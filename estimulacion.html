@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estimulación | Profe Organizado</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --azul:#0F2C59;
+  --salvia:#7C9A83;
+  --salvia-claro:#EEF4EF;
+  --azul-claro:#EEF3F8;
+  --gris:#3E4651;
+  --gris2:#737B84;
+  --fondo:#F7F8FA;
+  --borde:#E3E7EB;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--fondo);
+  color:var(--gris);
+}
+
+a{text-decoration:none;color:inherit}
+button,input{font:inherit}
+
+.container{
+  width:min(1120px,94%);
+  margin:auto;
+}
+
+/* HEADER */
+
+header{
+  height:58px;
+  background:white;
+  border-bottom:1px solid var(--borde);
+}
+
+.nav{
+  height:58px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:var(--azul);
+  font-size:.85rem;
+  font-weight:900;
+}
+
+.logo img{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  object-fit:cover;
+}
+
+.logo strong{color:var(--salvia)}
+
+.home{
+  color:var(--azul);
+  font-size:.75rem;
+  font-weight:700;
+}
+
+/* MAIN */
+
+main{padding:22px 0 30px}
+
+.page-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  margin-bottom:15px;
+}
+
+.page-head h1{
+  color:var(--azul);
+  font-size:1.55rem;
+  margin-bottom:3px;
+}
+
+.page-head p{
+  color:var(--gris2);
+  font-size:.75rem;
+}
+
+.search{
+  width:230px;
+  height:37px;
+  border:1px solid var(--borde);
+  background:white;
+  border-radius:8px;
+  padding:0 11px;
+  font-size:.75rem;
+  outline:none;
+}
+
+/* PESTAÑAS */
+
+.tabs{
+  background:white;
+  border:1px solid var(--borde);
+  border-radius:10px;
+  padding:6px;
+  display:grid;
+  grid-template-columns:repeat(8,1fr);
+  gap:4px;
+  margin-bottom:12px;
+}
+
+.tab{
+  border:0;
+  background:transparent;
+  border-radius:7px;
+  padding:8px 4px;
+  cursor:pointer;
+  color:var(--gris);
+  font-size:.67rem;
+  font-weight:700;
+}
+
+.tab:hover{background:var(--fondo)}
+
+.tab.active{
+  background:var(--salvia-claro);
+  color:var(--azul);
+}
+
+/* PANEL */
+
+.workspace{
+  background:white;
+  border:1px solid var(--borde);
+  border-radius:10px;
+  overflow:hidden;
+}
+
+.panel{display:none}
+.panel.active{display:block}
+
+.workspace-head{
+  min-height:50px;
+  padding:9px 14px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  border-bottom:1px solid var(--borde);
+}
+
+.workspace-title{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.workspace-title .icon{font-size:1.15rem}
+
+.workspace-title h2{
+  color:var(--azul);
+  font-size:.9rem;
+}
+
+.workspace-title small{
+  display:block;
+  color:var(--gris2);
+  font-size:.63rem;
+  margin-top:2px;
+}
+
+.counter{
+  background:var(--salvia-claro);
+  color:#55725D;
+  border-radius:20px;
+  padding:5px 9px;
+  font-size:.61rem;
+  font-weight:800;
+}
+
+/* ACTIVIDADES */
+
+.activity{
+  min-height:54px;
+  display:grid;
+  grid-template-columns:37px 1fr 145px 80px;
+  align-items:center;
+  gap:10px;
+  padding:8px 14px;
+  border-bottom:1px solid #EEF0F2;
+}
+
+.activity:last-child{border-bottom:0}
+.activity:hover{background:#FAFBFC}
+
+.activity-icon{
+  width:33px;
+  height:33px;
+  display:grid;
+  place-items:center;
+  border-radius:7px;
+  background:var(--azul-claro);
+  font-size:.95rem;
+}
+
+.activity h3{
+  color:var(--azul);
+  font-size:.76rem;
+  margin-bottom:2px;
+}
+
+.activity p{
+  color:var(--gris2);
+  font-size:.62rem;
+}
+
+.skill{
+  color:var(--gris2);
+  font-size:.62rem;
+}
+
+.action{justify-self:end}
+
+.play{
+  display:inline-block;
+  min-width:66px;
+  text-align:center;
+  padding:6px 9px;
+  border-radius:6px;
+  background:var(--azul);
+  color:white;
+  font-size:.62rem;
+  font-weight:800;
+}
+
+.soon{
+  color:#979EA5;
+  font-size:.63rem;
+  font-weight:700;
+}
+
+.evidence{
+  display:inline-block;
+  margin-left:5px;
+  color:var(--salvia);
+  font-size:.58rem;
+  font-weight:800;
+}
+
+/* VACÍO */
+
+.empty{
+  min-height:160px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
+}
+
+.empty span{
+  font-size:1.5rem;
+  margin-bottom:6px;
+}
+
+.empty h3{
+  color:var(--azul);
+  font-size:.85rem;
+  margin-bottom:4px;
+}
+
+.empty p{
+  color:var(--gris2);
+  font-size:.68rem;
+}
+
+/* PIE */
+
+.note{
+  margin-top:9px;
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  color:var(--gris2);
+  font-size:.61rem;
+}
+
+.note strong{color:var(--azul)}
+
+/* RESPONSIVE */
+
+@media(max-width:850px){
+  .tabs{grid-template-columns:repeat(4,1fr)}
+
+  .activity{
+    grid-template-columns:37px 1fr 75px;
+  }
+
+  .skill{display:none}
+}
+
+@media(max-width:600px){
+  main{padding-top:15px}
+
+  .page-head{display:block}
+
+  .page-head h1{font-size:1.3rem}
+
+  .search{
+    width:100%;
+    margin-top:9px;
+  }
+
+  .tabs{grid-template-columns:repeat(2,1fr)}
+
+  .activity{
+    grid-template-columns:33px 1fr auto;
+    padding:8px 10px;
+  }
+
+  .activity p{display:none}
+
+  .note{
+    display:block;
+  }
+
+  .note span{
+    display:block;
+    margin-bottom:4px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="container nav">
+
+  <a href="index.html" class="logo">
+    <img src="logo.png" alt="Logo Profe Organizado">
+    <span>PROFE <strong>ORGANIZADO</strong></span>
+  </a>
+
+  <a href="index.html" class="home">← Inicio</a>
+
+</div>
+</header>
+
+<main>
+<div class="container">
+
+  <section class="page-head">
+    <div>
+      <h1>🧠 Estimulación</h1>
+      <p>Habilidades básicas que apoyan los procesos de aprendizaje.</p>
+    </div>
+
+    <input
+      id="search"
+      class="search"
+      type="text"
+      placeholder="🔎 Buscar actividad..."
+      oninput="searchActivity()"
+    >
+  </section>
+
+  <!-- PESTAÑAS -->
+
+  <nav class="tabs">
+
+    <button class="tab active"
+      onclick="openPanel('atencion',this)">
+      🎯 Atención
+    </button>
+
+    <button class="tab"
+      onclick="openPanel('memoria',this)">
+      🧠 Memoria
+    </button>
+
+    <button class="tab"
+      onclick="openPanel('percepcion',this)">
+      👁️ Percepción
+    </button>
+
+    <button class="tab"
+      onclick="openPanel('visual',this)">
+      🔎 Disc. visual
+    </button>
+
+    <button class="tab"
+      onclick="openPanel('auditiva',this)">
+      👂 Disc. auditiva
+    </button>
+
+    <button class="tab"
+      onclick="openPanel('espacial',this)">
+      🧭 Espacial
+    </button>
+
+    <button class="tab"
+      onclick="openPanel('ejecutivas',this)">
+      ⚙️ F. ejecutivas
+    </button>
+
+    <button class="tab"
+      onclick="openPanel('juegos',this)">
+      🎮 Juegos
+    </button>
+
+  </nav>
+
+
+  <section class="workspace">
+
+    <!-- ATENCIÓN -->
+
+    <div id="atencion" class="panel active">
+
+      <div class="workspace-head">
+        <div class="workspace-title">
+          <span class="icon">🎯</span>
+          <div>
+            <h2>Atención</h2>
+            <small>Focalización, selección y mantenimiento de la atención.</small>
+          </div>
+        </div>
+
+        <span class="counter">1 disponible</span>
+      </div>
+
+      <div class="activity searchable">
+
+        <div class="activity-icon">🔎</div>
+
+        <div>
+          <h3>Búsqueda visual</h3>
+          <p>Localizar estímulos objetivo entre distractores.</p>
+        </div>
+
+        <div class="skill">
+          Atención selectiva
+        </div>
+
+        <div class="action">
+          <a href="busqueda-visual.html" class="play">JUGAR</a>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- MEMORIA -->
+
+    <div id="memoria" class="panel">
+
+      <div class="workspace-head">
+        <div class="workspace-title">
+          <span class="icon">🧠</span>
+          <div>
+            <h2>Memoria</h2>
+            <small>Retención, reconocimiento y recuperación de información.</small>
+          </div>
+        </div>
+
+        <span class="counter">1 disponible</span>
+      </div>
+
+      <div class="activity searchable">
+
+        <div class="activity-icon">🃏</div>
+
+        <div>
+          <h3>Memoria de parejas</h3>
+          <p>Recordar la ubicación de estímulos visuales.</p>
+        </div>
+
+        <div class="skill">
+          Memoria visual
+        </div>
+
+        <div class="action">
+          <a href="memoria.html" class="play">JUGAR</a>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- PERCEPCIÓN -->
+
+    <div id="percepcion" class="panel">
+
+      <div class="workspace-head">
+        <div class="workspace-title">
+          <span class="icon">👁️</span>
+          <div>
+            <h2>Percepción</h2>
+            <small>Reconocimiento y organización de información perceptiva.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="empty">
+        <span>👁️</span>
+        <h3>Percepción</h3>
+        <p>Próximamente añadiremos actividades para esta habilidad.</p>
+      </div>
+
+    </div>
+
+
+    <!-- DISCRIMINACIÓN VISUAL -->
+
+    <div id="visual" class="panel">
+
+      <div class="workspace-head">
+        <div class="workspace-title">
+          <span class="icon">🔎</span>
+          <div>
+            <h2>Discriminación visual</h2>
+            <small>Identificar semejanzas, diferencias y características visuales.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="empty">
+        <span>🔎</span>
+        <h3>Discriminación visual</h3>
+        <p>Aquí incorporaremos ejercicios específicos de discriminación visual.</p>
+      </div>
+
+    </div>
+
+
+    <!-- DISCRIMINACIÓN AUDITIVA -->
+
+    <div id="auditiva" class="panel">
+
+      <div class="workspace-head">
+        <div class="workspace-title">
+          <span class="icon">👂</span>
+          <div>
+            <h2>Discriminación auditiva</h2>
+            <small>Diferenciar y reconocer características de estímulos sonoros.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="empty">
+        <span>👂</span>
+        <h3>Discriminación auditiva</h3>
+        <p>Las actividades se incorporarán progresivamente.</p>
+      </div>
+
+    </div>
+
+
+    <!-- ESPACIAL -->
+
+    <div id="espacial" class="panel">
+
+      <div class="workspace-head">
+        <div class="workspace-title">
+          <span class="icon">🧭</span>
+          <div>
+            <h2>Orientación espacial</h2>
+            <small>Posición, dirección y relaciones espaciales.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="empty">
+        <span>🧭</span>
+        <h3>Orientación espacial</h3>
+        <p>Próximamente añadiremos actividades específicas.</p>
+      </div>
+
+    </div>
+
+
+    <!-- FUNCIONES EJECUTIVAS -->
+
+    <div id="ejecutivas" class="panel">
+
+      <div class="workspace-head">
+        <div class="workspace-title">
+          <span class="icon">⚙️</span>
+          <div>
+            <h2>Funciones ejecutivas</h2>
+            <small>Planificación, flexibilidad, inhibición y organización.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="empty">
+        <span>⚙️</span>
+        <h3>Funciones ejecutivas</h3>
+        <p>Aquí iremos incorporando actividades de apoyo a estas habilidades.</p>
+      </div>
+
+    </div>
+
+
+    <!-- TODOS LOS JUEGOS -->
+
+    <div id="juegos" class="panel">
+
+      <div class="workspace-head">
+
+        <div class="workspace-title">
+          <span class="icon">🎮</span>
+          <div>
+            <h2>Juegos de estimulación</h2>
+            <small>Actividades interactivas disponibles.</small>
+          </div>
+        </div>
+
+        <span class="counter">2 disponibles</span>
+
+      </div>
+
+
+      <div class="activity searchable">
+
+        <div class="activity-icon">🔎</div>
+
+        <div>
+          <h3>Búsqueda visual</h3>
+          <p>Localizar estímulos entre distractores.</p>
+        </div>
+
+        <div class="skill">
+          Atención selectiva
+        </div>
+
+        <div class="action">
+          <a href="busqueda-visual.html" class="play">JUGAR</a>
+        </div>
+
+      </div>
+
+
+      <div class="activity searchable">
+
+        <div class="activity-icon">🃏</div>
+
+        <div>
+          <h3>Memoria de parejas</h3>
+          <p>Recordar la ubicación de estímulos visuales.</p>
+        </div>
+
+        <div class="skill">
+          Memoria visual
+        </div>
+
+        <div class="action">
+          <a href="memoria.html" class="play">JUGAR</a>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <div class="note">
+
+    <span>
+      📋 Las actividades pueden utilizarse como apoyo para observación y seguimiento.
+    </span>
+
+    <span>
+      <strong>Profe Organizado</strong> · Los resultados aislados no constituyen diagnóstico.
+    </span>
+
+  </div>
+
+</div>
+</main>
+
+
+<script>
+
+function openPanel(id,button){
+
+  document.querySelectorAll(".panel").forEach(function(panel){
+    panel.classList.remove("active");
+  });
+
+  document.getElementById(id).classList.add("active");
+
+  document.querySelectorAll(".tab").forEach(function(tab){
+    tab.classList.remove("active");
+  });
+
+  button.classList.add("active");
+
+  document.getElementById("search").value="";
+
+  document.querySelectorAll(".searchable").forEach(function(item){
+    item.style.display="grid";
+  });
+}
+
+
+function searchActivity(){
+
+  const value =
+    document.getElementById("search").value.toLowerCase().trim();
+
+  if(value===""){
+    document.querySelectorAll(".searchable").forEach(function(item){
+      item.style.display="grid";
+    });
+    return;
+  }
+
+  document.querySelectorAll(".panel").forEach(function(panel){
+    panel.classList.remove("active");
+  });
+
+  document.getElementById("juegos").classList.add("active");
+
+  document.querySelectorAll(".tab").forEach(function(tab){
+    tab.classList.remove("active");
+  });
+
+  const gamesTab =
+    document.querySelectorAll(".tab")[7];
+
+  gamesTab.classList.add("active");
+
+  document.querySelectorAll("#juegos .searchable")
+    .forEach(function(item){
+
+      const text=item.innerText.toLowerCase();
+
+      item.style.display =
+        text.includes(value) ? "grid" : "none";
+
+    });
+}
+
+</script>
+
+</body>
+</html>
