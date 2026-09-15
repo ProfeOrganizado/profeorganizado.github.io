@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>¿Cuántas sílabas tiene? | Profe Organizado</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --azul:#0F2C59;
+  --salvia:#7C9A83;
+  --salvia-claro:#EEF4EF;
+  --azul-claro:#EDF2F8;
+  --crema:#F8F5EE;
+  --gris:#3E4651;
+  --gris-claro:#F5F7F9;
+  --borde:#E3E8ED;
+  --rojo:#B95C5C;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  color:var(--gris);
+  background:var(--gris-claro);
+  line-height:1.5;
+}
+
+a{text-decoration:none;color:inherit}
+
+.container{
+  width:min(900px,92%);
+  margin:auto;
+}
+
+/* HEADER */
+
+header{
+  background:white;
+  border-bottom:1px solid var(--borde);
+}
+
+.nav{
+  min-height:68px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.logo{
+  color:var(--azul);
+  font-weight:800;
+}
+
+.logo span{color:var(--salvia)}
+
+.back{
+  font-size:.88rem;
+  color:var(--azul);
+  font-weight:700;
+}
+
+/* MAIN */
+
+main{
+  padding:45px 0 70px;
+}
+
+.game-box{
+  background:white;
+  border:1px solid var(--borde);
+  border-radius:22px;
+  padding:35px;
+  box-shadow:0 15px 40px rgba(15,44,89,.07);
+}
+
+.label{
+  color:var(--salvia);
+  font-size:.75rem;
+  font-weight:800;
+  letter-spacing:1.3px;
+  margin-bottom:8px;
+}
+
+h1,h2,h3{
+  color:var(--azul);
+}
+
+h1{
+  font-size:clamp(2rem,5vw,3rem);
+  line-height:1.1;
+  margin-bottom:12px;
+}
+
+.intro{
+  color:#69727A;
+  margin-bottom:25px;
+}
+
+.confidential{
+  background:var(--salvia-claro);
+  padding:13px 15px;
+  border-radius:10px;
+  font-size:.83rem;
+  margin-bottom:25px;
+}
+
+/* FORM */
+
+.student-data{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+  margin:22px 0;
+}
+
+.field label{
+  display:block;
+  color:var(--azul);
+  font-weight:700;
+  font-size:.82rem;
+  margin-bottom:6px;
+}
+
+input,select,textarea{
+  width:100%;
+  padding:12px;
+  border:1px solid #CCD3DA;
+  border-radius:9px;
+  font:inherit;
+  background:white;
+}
+
+textarea{
+  resize:vertical;
+  min-height:85px;
+}
+
+button{
+  border:none;
+  cursor:pointer;
+  font:inherit;
+}
+
+.primary{
+  background:var(--azul);
+  color:white;
+  padding:13px 21px;
+  border-radius:9px;
+  font-weight:700;
+}
+
+.secondary{
+  background:white;
+  color:var(--azul);
+  border:1px solid var(--borde);
+  padding:12px 18px;
+  border-radius:9px;
+  font-weight:700;
+}
+
+/* TEACH */
+
+.teach{
+  margin-top:25px;
+  padding:22px;
+  background:var(--crema);
+  border-radius:15px;
+}
+
+.teach h3{
+  margin-bottom:8px;
+}
+
+.example{
+  margin-top:14px;
+  text-align:center;
+  font-size:1.15rem;
+  font-weight:bold;
+}
+
+.syllable-example{
+  color:var(--azul);
+  font-size:1.4rem;
+  letter-spacing:3px;
+}
+
+/* GAME */
+
+#gameScreen,#resultScreen{
+  display:none;
+}
+
+.progress-wrap{
+  margin:20px 0 30px;
+}
+
+.progress-info{
+  display:flex;
+  justify-content:space-between;
+  font-size:.82rem;
+  margin-bottom:7px;
+}
+
+.progress{
+  height:8px;
+  background:#E8ECF0;
+  border-radius:20px;
+  overflow:hidden;
+}
+
+.progress-bar{
+  height:100%;
+  width:0;
+  background:var(--salvia);
+  transition:.3s;
+}
+
+.word-card{
+  text-align:center;
+  padding:30px 20px;
+  background:var(--azul-claro);
+  border-radius:18px;
+}
+
+.emoji{
+  font-size:5rem;
+  margin-bottom:5px;
+}
+
+.word{
+  color:var(--azul);
+  font-size:2rem;
+  font-weight:800;
+  letter-spacing:1px;
+}
+
+.instruction{
+  text-align:center;
+  margin:25px 0 15px;
+  font-weight:700;
+}
+
+.answers{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+}
+
+.answer{
+  width:85px;
+  height:60px;
+  border:2px solid var(--borde);
+  border-radius:12px;
+  background:white;
+  color:var(--azul);
+  font-size:1.3rem;
+  font-weight:800;
+}
+
+.answer:hover{
+  border-color:var(--salvia);
+  background:var(--salvia-claro);
+}
+
+.feedback{
+  min-height:55px;
+  margin-top:20px;
+  text-align:center;
+  font-weight:700;
+}
+
+.correct{color:#52765B}
+.wrong{color:var(--rojo)}
+
+/* RESULTS */
+
+.score{
+  text-align:center;
+  background:var(--azul-claro);
+  padding:25px;
+  border-radius:17px;
+  margin:25px 0;
+}
+
+.score-big{
+  color:var(--azul);
+  font-size:3rem;
+  font-weight:800;
+}
+
+.stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:15px;
+}
+
+.stat{
+  background:white;
+  border-radius:10px;
+  padding:12px;
+  font-size:.85rem;
+}
+
+.record{
+  margin-top:30px;
+  border-top:1px solid var(--borde);
+  padding-top:30px;
+}
+
+.record h2{
+  margin-bottom:8px;
+}
+
+.record-intro{
+  font-size:.87rem;
+  color:#69727A;
+  margin-bottom:20px;
+}
+
+.record-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.full{
+  grid-column:1/-1;
+}
+
+.actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:22px;
+}
+
+/* PRINT */
+
+.print-only{
+  display:none;
+}
+
+@media print{
+
+  body{
+    background:white;
+  }
+
+  header,
+  #startScreen,
+  .score,
+  .actions,
+  .record-intro{
+    display:none !important;
+  }
+
+  main{
+    padding:0;
+  }
+
+  .container{
+    width:100%;
+  }
+
+  .game-box{
+    box-shadow:none;
+    border:none;
+    padding:0;
+  }
+
+  #resultScreen{
+    display:block !important;
+  }
+
+  .record{
+    border:none;
+    padding:0;
+  }
+
+  .print-only{
+    display:block;
+  }
+
+  .record-grid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  input,select,textarea{
+    border:none;
+    border-bottom:1px solid #999;
+    border-radius:0;
+    padding:7px 2px;
+  }
+
+  h1{
+    font-size:24px;
+  }
+}
+
+@media(max-width:600px){
+  .student-data,
+  .record-grid,
+  .stats{
+    grid-template-columns:1fr;
+  }
+
+  .full{
+    grid-column:auto;
+  }
+
+  .game-box{
+    padding:23px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container nav">
+    <a href="index.html" class="logo">
+      PROFE <span>ORGANIZADO</span>
+    </a>
+
+    <a href="alfabetizacion.html" class="back">
+      ← Alfabetización
+    </a>
+  </div>
+</header>
+
+<main>
+<div class="container">
+<div class="game-box">
+
+<!-- INICIO -->
+
+<section id="startScreen">
+
+  <div class="label">ALFABETIZACIÓN · CONCIENCIA FONOLÓGICA</div>
+
+  <h1>👏 ¿Cuántas sílabas tiene?</h1>
+
+  <p class="intro">
+    Actividad interactiva para trabajar la segmentación silábica
+    de palabras familiares.
+  </p>
+
+  <div class="confidential">
+    🔒 <strong>Confidencialidad:</strong>
+    utilice únicamente las iniciales del estudiante.
+    No introduzca nombres completos.
+  </div>
+
+  <div class="student-data">
+
+    <div class="field">
+      <label>Iniciales del estudiante</label>
+      <input id="initials"
+             maxlength="10"
+             placeholder="Ej.: J.P.">
+    </div>
+
+    <div class="field">
+      <label>Curso / grado</label>
+      <input id="grade"
+             maxlength="30"
+             placeholder="Ej.: 2.º de Primaria">
+    </div>
+
+  </div>
+
+  <div class="teach">
+
+    <h3>📘 Antes de comenzar</h3>
+
+    <p>
+      Explica que las palabras pueden dividirse en partes que
+      pronunciamos mediante golpes de voz. Pueden acompañar cada
+      parte con una palmada.
+    </p>
+
+    <div class="example">
+      🍌 BANANA
+      <br>
+      <span class="syllable-example">
+        BA · NA · NA
+      </span>
+      <br>
+      👏 &nbsp; 👏 &nbsp; 👏
+    </div>
+
+  </div>
+
+  <br>
+
+  <button class="primary" onclick="startGame()">
+    Comenzar actividad →
+  </button>
+
+</section>
+
+
+<!-- JUEGO -->
+
+<section id="gameScreen">
+
+  <div class="label">
+    CONCIENCIA SILÁBICA
+  </div>
+
+  <h2>Escucha la palabra y sepárala en partes.</h2>
+
+  <div class="progress-wrap">
+
+    <div class="progress-info">
+      <span id="questionNumber">Palabra 1 de 10</span>
+      <span id="scoreLive">Aciertos: 0</span>
+    </div>
+
+    <div class="progress">
+      <div id="progressBar" class="progress-bar"></div>
+    </div>
+
+  </div>
+
+  <div class="word-card">
+    <div id="emoji" class="emoji">🍌</div>
+    <div id="word" class="word">BANANA</div>
+  </div>
+
+  <div class="instruction">
+    ¿Cuántas sílabas tiene esta palabra?
+  </div>
+
+  <div class="answers">
+    <button class="answer" onclick="answer(1)">1</button>
+    <button class="answer" onclick="answer(2)">2</button>
+    <button class="answer" onclick="answer(3)">3</button>
+    <button class="answer" onclick="answer(4)">4</button>
+  </div>
+
+  <div id="feedback" class="feedback"></div>
+
+</section>
+
+
+<!-- RESULTADOS -->
+
+<section id="resultScreen">
+
+  <div class="label">
+    ACTIVIDAD FINALIZADA
+  </div>
+
+  <h1>Resultado de la actividad</h1>
+
+  <div class="score">
+
+    <div id="percentage" class="score-big">
+      0%
+    </div>
+
+    <strong>Respuestas correctas</strong>
+
+    <div class="stats">
+
+      <div class="stat">
+        <strong id="correctResult">0</strong>
+        <br>Aciertos
+      </div>
+
+      <div class="stat">
+        <strong id="wrongResult">0</strong>
+        <br>Errores
+      </div>
+
+      <div class="stat">
+        <strong>10</strong>
+        <br>Palabras
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="record">
+
+    <div class="print-only">
+      <h1>PROFE ORGANIZADO</h1>
+      <p>Registro de intervención psicopedagógica</p>
+      <br>
+    </div>
+
+    <h2>📋 Registro de la sesión</h2>
+
+    <p class="record-intro">
+      Complete la información profesional antes de imprimir
+      o guardar el registro en PDF.
+    </p>
+
+
+    <div class="record-grid">
+
+      <div class="field">
+        <label>Iniciales</label>
+        <input id="recordInitials" readonly>
+      </div>
+
+      <div class="field">
+        <label>Curso / grado</label>
+        <input id="recordGrade" readonly>
+      </div>
+
+      <div class="field">
+        <label>Fecha</label>
+        <input id="recordDate" readonly>
+      </div>
+
+      <div class="field">
+        <label>Área</label>
+        <input value="Alfabetización" readonly>
+      </div>
+
+      <div class="field">
+        <label>Habilidad trabajada</label>
+        <input value="Conciencia silábica" readonly>
+      </div>
+
+      <div class="field">
+        <label>Actividad</label>
+        <input value="¿Cuántas sílabas tiene?" readonly>
+      </div>
+
+      <div class="field">
+        <label>Resultado</label>
+        <input id="recordResult" readonly>
+      </div>
+
+      <div class="field">
+        <label>Nivel de apoyo</label>
+
+        <select id="support">
+          <option value="">Seleccionar</option>
+          <option>Independiente</option>
+          <option>Consigna repetida</option>
+          <option>Apoyo verbal ocasional</option>
+          <option>Apoyo verbal frecuente</option>
+          <option>Modelado</option>
+        </select>
+
+      </div>
+
+      <div class="field full">
+        <label>Observaciones</label>
+
+        <textarea
+          placeholder="Registre estrategias utilizadas, errores observados, respuesta del estudiante u otra información pertinente."></textarea>
+      </div>
+
+      <div class="field full">
+        <label>Próximo paso</label>
+
+        <textarea
+          placeholder="Ej.: continuar trabajando segmentación silábica con palabras de mayor complejidad."></textarea>
+      </div>
+
+      <div class="field">
+        <label>Responsable</label>
+
+        <input
+          placeholder="Nombre o iniciales del profesional/docente">
+      </div>
+
+      <div class="field">
+        <label>Rol</label>
+
+        <select>
+          <option>Psicología escolar</option>
+          <option>Orientación</option>
+          <option>Docente</option>
+          <option>Psicopedagogía</option>
+          <option>Otro</option>
+        </select>
+      </div>
+
+    </div>
+
+
+    <div class="actions">
+
+      <button class="primary" onclick="window.print()">
+        🖨️ Imprimir / Guardar PDF
+      </button>
+
+      <button class="secondary" onclick="restartGame()">
+        🔄 Realizar nuevamente
+      </button>
+
+      <a href="alfabetizacion.html" class="secondary">
+        ← Volver a Alfabetización
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+</div>
+</div>
+</main>
+
+
+<script>
+
+const words = [
+  {word:"SOL", emoji:"☀️", syllables:1, split:"SOL"},
+  {word:"CASA", emoji:"🏠", syllables:2, split:"CA · SA"},
+  {word:"GATO", emoji:"🐱", syllables:2, split:"GA · TO"},
+  {word:"MESA", emoji:"🪑", syllables:2, split:"ME · SA"},
+  {word:"PELOTA", emoji:"⚽", syllables:3, split:"PE · LO · TA"},
+  {word:"BANANA", emoji:"🍌", syllables:3, split:"BA · NA · NA"},
+  {word:"CAMISA", emoji:"👕", syllables:3, split:"CA · MI · SA"},
+  {word:"MARIPOSA", emoji:"🦋", syllables:4, split:"MA · RI · PO · SA"},
+  {word:"TELEFONO", emoji:"📱", syllables:4, split:"TE · LE · FO · NO"},
+  {word:"CHOCOLATE", emoji:"🍫", syllables:4, split:"CHO · CO · LA · TE"}
+];
+
+let current = 0;
+let correct = 0;
+let locked = false;
+
+function startGame(){
+
+  const initials =
+    document.getElementById("initials").value.trim();
+
+  const grade =
+    document.getElementById("grade").value.trim();
+
+  if(!initials){
+    alert("Escriba únicamente las iniciales del estudiante.");
+    return;
+  }
+
+  document.getElementById("recordInitials").value = initials;
+  document.getElementById("recordGrade").value =
+    grade || "No especificado";
+
+  const today = new Date();
+
+  document.getElementById("recordDate").value =
+    today.toLocaleDateString("es-DO");
+
+  document.getElementById("startScreen").style.display="none";
+  document.getElementById("gameScreen").style.display="block";
+
+  showWord();
+}
+
+
+function showWord(){
+
+  locked=false;
+
+  const item=words[current];
+
+  document.getElementById("emoji").textContent=item.emoji;
+  document.getElementById("word").textContent=item.word;
+
+  document.getElementById("questionNumber").textContent =
+    "Palabra " + (current+1) + " de " + words.length;
+
+  document.getElementById("scoreLive").textContent =
+    "Aciertos: " + correct;
+
+  document.getElementById("progressBar").style.width =
+    ((current)/words.length*100) + "%";
+
+  document.getElementById("feedback").innerHTML="";
+}
+
+
+function answer(number){
+
+  if(locked) return;
+
+  locked=true;
+
+  const item=words[current];
+  const feedback=document.getElementById("feedback");
+
+  if(number===item.syllables){
+
+    correct++;
+
+    feedback.className="feedback correct";
+
+    feedback.innerHTML =
+      "✓ ¡Muy bien! " +
+      item.word +
+      " se divide: " +
+      item.split +
+      ".";
+
+  }else{
+
+    feedback.className="feedback wrong";
+
+    feedback.innerHTML =
+      "Vamos a comprobarlo: " +
+      item.word +
+      " se divide " +
+      item.split +
+      ". Tiene " +
+      item.syllables +
+      " sílaba" +
+      (item.syllables>1 ? "s." : ".");
+
+  }
+
+  document.getElementById("scoreLive").textContent =
+    "Aciertos: " + correct;
+
+  setTimeout(()=>{
+
+    current++;
+
+    if(current<words.length){
+      showWord();
+    }else{
+      finishGame();
+    }
+
+  },1700);
+}
+
+
+function finishGame(){
+
+  document.getElementById("gameScreen").style.display="none";
+  document.getElementById("resultScreen").style.display="block";
+
+  const wrong=words.length-correct;
+  const percentage=Math.round((correct/words.length)*100);
+
+  document.getElementById("percentage").textContent =
+    percentage+"%";
+
+  document.getElementById("correctResult").textContent =
+    correct;
+
+  document.getElementById("wrongResult").textContent =
+    wrong;
+
+  document.getElementById("recordResult").value =
+    correct+"/"+words.length+
+    " respuestas correctas ("+
+    percentage+"%)";
+}
+
+
+function restartGame(){
+
+  current=0;
+  correct=0;
+  locked=false;
+
+  document.getElementById("resultScreen").style.display="none";
+  document.getElementById("startScreen").style.display="block";
+
+}
+
+</script>
+
+</body>
+</html>
