@@ -63,25 +63,29 @@
     .logo{
   display:flex;
   align-items:center;
-  gap:9px;
+  gap:10px;
   color:var(--azul);
   font-size:1.25rem;
   font-weight:800;
   letter-spacing:.3px;
+  text-decoration:none;
 }
 
 .logo img{
-  width:42px;
-  height:42px;
+  display:block;
+  width:48px;
+  height:48px;
+  min-width:48px;
   border-radius:50%;
   object-fit:cover;
-  flex-shrink:0;
 }
 
 .logo-text{
   display:flex;
   align-items:center;
   gap:4px;
+  white-space:nowrap;
+  color:var(--azul);
 }
 
 .logo-text strong{
