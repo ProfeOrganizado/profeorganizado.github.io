@@ -1,558 +1,904 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Profe Organizado | Recursos y Juegos Educativos</title>
+  <title>Profe Organizado | Recursos Psicopedagógicos</title>
 
-<style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    color: #2f3437;
-    background: #ffffff;
-    line-height: 1.6;
-}
-
-/* MENÚ */
-
-header {
-    background: white;
-    border-bottom: 1px solid #e8ecef;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.nav {
-    max-width: 1150px;
-    margin: auto;
-    padding: 18px 25px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.logo {
-    font-size: 22px;
-    font-weight: 800;
-    color: #0F2C59;
-}
-
-.logo span {
-    color: #7C9A83;
-}
-
-nav a {
-    color: #444;
-    text-decoration: none;
-    margin-left: 28px;
-    font-size: 15px;
-    font-weight: 600;
-}
-
-nav a:hover {
-    color: #0F2C59;
-}
-
-/* PORTADA */
-
-.hero {
-    background: #f7f5ef;
-    padding: 95px 25px;
-}
-
-.hero-content {
-    max-width: 1100px;
-    margin: auto;
-}
-
-.badge {
-    display: inline-block;
-    background: #e5ece6;
-    color: #496b52;
-    padding: 7px 14px;
-    border-radius: 30px;
-    font-size: 13px;
-    font-weight: bold;
-    margin-bottom: 22px;
-}
-
-.hero h1 {
-    color: #0F2C59;
-    font-size: 54px;
-    line-height: 1.08;
-    max-width: 750px;
-    margin-bottom: 22px;
-}
-
-.hero p {
-    font-size: 19px;
-    max-width: 650px;
-    color: #5f6468;
-    margin-bottom: 35px;
-}
-
-.btn {
-    display: inline-block;
-    background: #0F2C59;
-    color: white;
-    padding: 14px 25px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: .2s;
-}
-
-.btn:hover {
-    transform: translateY(-2px);
-}
-
-/* SECCIONES */
-
-.section {
-    padding: 80px 25px;
-}
-
-.container {
-    max-width: 1100px;
-    margin: auto;
-}
-
-.section-title {
-    text-align: center;
-    margin-bottom: 45px;
-}
-
-.section-title small {
-    color: #7C9A83;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
-.section-title h2 {
-    color: #0F2C59;
-    font-size: 34px;
-    margin-top: 8px;
-}
-
-.section-title p {
-    color: #6c7175;
-    max-width: 600px;
-    margin: 10px auto 0;
-}
-
-/* CATEGORÍAS */
-
-.categories {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 18px;
-}
-
-.category {
-    border: 1px solid #e4e8e5;
-    border-radius: 12px;
-    padding: 27px 20px;
-    background: white;
-    transition: .2s;
-}
-
-.category:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 25px rgba(0,0,0,.06);
-}
-
-.icon {
-    font-size: 30px;
-    margin-bottom: 12px;
-}
-
-.category h3 {
-    color: #0F2C59;
-    font-size: 17px;
-    margin-bottom: 6px;
-}
-
-.category p {
-    font-size: 14px;
-    color: #707579;
-}
-
-/* JUEGOS */
-
-.games-section {
-    background: #f6f8f7;
-}
-
-.games {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-}
-
-.game {
-    background: white;
-    border-radius: 14px;
-    overflow: hidden;
-    border: 1px solid #e7e9e8;
-    transition: .2s;
-}
-
-.game:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 30px rgba(0,0,0,.07);
-}
-
-.game-top {
-    height: 150px;
-    background: #e8eee9;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 55px;
-}
-
-.game-content {
-    padding: 23px;
-}
-
-.game-tag {
-    color: #69836f;
-    font-size: 12px;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-
-.game h3 {
-    color: #0F2C59;
-    margin: 7px 0;
-}
-
-.game p {
-    color: #707579;
-    font-size: 14px;
-    margin-bottom: 18px;
-}
-
-.play {
-    color: #0F2C59;
-    font-weight: bold;
-    text-decoration: none;
-}
-
-/* PROFESIONALES */
-
-.professional {
-    display: flex;
-    align-items: center;
-    gap: 60px;
-}
-
-.professional > div {
-    flex: 1;
-}
-
-.professional h2 {
-    color: #0F2C59;
-    font-size: 35px;
-    margin-bottom: 15px;
-}
-
-.professional p {
-    color: #62676b;
-    margin-bottom: 20px;
-}
-
-.info-box {
-    background: #f7f5ef;
-    padding: 35px;
-    border-radius: 14px;
-}
-
-.info-box p {
-    margin: 10px 0;
-}
-
-/* FOOTER */
-
-footer {
-    background: #0F2C59;
-    color: white;
-    padding: 45px 25px;
-}
-
-.footer-content {
-    max-width: 1100px;
-    margin: auto;
-    text-align: center;
-}
-
-footer h3 {
-    font-size: 23px;
-    margin-bottom: 8px;
-}
-
-footer p {
-    color: #d7dfe8;
-    font-size: 14px;
-}
-
-/* CELULAR */
-
-@media(max-width: 850px) {
-
-    nav {
-        display: none;
+  <style>
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
     }
 
-    .hero {
-        padding: 70px 22px;
+    :root{
+      --azul:#0F2C59;
+      --azul-claro:#EAF0F7;
+      --salvia:#7C9A83;
+      --salvia-claro:#EEF4EF;
+      --crema:#F8F5EE;
+      --gris:#3E4651;
+      --gris-claro:#F4F6F8;
+      --blanco:#FFFFFF;
+      --borde:#E5E9EE;
     }
 
-    .hero h1 {
-        font-size: 39px;
+    body{
+      font-family:Arial, Helvetica, sans-serif;
+      color:var(--gris);
+      background:var(--blanco);
+      line-height:1.6;
     }
 
-    .categories {
-        grid-template-columns: repeat(2, 1fr);
+    a{
+      text-decoration:none;
+      color:inherit;
     }
 
-    .games {
-        grid-template-columns: 1fr;
+    .container{
+      width:min(1180px, 92%);
+      margin:auto;
     }
 
-    .professional {
-        flex-direction: column;
-        gap: 30px;
-    }
-}
+    /* HEADER */
 
-@media(max-width: 500px) {
-
-    .categories {
-        grid-template-columns: 1fr;
+    header{
+      background:white;
+      border-bottom:1px solid var(--borde);
+      position:sticky;
+      top:0;
+      z-index:100;
     }
 
-    .hero h1 {
-        font-size: 34px;
+    .nav{
+      min-height:72px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:25px;
     }
-}
-</style>
+
+    .logo{
+      color:var(--azul);
+      font-size:1.25rem;
+      font-weight:800;
+      letter-spacing:.3px;
+    }
+
+    .logo span{
+      color:var(--salvia);
+    }
+
+    nav{
+      display:flex;
+      gap:24px;
+      font-size:.93rem;
+      font-weight:600;
+    }
+
+    nav a:hover{
+      color:var(--salvia);
+    }
+
+    /* HERO */
+
+    .hero{
+      padding:90px 0 80px;
+      background:
+        radial-gradient(circle at 90% 20%, #eef4ef 0, transparent 28%),
+        radial-gradient(circle at 10% 80%, #edf2f8 0, transparent 25%),
+        white;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.3fr .7fr;
+      gap:60px;
+      align-items:center;
+    }
+
+    .eyebrow{
+      color:var(--salvia);
+      font-size:.82rem;
+      font-weight:800;
+      letter-spacing:1.5px;
+      margin-bottom:16px;
+    }
+
+    h1{
+      color:var(--azul);
+      font-size:clamp(2.5rem,5vw,4.7rem);
+      line-height:1.05;
+      max-width:800px;
+      margin-bottom:24px;
+    }
+
+    .hero p{
+      font-size:1.08rem;
+      max-width:700px;
+      color:#626A73;
+      margin-bottom:30px;
+    }
+
+    .hero-buttons{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+
+    .btn{
+      display:inline-block;
+      padding:13px 21px;
+      border-radius:10px;
+      font-weight:700;
+      transition:.2s;
+    }
+
+    .btn-primary{
+      background:var(--azul);
+      color:white;
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-2px);
+    }
+
+    .btn-secondary{
+      background:white;
+      color:var(--azul);
+      border:1px solid var(--borde);
+    }
+
+    .hero-panel{
+      background:white;
+      border:1px solid var(--borde);
+      border-radius:22px;
+      padding:30px;
+      box-shadow:0 18px 45px rgba(15,44,89,.08);
+    }
+
+    .hero-panel h3{
+      color:var(--azul);
+      margin-bottom:20px;
+    }
+
+    .process{
+      display:grid;
+      gap:12px;
+    }
+
+    .process-item{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      padding:13px;
+      background:var(--gris-claro);
+      border-radius:10px;
+    }
+
+    .number{
+      width:31px;
+      height:31px;
+      flex:0 0 31px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      background:var(--azul);
+      color:white;
+      font-size:.8rem;
+      font-weight:bold;
+    }
+
+    /* GENERAL */
+
+    section{
+      padding:80px 0;
+    }
+
+    .soft{
+      background:var(--gris-claro);
+    }
+
+    .section-top{
+      margin-bottom:40px;
+      max-width:750px;
+    }
+
+    .section-label{
+      color:var(--salvia);
+      font-size:.78rem;
+      font-weight:800;
+      letter-spacing:1.4px;
+      margin-bottom:10px;
+    }
+
+    h2{
+      color:var(--azul);
+      font-size:clamp(2rem,4vw,3rem);
+      line-height:1.15;
+      margin-bottom:15px;
+    }
+
+    .section-top p{
+      color:#69717A;
+    }
+
+    /* MAIN AREAS */
+
+    .areas{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+
+    .area-card{
+      background:white;
+      border:1px solid var(--borde);
+      border-radius:17px;
+      padding:26px;
+      min-height:215px;
+      transition:.2s;
+    }
+
+    .area-card:hover{
+      transform:translateY(-4px);
+      box-shadow:0 14px 35px rgba(15,44,89,.08);
+    }
+
+    .icon{
+      font-size:1.8rem;
+      margin-bottom:18px;
+    }
+
+    .area-card h3{
+      color:var(--azul);
+      margin-bottom:9px;
+      font-size:1.12rem;
+    }
+
+    .area-card p{
+      font-size:.92rem;
+      color:#6B737C;
+    }
+
+    .tag{
+      display:inline-block;
+      margin-top:18px;
+      font-size:.75rem;
+      font-weight:700;
+      color:var(--salvia);
+      background:var(--salvia-claro);
+      padding:5px 9px;
+      border-radius:30px;
+    }
+
+    /* GAMES */
+
+    .games-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:20px;
+    }
+
+    .game{
+      border:1px solid var(--borde);
+      border-radius:18px;
+      overflow:hidden;
+      background:white;
+      transition:.2s;
+    }
+
+    .game:hover{
+      transform:translateY(-4px);
+      box-shadow:0 14px 35px rgba(15,44,89,.08);
+    }
+
+    .game-visual{
+      height:155px;
+      display:grid;
+      place-items:center;
+      font-size:3.5rem;
+      background:var(--azul-claro);
+    }
+
+    .game:nth-child(2) .game-visual{
+      background:var(--salvia-claro);
+    }
+
+    .game:nth-child(3) .game-visual{
+      background:var(--crema);
+    }
+
+    .game-body{
+      padding:23px;
+    }
+
+    .game-small{
+      font-size:.72rem;
+      color:var(--salvia);
+      font-weight:800;
+      letter-spacing:1px;
+      margin-bottom:8px;
+    }
+
+    .game h3{
+      color:var(--azul);
+      margin-bottom:9px;
+    }
+
+    .game p{
+      font-size:.9rem;
+      color:#69717A;
+      min-height:58px;
+    }
+
+    .play{
+      display:inline-block;
+      margin-top:18px;
+      color:var(--azul);
+      font-weight:800;
+      font-size:.9rem;
+    }
+
+    /* TWO PATHS */
+
+    .paths{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+    }
+
+    .path{
+      padding:35px;
+      border-radius:20px;
+      border:1px solid var(--borde);
+      background:white;
+    }
+
+    .path:first-child{
+      background:var(--azul);
+      color:white;
+      border:none;
+    }
+
+    .path:first-child h3{
+      color:white;
+    }
+
+    .path h3{
+      color:var(--azul);
+      font-size:1.5rem;
+      margin-bottom:14px;
+    }
+
+    .path p{
+      margin-bottom:22px;
+      opacity:.9;
+    }
+
+    .path ul{
+      list-style:none;
+      display:grid;
+      gap:9px;
+    }
+
+    /* EVIDENCE */
+
+    .evidence{
+      display:grid;
+      grid-template-columns:.8fr 1.2fr;
+      gap:45px;
+      align-items:center;
+    }
+
+    .evidence-box{
+      border:1px solid var(--borde);
+      background:white;
+      border-radius:18px;
+      padding:28px;
+      box-shadow:0 15px 35px rgba(15,44,89,.06);
+    }
+
+    .evidence-line{
+      padding:11px 0;
+      border-bottom:1px solid var(--borde);
+      font-size:.9rem;
+    }
+
+    .evidence-line:last-child{
+      border-bottom:none;
+    }
+
+    /* NOTICE */
+
+    .notice{
+      background:var(--crema);
+      border-radius:18px;
+      padding:28px;
+      font-size:.92rem;
+    }
+
+    .notice strong{
+      color:var(--azul);
+    }
+
+    /* FOOTER */
+
+    footer{
+      padding:40px 0;
+      border-top:1px solid var(--borde);
+      background:white;
+    }
+
+    .footer{
+      display:flex;
+      justify-content:space-between;
+      gap:30px;
+      color:#777F87;
+      font-size:.85rem;
+    }
+
+    /* RESPONSIVE */
+
+    @media(max-width:850px){
+      nav{
+        display:none;
+      }
+
+      .hero-grid,
+      .evidence{
+        grid-template-columns:1fr;
+      }
+
+      .areas,
+      .games-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .paths{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media(max-width:560px){
+      .hero{
+        padding:60px 0;
+      }
+
+      section{
+        padding:60px 0;
+      }
+
+      .areas,
+      .games-grid{
+        grid-template-columns:1fr;
+      }
+
+      .footer{
+        flex-direction:column;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
 <header>
-    <div class="nav">
-        <div class="logo">Profe <span>Organizado</span></div>
+  <div class="container nav">
+    <a href="index.html" class="logo">
+      PROFE <span>ORGANIZADO</span>
+    </a>
 
-        <nav>
-            <a href="#inicio">Inicio</a>
-            <a href="#areas">Áreas</a>
-            <a href="#juegos">Juegos</a>
-            <a href="#profesionales">Profesionales</a>
-        </nav>
-    </div>
+    <nav>
+      <a href="#areas">Áreas</a>
+      <a href="#juegos">Juegos</a>
+      <a href="#trabajar">Trabajar</a>
+      <a href="#seguimiento">Seguimiento</a>
+    </nav>
+  </div>
 </header>
 
 
-<section class="hero" id="inicio">
-    <div class="hero-content">
+<!-- HERO -->
 
-        <div class="badge">RECURSOS EDUCATIVOS</div>
+<section class="hero">
+  <div class="container hero-grid">
 
-        <h1>Recursos que hacen más fácil enseñar, acompañar y aprender.</h1>
+    <div>
+      <div class="eyebrow">APOYO PSICOPEDAGÓGICO Y EDUCATIVO</div>
+
+      <h1>Detectar. Trabajar. Acompañar el progreso.</h1>
+
+      <p>
+        Recursos, juegos y herramientas para apoyar el aprendizaje,
+        desarrollar habilidades, realizar intervenciones educativas
+        y documentar el progreso del estudiante.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#areas" class="btn btn-primary">Explorar áreas</a>
+        <a href="#juegos" class="btn btn-secondary">🎮 Ver juegos</a>
+      </div>
+    </div>
+
+    <div class="hero-panel">
+      <h3>Una intervención con propósito</h3>
+
+      <div class="process">
+        <div class="process-item">
+          <span class="number">1</span>
+          <span>Identificar la habilidad o necesidad</span>
+        </div>
+
+        <div class="process-item">
+          <span class="number">2</span>
+          <span>Seleccionar cómo trabajarla</span>
+        </div>
+
+        <div class="process-item">
+          <span class="number">3</span>
+          <span>Enseñar, practicar o estimular</span>
+        </div>
+
+        <div class="process-item">
+          <span class="number">4</span>
+          <span>Registrar lo observado</span>
+        </div>
+
+        <div class="process-item">
+          <span class="number">5</span>
+          <span>Dar seguimiento al progreso</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- AREAS -->
+
+<section id="areas" class="soft">
+  <div class="container">
+
+    <div class="section-top">
+      <div class="section-label">ÁREAS DE TRABAJO</div>
+      <h2>¿Qué necesitas trabajar?</h2>
+      <p>
+        Selecciona el área de acuerdo con las necesidades del estudiante
+        o el objetivo de la intervención.
+      </p>
+    </div>
+
+    <div class="areas">
+
+      <div class="area-card">
+        <div class="icon">📚</div>
+        <h3>Alfabetización</h3>
+        <p>
+          Conciencia fonológica, letras y sonidos, sílabas, palabras,
+          lectura, comprensión y escritura.
+        </p>
+        <span class="tag">En desarrollo</span>
+      </div>
+
+      <div class="area-card">
+        <div class="icon">🧠</div>
+        <h3>Estimulación para el aprendizaje</h3>
+        <p>
+          Atención, memoria, percepción, discriminación,
+          orientación y funciones ejecutivas.
+        </p>
+        <span class="tag">2 juegos disponibles</span>
+      </div>
+
+      <div class="area-card">
+        <div class="icon">🔢</div>
+        <h3>Pensamiento matemático</h3>
+        <p>
+          Numeración, cálculo, razonamiento, relaciones,
+          secuencias y resolución de situaciones.
+        </p>
+        <span class="tag">Próximamente</span>
+      </div>
+
+      <div class="area-card">
+        <div class="icon">🧩</div>
+        <h3>Conducta y autorregulación</h3>
+        <p>
+          Seguimiento de instrucciones, rutinas, autocontrol,
+          metas, observación y estrategias de apoyo.
+        </p>
+        <span class="tag">En desarrollo</span>
+      </div>
+
+      <div class="area-card">
+        <div class="icon">❤️</div>
+        <h3>Desarrollo socioemocional</h3>
+        <p>
+          Reconocimiento emocional, habilidades sociales,
+          autoestima, convivencia y resolución de conflictos.
+        </p>
+        <span class="tag">En desarrollo</span>
+      </div>
+
+      <div class="area-card">
+        <div class="icon">✍️</div>
+        <h3>Grafomotricidad</h3>
+        <p>
+          Coordinación visomotora, trazos, orientación espacial
+          y habilidades de apoyo para la escritura.
+        </p>
+        <span class="tag">Próximamente</span>
+      </div>
+
+      <div class="area-card">
+        <div class="icon">🗣️</div>
+        <h3>Habilidades lingüísticas</h3>
+        <p>
+          Vocabulario, comprensión oral, secuencias,
+          categorías y seguimiento de consignas.
+        </p>
+        <span class="tag">Próximamente</span>
+      </div>
+
+      <div class="area-card">
+        <div class="icon">🔎</div>
+        <h3>Detección y exploración</h3>
+        <p>
+          Herramientas para recopilar información, observar
+          habilidades e identificar necesidades de apoyo.
+        </p>
+        <span class="tag">En desarrollo</span>
+      </div>
+
+      <div class="area-card">
+        <div class="icon">📋</div>
+        <h3>Seguimiento y evidencias</h3>
+        <p>
+          Registros de intervención, progreso, observaciones
+          y documentos imprimibles para el expediente.
+        </p>
+        <span class="tag">En desarrollo</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- GAMES -->
+
+<section id="juegos">
+  <div class="container">
+
+    <div class="section-top">
+      <div class="section-label">JUEGOS Y ACTIVIDADES INTERACTIVAS</div>
+      <h2>Aprender y estimular jugando</h2>
+      <p>
+        Cada actividad está vinculada a una habilidad concreta.
+        Poco a poco añadiremos actividades de alfabetización,
+        matemática, atención, memoria, conducta y otras áreas.
+      </p>
+    </div>
+
+    <div class="games-grid">
+
+      <!-- JUEGO YA CREADO -->
+
+      <div class="game">
+        <div class="game-visual">🧠</div>
+
+        <div class="game-body">
+          <div class="game-small">MEMORIA VISUAL</div>
+
+          <h3>Memoria de parejas</h3>
+
+          <p>
+            Encuentra las parejas y ejercita memoria visual,
+            atención y estrategia.
+          </p>
+
+          <a href="memoria.html" class="play">
+            Jugar ahora →
+          </a>
+        </div>
+      </div>
+
+
+      <!-- JUEGO YA CREADO -->
+
+      <div class="game">
+        <div class="game-visual">🎯</div>
+
+        <div class="game-body">
+          <div class="game-small">ATENCIÓN SELECTIVA</div>
+
+          <h3>Búsqueda visual</h3>
+
+          <p>
+            Localiza los estímulos objetivo entre distractores
+            y observa precisión, errores y tiempo.
+          </p>
+
+          <a href="busqueda-visual.html" class="play">
+            Jugar ahora →
+          </a>
+        </div>
+      </div>
+
+
+      <!-- PRÓXIMO JUEGO -->
+
+      <div class="game">
+        <div class="game-visual">🔤</div>
+
+        <div class="game-body">
+          <div class="game-small">ALFABETIZACIÓN</div>
+
+          <h3>Sonidos y palabras</h3>
+
+          <p>
+            Primeras actividades para trabajar conciencia
+            fonológica y apoyar el aprendizaje de la lectura.
+          </p>
+
+          <span class="play">
+            Próximamente →
+          </span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- PATHS -->
+
+<section id="trabajar" class="soft">
+  <div class="container">
+
+    <div class="section-top">
+      <div class="section-label">DOS FORMAS DE UTILIZAR LA PLATAFORMA</div>
+      <h2>Trabajar y dar seguimiento</h2>
+    </div>
+
+    <div class="paths">
+
+      <div class="path">
+        <h3>🎯 Trabajar con el estudiante</h3>
 
         <p>
-            Juegos y herramientas educativas para estimular habilidades,
-            reforzar aprendizajes y acompañar las necesidades de los estudiantes.
+          Selecciona una habilidad y accede a actividades
+          diseñadas para enseñar, practicar o estimular.
         </p>
 
-        <a href="#juegos" class="btn">Explorar juegos →</a>
+        <ul>
+          <li>✓ Actividades guiadas</li>
+          <li>✓ Juegos interactivos</li>
+          <li>✓ Práctica progresiva</li>
+          <li>✓ Materiales imprimibles</li>
+          <li>✓ Registro de resultados</li>
+        </ul>
+      </div>
+
+      <div class="path">
+        <h3>📋 Evaluar y dar seguimiento</h3>
+
+        <p>
+          Organiza la información necesaria para acompañar
+          el proceso del estudiante.
+        </p>
+
+        <ul>
+          <li>✓ Detección de necesidades</li>
+          <li>✓ Observación y recopilación de información</li>
+          <li>✓ Exploración de habilidades</li>
+          <li>✓ Plan de apoyo</li>
+          <li>✓ Registro de intervención</li>
+          <li>✓ Seguimiento del progreso</li>
+        </ul>
+      </div>
 
     </div>
+  </div>
 </section>
 
 
-<section class="section" id="areas">
+<!-- EVIDENCE -->
 
-    <div class="container">
+<section id="seguimiento">
+  <div class="container evidence">
 
-        <div class="section-title">
-            <small>EXPLORA POR ÁREA</small>
-            <h2>¿Qué quieres trabajar?</h2>
-            <p>
-                Selecciona un área para descubrir actividades y juegos
-                educativos.
-            </p>
-        </div>
+    <div>
+      <div class="section-label">DOCUMENTAR EL PROCESO</div>
 
-        <div class="categories">
+      <h2>La actividad no termina cuando acaba el juego.</h2>
 
-            <div class="category">
-                <div class="icon">🎯</div>
-                <h3>Atención</h3>
-                <p>Atención sostenida, selectiva y concentración.</p>
-            </div>
-
-            <div class="category">
-                <div class="icon">🧠</div>
-                <h3>Memoria</h3>
-                <p>Memoria visual, auditiva y secuencial.</p>
-            </div>
-
-            <div class="category">
-                <div class="icon">🔤</div>
-                <h3>Lectura y escritura</h3>
-                <p>Reconocimiento, comprensión y producción escrita.</p>
-            </div>
-
-            <div class="category">
-                <div class="icon">👂</div>
-                <h3>Conciencia fonológica</h3>
-                <p>Sonidos, sílabas, fonemas y rimas.</p>
-            </div>
-
-            <div class="category">
-                <div class="icon">🔢</div>
-                <h3>Pensamiento matemático</h3>
-                <p>Números, cantidades, secuencias y cálculo.</p>
-            </div>
-
-            <div class="category">
-                <div class="icon">👁️</div>
-                <h3>Percepción</h3>
-                <p>Discriminación visual y organización espacial.</p>
-            </div>
-
-            <div class="category">
-                <div class="icon">❤️</div>
-                <h3>Socioemocional</h3>
-                <p>Emociones, autocontrol y habilidades sociales.</p>
-            </div>
-
-            <div class="category">
-                <div class="icon">🧩</div>
-                <h3>Funciones ejecutivas</h3>
-                <p>Planificación, flexibilidad y control inhibitorio.</p>
-            </div>
-
-        </div>
+      <p>
+        Profe Organizado busca conectar las actividades con
+        la observación y el seguimiento educativo. Los próximos
+        juegos incorporarán registros que puedan imprimirse y
+        utilizarse como evidencia del trabajo realizado.
+      </p>
     </div>
+
+    <div class="evidence-box">
+
+      <h3 style="color:#0F2C59; margin-bottom:15px;">
+        📄 Registro de intervención
+      </h3>
+
+      <div class="evidence-line">
+        <strong>Área:</strong> __________________________
+      </div>
+
+      <div class="evidence-line">
+        <strong>Habilidad trabajada:</strong> __________________
+      </div>
+
+      <div class="evidence-line">
+        <strong>Actividad:</strong> ______________________
+      </div>
+
+      <div class="evidence-line">
+        <strong>Resultado:</strong> ______________________
+      </div>
+
+      <div class="evidence-line">
+        <strong>Nivel de apoyo:</strong> __________________
+      </div>
+
+      <div class="evidence-line">
+        <strong>Observaciones:</strong> ___________________
+      </div>
+
+      <div class="evidence-line">
+        <strong>Próxima acción:</strong> __________________
+      </div>
+
+    </div>
+
+  </div>
 </section>
 
 
-<section class="section games-section" id="juegos">
+<!-- PROFESSIONAL NOTICE -->
 
-    <div class="container">
+<section class="soft">
+  <div class="container">
 
-        <div class="section-title">
-            <small>APRENDE JUGANDO</small>
-            <h2>Juegos interactivos</h2>
-            <p>
-                Actividades sencillas para trabajar diferentes habilidades
-                educativas.
-            </p>
-        </div>
-
-        <div class="games">
-
-            <div class="game">
-                <div class="game-top">🧠</div>
-                <div class="game-content">
-                    <span class="game-tag">Memoria</span>
-                    <h3>Memoria de parejas</h3>
-                    <p>Encuentra las parejas y ejercita la memoria visual.</p>
-                    <a href="memoria.html" class="play">Jugar ahora →</a>
-                </div>
-            </div>
-
-            <div class="game">
-                <div class="game-top">🔎</div>
-                <div class="game-content">
-                    <span class="game-tag">Atención</span>
-                    <h3>Búsqueda visual</h3>
-                    <p>Localiza los estímulos indicados entre diferentes elementos.</p>
-                  <a href="busqueda-visual.html" class="play">Jugar ahora →</a>
-                </div>
-            </div>
-
-            <div class="game">
-                <div class="game-top">🔤</div>
-                <div class="game-content">
-                    <span class="game-tag">Conciencia fonológica</span>
-                    <h3>Sonido inicial</h3>
-                    <p>Identifica con qué sonido comienzan diferentes palabras.</p>
-                    <a href="#" class="play">Próximamente →</a>
-                </div>
-            </div>
-
-        </div>
+    <div class="notice">
+      <strong>Enfoque de Profe Organizado:</strong>
+      las actividades y resultados de la plataforma están concebidos
+      como recursos de apoyo educativo y psicopedagógico para la
+      observación, intervención y seguimiento. Los resultados aislados
+      de una actividad no constituyen por sí mismos un diagnóstico.
     </div>
-</section>
 
-
-<section class="section" id="profesionales">
-
-    <div class="container professional">
-
-        <div>
-            <h2>Más que juegos.</h2>
-
-            <p>
-                Profe Organizado busca ofrecer recursos prácticos que puedan
-                utilizarse como apoyo en el contexto educativo.
-            </p>
-
-            <p>
-                Las actividades están pensadas para facilitar la estimulación,
-                el reforzamiento de habilidades y el seguimiento educativo.
-            </p>
-        </div>
-
-        <div class="info-box">
-
-            <strong>Diseñado pensando en:</strong>
-
-            <p>✓ Docentes</p>
-            <p>✓ Orientadores escolares</p>
-            <p>✓ Psicólogos escolares</p>
-            <p>✓ Familias</p>
-            <p>✓ Estudiantes</p>
-
-        </div>
-
-    </div>
+  </div>
 </section>
 
 
 <footer>
+  <div class="container footer">
 
-    <div class="footer-content">
-
-        <h3>Profe Organizado</h3>
-
-        <p>
-            Recursos y juegos educativos para acompañar el aprendizaje.
-        </p>
-
-        <br>
-
-        <p>© 2026 Profe Organizado</p>
-
+    <div>
+      <strong style="color:#0F2C59;">
+        PROFE ORGANIZADO
+      </strong>
+      <br>
+      Recursos para acompañar el aprendizaje.
     </div>
 
+    <div>
+      © 2026 Profe Organizado
+    </div>
+
+  </div>
 </footer>
 
 </body>
