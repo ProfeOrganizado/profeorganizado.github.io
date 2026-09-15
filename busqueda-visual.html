@@ -8,361 +8,585 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 
-body{
-    font-family:Arial,sans-serif;
-    background:#f6f8f7;
-    color:#2f3437;
-    min-height:100vh;
+:root{
+  --azul:#0F2C59;
+  --salvia:#7C9A83;
+  --salvia-claro:#EEF4EF;
+  --azul-claro:#EEF3F8;
+  --crema:#FAF8F3;
+  --gris:#3E4651;
+  --gris2:#737B84;
+  --borde:#E3E7EB;
+  --blanco:#fff;
 }
 
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  background:#F7F8FA;
+  color:var(--gris);
+  min-height:100vh;
+}
+
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+
 header{
-    background:#fff;
-    border-bottom:1px solid #e5e8e6;
+  height:58px;
+  background:white;
+  border-bottom:1px solid var(--borde);
 }
 
 .nav{
-    max-width:1050px;
-    margin:auto;
-    padding:18px 24px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+  max-width:1080px;
+  height:58px;
+  margin:auto;
+  padding:0 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
 }
 
 .logo{
-    font-size:21px;
-    font-weight:800;
-    color:#0F2C59;
+  display:flex;
+  align-items:center;
+  gap:8px;
+  color:var(--azul);
+  font-size:.85rem;
+  font-weight:900;
 }
 
-.logo span{color:#7C9A83}
+.logo img{
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  object-fit:cover;
+}
+
+.logo strong{color:var(--salvia)}
 
 .back{
-    color:#0F2C59;
-    text-decoration:none;
-    font-weight:bold;
-    font-size:14px;
+  color:var(--azul);
+  font-size:.75rem;
+  font-weight:700;
 }
 
 main{
-    max-width:900px;
-    margin:auto;
-    padding:45px 20px 70px;
+  max-width:900px;
+  margin:auto;
+  padding:22px 18px 40px;
 }
 
-.intro{text-align:center;margin-bottom:30px}
+.screen{display:none}
+.screen.active{display:block}
 
-.badge{
-    display:inline-block;
-    background:#e5ece6;
-    color:#55705c;
-    padding:6px 13px;
-    border-radius:20px;
-    font-size:12px;
-    font-weight:bold;
-    margin-bottom:12px;
+/* ---------- INICIO ---------- */
+
+.hero{
+  text-align:center;
+  max-width:650px;
+  margin:10px auto 22px;
 }
 
-h1{
-    color:#0F2C59;
-    font-size:38px;
-    margin-bottom:10px;
+.eyebrow{
+  display:inline-block;
+  padding:5px 10px;
+  background:var(--salvia-claro);
+  color:#587361;
+  border-radius:20px;
+  font-size:.65rem;
+  font-weight:800;
+  margin-bottom:10px;
 }
 
-.intro p{
-    max-width:600px;
-    margin:auto;
-    color:#697075;
+.hero h1{
+  color:var(--azul);
+  font-size:2rem;
+  margin-bottom:7px;
 }
 
-/* INICIO */
-
-.start-screen{
-    max-width:620px;
-    margin:30px auto;
-    background:#fff;
-    border:1px solid #e4e8e5;
-    border-radius:16px;
-    padding:35px;
-    text-align:center;
+.hero p{
+  color:var(--gris2);
+  font-size:.85rem;
+  line-height:1.5;
 }
 
-.start-screen h2{
-    color:#0F2C59;
-    margin-bottom:8px;
+.setup{
+  max-width:650px;
+  margin:auto;
+  background:white;
+  border:1px solid var(--borde);
+  border-radius:14px;
+  padding:20px;
 }
 
-.start-screen > p{
-    color:#707579;
-    margin-bottom:25px;
+.section-label{
+  color:var(--azul);
+  font-size:.72rem;
+  font-weight:800;
+  margin-bottom:8px;
 }
 
-.levels{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:12px;
-    margin-bottom:25px;
+.mode-grid,
+.level-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:9px;
+  margin-bottom:18px;
 }
 
-.level{
-    border:2px solid #e2e6e3;
-    background:#fff;
-    border-radius:10px;
-    padding:15px 8px;
-    cursor:pointer;
+.level-grid{
+  grid-template-columns:repeat(3,1fr);
 }
 
-.level:hover{border-color:#7C9A83}
-
-.level.selected{
-    border-color:#0F2C59;
-    background:#f3f6f9;
+.option{
+  position:relative;
+  border:1px solid var(--borde);
+  background:white;
+  border-radius:10px;
+  padding:13px 10px;
+  text-align:center;
+  transition:.15s;
 }
 
-.level strong{
-    display:block;
-    color:#0F2C59;
-    margin-bottom:4px;
+.option:hover{
+  border-color:var(--salvia);
+  transform:translateY(-1px);
 }
 
-.level span{
-    color:#777;
-    font-size:12px;
+.option.selected{
+  border:2px solid var(--salvia);
+  background:var(--salvia-claro);
 }
 
-.instructions{
-    background:#f7f5ef;
-    padding:17px;
-    border-radius:10px;
-    text-align:left;
-    margin-bottom:25px;
-    color:#60666a;
-    font-size:14px;
+.option .big{
+  display:block;
+  font-size:1.35rem;
+  margin-bottom:4px;
 }
 
-.primary-btn{
-    border:0;
-    background:#0F2C59;
-    color:#fff;
-    padding:14px 25px;
-    border-radius:8px;
-    cursor:pointer;
-    font-size:15px;
-    font-weight:bold;
+.option strong{
+  display:block;
+  color:var(--azul);
+  font-size:.75rem;
 }
 
-/* JUEGO */
-
-.game-area{display:none}
-
-.target-box{
-    background:#fff;
-    border:1px solid #e4e8e5;
-    border-radius:14px;
-    padding:20px;
-    margin-bottom:18px;
-    text-align:center;
+.option small{
+  display:block;
+  color:var(--gris2);
+  font-size:.6rem;
+  margin-top:3px;
 }
 
-.target-box span{
-    color:#697075;
-    font-size:13px;
-    display:block;
+.session-fields{
+  display:none;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  padding:12px;
+  margin-bottom:18px;
+  background:var(--crema);
+  border-radius:9px;
 }
 
-.target{
-    font-size:48px;
-    margin-top:5px;
+.session-fields.show{display:grid}
+
+.field label{
+  display:block;
+  color:var(--azul);
+  font-size:.65rem;
+  font-weight:700;
+  margin-bottom:4px;
+}
+
+.field input,
+.field select,
+.record textarea{
+  width:100%;
+  border:1px solid var(--borde);
+  border-radius:7px;
+  padding:9px;
+  background:white;
+  color:var(--gris);
+  outline:none;
+}
+
+.privacy{
+  grid-column:1/-1;
+  color:var(--gris2);
+  font-size:.6rem;
+}
+
+.primary{
+  width:100%;
+  border:0;
+  border-radius:8px;
+  padding:11px;
+  background:var(--azul);
+  color:white;
+  font-weight:800;
+  font-size:.76rem;
+}
+
+/* ---------- JUEGO ---------- */
+
+.game-top{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:15px;
+  align-items:center;
+  margin-bottom:12px;
+}
+
+.mission small{
+  color:var(--salvia);
+  font-weight:800;
+  font-size:.65rem;
+}
+
+.mission h2{
+  color:var(--azul);
+  font-size:1.2rem;
+  margin-top:3px;
 }
 
 .stats{
-    display:grid;
-    grid-template-columns:repeat(5,1fr);
-    background:#fff;
-    border:1px solid #e4e8e5;
-    border-radius:12px;
-    padding:14px 5px;
-    margin-bottom:20px;
+  display:flex;
+  gap:7px;
 }
 
 .stat{
-    text-align:center;
-    border-right:1px solid #e9ecea;
-}
-
-.stat:last-child{border:0}
-
-.stat span{
-    display:block;
-    font-size:11px;
-    color:#777;
+  background:white;
+  border:1px solid var(--borde);
+  border-radius:8px;
+  padding:7px 10px;
+  min-width:62px;
+  text-align:center;
 }
 
 .stat strong{
-    color:#0F2C59;
-    font-size:18px;
+  display:block;
+  color:var(--azul);
+  font-size:.85rem;
+}
+
+.stat span{
+  color:var(--gris2);
+  font-size:.55rem;
+}
+
+.progress-track{
+  height:6px;
+  background:#E9ECEF;
+  border-radius:10px;
+  overflow:hidden;
+  margin-bottom:14px;
+}
+
+.progress-bar{
+  width:0%;
+  height:100%;
+  background:var(--salvia);
+  transition:.3s;
+}
+
+.challenge{
+  background:white;
+  border:1px solid var(--borde);
+  border-radius:14px;
+  padding:17px;
+}
+
+.instruction{
+  text-align:center;
+  margin-bottom:13px;
+}
+
+.instruction span{
+  color:var(--gris2);
+  font-size:.7rem;
+}
+
+.target{
+  display:inline-grid;
+  place-items:center;
+  width:50px;
+  height:50px;
+  margin-left:7px;
+  border-radius:10px;
+  background:var(--salvia-claro);
+  font-size:1.8rem;
+  vertical-align:middle;
 }
 
 .board{
-    background:#fff;
-    border:1px solid #e2e6e3;
-    border-radius:16px;
-    padding:22px;
-    display:grid;
-    gap:8px;
-    user-select:none;
+  display:grid;
+  gap:8px;
+  max-width:650px;
+  margin:auto;
 }
 
 .symbol{
-    min-height:58px;
-    border:2px solid transparent;
-    background:#f7f8f7;
-    border-radius:9px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:31px;
-    cursor:pointer;
-    transition:.15s;
+  aspect-ratio:1;
+  min-height:48px;
+  border:1px solid #E6E9EC;
+  background:#FAFBFC;
+  border-radius:10px;
+  font-size:1.55rem;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:.15s;
+  user-select:none;
 }
 
 .symbol:hover{
-    background:#eef2ef;
-    transform:scale(1.03);
+  background:var(--azul-claro);
+  transform:scale(1.03);
 }
 
 .symbol.correct{
-    background:#e8f2ea;
-    border-color:#7C9A83;
+  background:var(--salvia-claro);
+  border-color:var(--salvia);
+  transform:scale(.92);
+}
+
+.symbol.correct::after{
+  content:"✓";
+  position:absolute;
 }
 
 .symbol.wrong{
-    background:#f7eaea;
-    border-color:#c88b8b;
+  animation:shake .22s;
 }
 
-.symbol.disabled{
-    pointer-events:none;
+.symbol{
+  position:relative;
 }
 
-.controls{
-    text-align:center;
-    margin-top:25px;
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  30%{transform:translateX(-4px)}
+  70%{transform:translateX(4px)}
 }
 
-.secondary-btn{
-    background:#fff;
-    color:#0F2C59;
-    border:1px solid #d6dcda;
-    border-radius:8px;
-    padding:11px 18px;
-    font-weight:bold;
-    cursor:pointer;
+.feedback{
+  min-height:38px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  font-weight:800;
+  color:var(--salvia);
+  font-size:.75rem;
+  margin-top:7px;
 }
 
-/* RESULTADOS */
-
-.result{
-    display:none;
-    max-width:650px;
-    margin:25px auto;
-    background:#fff;
-    border:1px solid #e3e7e5;
-    border-radius:16px;
-    padding:38px;
-    text-align:center;
+.round-complete{
+  text-align:center;
+  padding:16px 5px 3px;
+  display:none;
 }
 
-.result-icon{
-    font-size:48px;
-    margin-bottom:8px;
+.round-complete.show{display:block}
+
+.round-complete .celebrate{
+  font-size:2rem;
+  margin-bottom:5px;
 }
 
-.result h2{
-    color:#0F2C59;
-    font-size:28px;
+.round-complete h3{
+  color:var(--azul);
+  margin-bottom:4px;
 }
 
-.result > p{
-    color:#6d7377;
-    margin:8px 0 25px;
+.next{
+  border:0;
+  background:var(--azul);
+  color:white;
+  border-radius:7px;
+  padding:9px 18px;
+  font-weight:800;
+  font-size:.7rem;
+  margin-top:9px;
 }
 
-.result-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:10px;
-    margin-bottom:25px;
+/* ---------- RESULTADO ---------- */
+
+.result-card{
+  max-width:680px;
+  margin:10px auto;
+  background:white;
+  border:1px solid var(--borde);
+  border-radius:14px;
+  overflow:hidden;
 }
 
-.result-item{
-    background:#f6f8f7;
-    border-radius:10px;
-    padding:16px 6px;
+.result-main{
+  text-align:center;
+  padding:25px 20px 18px;
 }
 
-.result-item strong{
-    display:block;
-    color:#0F2C59;
-    font-size:20px;
+.trophy{
+  font-size:2.8rem;
+  margin-bottom:5px;
 }
 
-.result-item span{
-    font-size:11px;
-    color:#777;
+.result-main h2{
+  color:var(--azul);
+  font-size:1.35rem;
 }
 
-.performance{
-    background:#eaf1eb;
-    border-radius:10px;
-    padding:17px;
-    margin-bottom:15px;
+.result-main p{
+  color:var(--gris2);
+  font-size:.75rem;
+  margin-top:5px;
 }
 
-.performance strong{
-    color:#0F2C59;
+.score-big{
+  color:var(--azul);
+  font-size:2.2rem;
+  font-weight:900;
+  margin:12px 0 2px;
 }
 
-.note{
-    text-align:left;
-    background:#f7f5ef;
-    padding:18px;
-    border-radius:10px;
-    margin-bottom:25px;
-    font-size:13px;
-    color:#5f6468;
+.score-label{
+  color:var(--gris2);
+  font-size:.62rem;
 }
 
-footer{
-    text-align:center;
-    color:#888;
-    font-size:12px;
-    padding:25px;
+.result-stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  border-top:1px solid var(--borde);
+  border-bottom:1px solid var(--borde);
+}
+
+.result-stat{
+  text-align:center;
+  padding:13px 5px;
+  border-right:1px solid var(--borde);
+}
+
+.result-stat:last-child{border:0}
+
+.result-stat strong{
+  display:block;
+  color:var(--azul);
+  font-size:.95rem;
+}
+
+.result-stat span{
+  color:var(--gris2);
+  font-size:.57rem;
+}
+
+.result-actions{
+  display:flex;
+  gap:8px;
+  padding:14px;
+}
+
+.result-actions button{
+  flex:1;
+  border-radius:7px;
+  padding:9px;
+  font-size:.68rem;
+  font-weight:800;
+}
+
+.play-again{
+  border:0;
+  background:var(--azul);
+  color:white;
+}
+
+.print-btn{
+  border:1px solid var(--azul);
+  color:var(--azul);
+  background:white;
+}
+
+/* ---------- REGISTRO ---------- */
+
+.record{
+  display:none;
+  padding:18px;
+  border-top:1px solid var(--borde);
+}
+
+.record.show{display:block}
+
+.record h3{
+  color:var(--azul);
+  font-size:.9rem;
+  margin-bottom:4px;
+}
+
+.record-intro{
+  color:var(--gris2);
+  font-size:.63rem;
+  margin-bottom:13px;
+}
+
+.record-grid{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+}
+
+.record .full{grid-column:1/-1}
+
+.record label{
+  display:block;
+  color:var(--azul);
+  font-size:.62rem;
+  font-weight:700;
+  margin-bottom:4px;
+}
+
+.record textarea{
+  min-height:70px;
+  resize:vertical;
+}
+
+.record-data{
+  padding:9px;
+  border:1px solid var(--borde);
+  border-radius:7px;
+  background:#FAFBFC;
+  min-height:35px;
+  font-size:.7rem;
+}
+
+.disclaimer{
+  margin-top:12px;
+  padding:9px;
+  background:var(--salvia-claro);
+  border-radius:7px;
+  color:#587361;
+  font-size:.6rem;
+  line-height:1.4;
 }
 
 @media(max-width:650px){
+  .hero h1{font-size:1.55rem}
+  .game-top{grid-template-columns:1fr}
+  .stats{justify-content:space-between}
+  .stat{flex:1}
+  .result-stats{grid-template-columns:repeat(2,1fr)}
+  .result-stat:nth-child(2){border-right:0}
+  .result-stat:nth-child(-n+2){border-bottom:1px solid var(--borde)}
+  .record-grid,.session-fields{grid-template-columns:1fr}
+  .privacy,.record .full{grid-column:auto}
+  .level-grid{grid-template-columns:1fr}
+}
 
-    h1{font-size:30px}
-
-    .levels{grid-template-columns:1fr}
-
-    .stats{
-        grid-template-columns:repeat(2,1fr);
-        gap:12px;
-    }
-
-    .stat{border:0}
-
-    .result-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-
-    .symbol{
-        min-height:48px;
-        font-size:25px;
-    }
-
-    .board{padding:12px}
+@media print{
+  body{background:white}
+  header,.hero,.result-main,.result-stats,.result-actions{display:none!important}
+  main{padding:0}
+  .result-card{border:0;margin:0;max-width:none}
+  .record{display:block!important;border:0;padding:0}
 }
 </style>
 </head>
@@ -370,383 +594,689 @@ footer{
 <body>
 
 <header>
-<div class="nav">
-    <div class="logo">Profe <span>Organizado</span></div>
-    <a class="back" href="index.html">← Volver al inicio</a>
-</div>
+  <div class="nav">
+    <a href="index.html" class="logo">
+      <img src="logo.png" alt="Logo Profe Organizado">
+      <span>PROFE <strong>ORGANIZADO</strong></span>
+    </a>
+
+    <a href="estimulacion.html" class="back">← Estimulación</a>
+  </div>
 </header>
 
 <main>
 
-<div class="intro">
-    <div class="badge">ATENCIÓN SELECTIVA</div>
-    <h1>Búsqueda visual</h1>
+<!-- INICIO -->
+
+<section id="startScreen" class="screen active">
+
+  <div class="hero">
+    <span class="eyebrow">🎯 ATENCIÓN SELECTIVA</span>
+    <h1>🔎 Búsqueda visual</h1>
     <p>
-        Localiza el estímulo objetivo entre diferentes distractores
-        de la forma más precisa posible.
+      Encuentra los objetivos entre los distractores.
+      Cada ronda será un poco diferente.
     </p>
-</div>
+  </div>
 
-<div class="start-screen" id="startScreen">
+  <div class="setup">
 
-    <h2>Selecciona un nivel</h2>
-    <p>La cantidad y similitud de los distractores aumentará.</p>
+    <div class="section-label">¿Cómo deseas utilizar la actividad?</div>
 
-    <div class="levels">
+    <div class="mode-grid">
+      <button class="option selected" data-mode="game">
+        <span class="big">🎮</span>
+        <strong>Modo juego</strong>
+        <small>Jugar y practicar</small>
+      </button>
 
-        <button class="level selected"
-        onclick="selectLevel(this,'Fácil',24,4,4)">
-            <strong>Fácil</strong>
-            <span>24 elementos</span>
-        </button>
-
-        <button class="level"
-        onclick="selectLevel(this,'Medio',40,6,5)">
-            <strong>Medio</strong>
-            <span>40 elementos</span>
-        </button>
-
-        <button class="level"
-        onclick="selectLevel(this,'Difícil',60,8,6)">
-            <strong>Difícil</strong>
-            <span>60 elementos</span>
-        </button>
-
+      <button class="option" data-mode="session">
+        <span class="big">📋</span>
+        <strong>Modo sesión</strong>
+        <small>Actividad + registro</small>
+      </button>
     </div>
 
-    <div class="instructions">
-        <strong>¿Cómo jugar?</strong><br><br>
-        Observa el símbolo que aparece como objetivo. Encuentra y selecciona
-        todos los símbolos iguales dentro del tablero. Evita seleccionar
-        los distractores.
+    <div id="sessionFields" class="session-fields">
+      <div class="privacy">
+        🔒 Utilice únicamente las iniciales del estudiante. No introduzca nombres completos.
+      </div>
+
+      <div class="field">
+        <label>Iniciales</label>
+        <input id="initials" maxlength="8" placeholder="Ej. A.M.">
+      </div>
+
+      <div class="field">
+        <label>Curso / grado</label>
+        <input id="grade" maxlength="25" placeholder="Ej. 3.º Primaria">
+      </div>
     </div>
 
-    <button class="primary-btn" onclick="startGame()">
-        Comenzar actividad
-    </button>
+    <div class="section-label">Selecciona el nivel</div>
 
-</div>
+    <div class="level-grid">
+      <button class="option selected" data-level="easy">
+        <span class="big">🌱</span>
+        <strong>Fácil</strong>
+        <small>Menos distractores</small>
+      </button>
+
+      <button class="option" data-level="medium">
+        <span class="big">⭐</span>
+        <strong>Medio</strong>
+        <small>Más elementos</small>
+      </button>
+
+      <button class="option" data-level="hard">
+        <span class="big">🚀</span>
+        <strong>Difícil</strong>
+        <small>Mayor semejanza visual</small>
+      </button>
+    </div>
+
+    <button id="startBtn" class="primary">COMENZAR RETO →</button>
+
+  </div>
+
+</section>
 
 
-<div class="game-area" id="gameArea">
+<!-- JUEGO -->
 
-    <div class="target-box">
-        <span>ENCUENTRA TODOS LOS</span>
-        <div class="target" id="target">★</div>
+<section id="gameScreen" class="screen">
+
+  <div class="game-top">
+
+    <div class="mission">
+      <small id="roundText">MISIÓN 1 DE 5</small>
+      <h2 id="missionTitle">Encuentra todos los objetivos</h2>
     </div>
 
     <div class="stats">
+      <div class="stat">
+        <strong id="score">0</strong>
+        <span>⭐ Puntos</span>
+      </div>
 
-        <div class="stat">
-            <span>NIVEL</span>
-            <strong id="levelStat">Fácil</strong>
-        </div>
+      <div class="stat">
+        <strong id="streak">0</strong>
+        <span>🔥 Racha</span>
+      </div>
 
-        <div class="stat">
-            <span>TIEMPO</span>
-            <strong id="timeStat">00:00</strong>
-        </div>
+      <div class="stat">
+        <strong id="time">0:00</strong>
+        <span>⏱ Tiempo</span>
+      </div>
+    </div>
 
-        <div class="stat">
-            <span>ACIERTOS</span>
-            <strong id="correctStat">0</strong>
-        </div>
+  </div>
 
-        <div class="stat">
-            <span>ERRORES</span>
-            <strong id="errorStat">0</strong>
-        </div>
+  <div class="progress-track">
+    <div id="progressBar" class="progress-bar"></div>
+  </div>
 
-        <div class="stat">
-            <span>FALTAN</span>
-            <strong id="remainingStat">0</strong>
-        </div>
+  <div class="challenge">
+
+    <div class="instruction">
+      <span>Encuentra todos los</span>
+      <span id="targetDisplay" class="target">⭐</span>
+    </div>
+
+    <div id="board" class="board"></div>
+
+    <div id="feedback" class="feedback"></div>
+
+    <div id="roundComplete" class="round-complete">
+      <div class="celebrate">🎉</div>
+      <h3 id="roundMessage">¡Ronda completada!</h3>
+      <button id="nextBtn" class="next">SIGUIENTE RETO →</button>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- RESULTADOS -->
+
+<section id="resultScreen" class="screen">
+
+  <div class="result-card">
+
+    <div class="result-main">
+      <div class="trophy">🏆</div>
+      <h2>¡Reto completado!</h2>
+      <p>Terminaste todas las misiones de búsqueda visual.</p>
+
+      <div id="finalScore" class="score-big">0</div>
+      <div class="score-label">PUNTOS</div>
+    </div>
+
+    <div class="result-stats">
+
+      <div class="result-stat">
+        <strong id="finalHits">0</strong>
+        <span>ACIERTOS</span>
+      </div>
+
+      <div class="result-stat">
+        <strong id="finalErrors">0</strong>
+        <span>ERRORES</span>
+      </div>
+
+      <div class="result-stat">
+        <strong id="finalPrecision">0%</strong>
+        <span>PRECISIÓN</span>
+      </div>
+
+      <div class="result-stat">
+        <strong id="finalTime">0:00</strong>
+        <span>TIEMPO</span>
+      </div>
 
     </div>
 
-    <div class="board" id="board"></div>
+    <div id="record" class="record">
 
-    <div class="controls">
-        <button class="secondary-btn" onclick="restartGame()">
-            ↻ Reiniciar
-        </button>
-    </div>
+      <h3>📋 Registro de intervención</h3>
 
-</div>
+      <div class="record-intro">
+        Evidencia de la actividad realizada para fines de observación y seguimiento educativo.
+      </div>
 
+      <div class="record-grid">
 
-<div class="result" id="result">
-
-    <div class="result-icon">🎯</div>
-
-    <h2>¡Actividad completada!</h2>
-
-    <p>Localizaste todos los estímulos objetivo.</p>
-
-    <div class="result-grid">
-
-        <div class="result-item">
-            <strong id="finalTime">00:00</strong>
-            <span>Tiempo</span>
+        <div>
+          <label>Iniciales</label>
+          <div id="recordInitials" class="record-data">—</div>
         </div>
 
-        <div class="result-item">
-            <strong id="finalCorrect">0</strong>
-            <span>Aciertos</span>
+        <div>
+          <label>Curso / grado</label>
+          <div id="recordGrade" class="record-data">—</div>
         </div>
 
-        <div class="result-item">
-            <strong id="finalErrors">0</strong>
-            <span>Errores</span>
+        <div>
+          <label>Fecha</label>
+          <div id="recordDate" class="record-data"></div>
         </div>
 
-        <div class="result-item">
-            <strong id="finalAccuracy">100%</strong>
-            <span>Precisión</span>
+        <div>
+          <label>Área</label>
+          <div class="record-data">Estimulación cognitiva para el aprendizaje</div>
         </div>
+
+        <div>
+          <label>Habilidad trabajada</label>
+          <div class="record-data">Atención selectiva y exploración visual</div>
+        </div>
+
+        <div>
+          <label>Actividad</label>
+          <div class="record-data">Búsqueda visual</div>
+        </div>
+
+        <div>
+          <label>Resultado</label>
+          <div id="recordResult" class="record-data"></div>
+        </div>
+
+        <div>
+          <label>Nivel utilizado</label>
+          <div id="recordLevel" class="record-data"></div>
+        </div>
+
+        <div>
+          <label>Nivel de apoyo durante la actividad</label>
+          <select id="support">
+            <option>Independiente</option>
+            <option>Consigna repetida</option>
+            <option>Apoyo verbal ocasional</option>
+            <option>Apoyo verbal frecuente</option>
+            <option>Modelado</option>
+          </select>
+        </div>
+
+        <div>
+          <label>Respuesta ante la actividad</label>
+          <select>
+            <option>Participación adecuada</option>
+            <option>Requirió redirección ocasional</option>
+            <option>Requirió redirección frecuente</option>
+            <option>Presentó dificultad para mantener la tarea</option>
+          </select>
+        </div>
+
+        <div class="full">
+          <label>Observaciones</label>
+          <textarea placeholder="Ej. estrategia de búsqueda utilizada, necesidad de redirección, distractibilidad observada..."></textarea>
+        </div>
+
+        <div class="full">
+          <label>Próxima acción / seguimiento</label>
+          <textarea placeholder="Ej. continuar con actividades de atención selectiva aumentando progresivamente la complejidad."></textarea>
+        </div>
+
+        <div>
+          <label>Responsable</label>
+          <input type="text" placeholder="Nombre o firma">
+        </div>
+
+        <div>
+          <label>Rol</label>
+          <select>
+            <option>Psicología escolar</option>
+            <option>Orientación</option>
+            <option>Docente</option>
+            <option>Psicopedagogía</option>
+            <option>Otro</option>
+          </select>
+        </div>
+
+      </div>
+
+      <div class="disclaimer">
+        Este registro documenta el desempeño observado durante una actividad específica.
+        Sus resultados no constituyen por sí solos una evaluación diagnóstica.
+      </div>
 
     </div>
 
-    <div class="performance">
-        <strong id="performanceText">
-            Actividad completada
-        </strong>
+    <div class="result-actions">
+      <button id="againBtn" class="play-again">🔄 JUGAR OTRA VEZ</button>
+      <button id="printBtn" class="print-btn">🖨️ IMPRIMIR REGISTRO</button>
     </div>
 
-    <div class="note">
-        <strong>Para el acompañamiento educativo:</strong><br><br>
-        Puedes observar aspectos como precisión, cantidad de errores,
-        tiempo empleado, necesidad de redirección y forma de abordar
-        la búsqueda. Los resultados de esta actividad son orientativos
-        y no constituyen por sí mismos una evaluación diagnóstica.
-    </div>
+  </div>
 
-    <button class="primary-btn" onclick="playAgain()">
-        Jugar otra vez
-    </button>
-
-</div>
+</section>
 
 </main>
 
-<footer>
-© 2026 Profe Organizado · Recursos educativos
-</footer>
 
 <script>
+const screens={
+  start:document.getElementById("startScreen"),
+  game:document.getElementById("gameScreen"),
+  result:document.getElementById("resultScreen")
+};
 
-const symbolGroups = [
-    ["●","○","◉","◎","◌","◍"],
-    ["▲","△","▼","▽","◆","◇"],
-    ["★","☆","✦","✧","✶","✷"],
-    ["■","□","▪","▫","▣","▢"],
-    ["⬆","⬇","⬅","➡","↗","↘"]
+let mode="game";
+let level="easy";
+let round=0;
+let score=0;
+let hits=0;
+let errors=0;
+let streak=0;
+let seconds=0;
+let timer=null;
+let targetsRemaining=0;
+let roundLocked=false;
+
+const configs={
+  easy:{
+    cols:4,
+    total:20,
+    targets:4,
+    name:"Fácil"
+  },
+  medium:{
+    cols:5,
+    total:35,
+    targets:5,
+    name:"Medio"
+  },
+  hard:{
+    cols:6,
+    total:48,
+    targets:6,
+    name:"Difícil"
+  }
+};
+
+const setsEasy=[
+  ["🐶","🐱","🐰","🐼","🐸"],
+  ["🍎","🍌","🍇","🍓","🍊"],
+  ["⭐","❤️","🌙","☀️","☁️"],
+  ["🚗","🚌","🚲","🚕","🚙"],
+  ["⚽","🏀","🎾","🏐","⚾"]
 ];
 
-let levelName = "Fácil";
-let totalItems = 24;
-let targetAmount = 4;
-let columns = 4;
+const setsMedium=[
+  ["🐶","🐺","🦊","🐱","🦁"],
+  ["🍎","🍅","🍒","🍓","🌶️"],
+  ["⭐","🌟","✨","💫","☀️"],
+  ["🚗","🚙","🚕","🛻","🚐"],
+  ["🔵","🟣","🟢","🟡","🟠"]
+];
 
-let targetSymbol = "";
-let correct = 0;
-let errors = 0;
-let seconds = 0;
-let timer = null;
+const setsHard=[
+  ["◯","○","●","◎","⊙"],
+  ["▲","△","▴","▵","▼"],
+  ["■","□","▪","▫","▣"],
+  ["◆","◇","♦","◈","⬥"],
+  ["➕","✚","✜","✛","✙"]
+];
 
-function selectLevel(button,name,total,targets,cols){
+document.querySelectorAll("[data-mode]").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll("[data-mode]").forEach(b=>b.classList.remove("selected"));
+    btn.classList.add("selected");
+    mode=btn.dataset.mode;
 
-    document.querySelectorAll(".level")
-    .forEach(b => b.classList.remove("selected"));
+    document.getElementById("sessionFields")
+      .classList.toggle("show",mode==="session");
+  });
+});
 
-    button.classList.add("selected");
+document.querySelectorAll("[data-level]").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    document.querySelectorAll("[data-level]").forEach(b=>b.classList.remove("selected"));
+    btn.classList.add("selected");
+    level=btn.dataset.level;
+  });
+});
 
-    levelName = name;
-    totalItems = total;
-    targetAmount = targets;
-    columns = cols;
+document.getElementById("startBtn").addEventListener("click",startGame);
+document.getElementById("nextBtn").addEventListener("click",nextRound);
+document.getElementById("againBtn").addEventListener("click",resetGame);
+document.getElementById("printBtn").addEventListener("click",()=>window.print());
+
+function showScreen(name){
+  Object.values(screens).forEach(s=>s.classList.remove("active"));
+  screens[name].classList.add("active");
 }
 
 function startGame(){
+  round=0;
+  score=0;
+  hits=0;
+  errors=0;
+  streak=0;
+  seconds=0;
 
-    document.getElementById("startScreen").style.display="none";
-    document.getElementById("result").style.display="none";
-    document.getElementById("gameArea").style.display="block";
+  clearInterval(timer);
 
-    setupGame();
+  updateStats();
+
+  timer=setInterval(()=>{
+    seconds++;
+    document.getElementById("time").textContent=formatTime(seconds);
+  },1000);
+
+  showScreen("game");
+  createRound();
 }
 
-function setupGame(){
+function getSymbolSet(){
+  if(level==="easy") return setsEasy[round % setsEasy.length];
+  if(level==="medium") return setsMedium[round % setsMedium.length];
+  return setsHard[round % setsHard.length];
+}
 
-    clearInterval(timer);
+function createRound(){
 
-    correct = 0;
-    errors = 0;
-    seconds = 0;
+  roundLocked=false;
 
-    document.getElementById("correctStat").textContent="0";
-    document.getElementById("errorStat").textContent="0";
-    document.getElementById("timeStat").textContent="00:00";
-    document.getElementById("levelStat").textContent=levelName;
-    document.getElementById("remainingStat").textContent=targetAmount;
+  document.getElementById("roundComplete").classList.remove("show");
+  document.getElementById("feedback").textContent="";
 
-    const group =
-        symbolGroups[Math.floor(Math.random()*symbolGroups.length)];
+  const config=configs[level];
+  const symbols=getSymbolSet();
+  const target=symbols[0];
 
-    targetSymbol = group[0];
+  targetsRemaining=config.targets;
 
-    document.getElementById("target").textContent=targetSymbol;
+  document.getElementById("roundText").textContent=
+    `MISIÓN ${round+1} DE 5`;
 
-    let items = [];
+  document.getElementById("missionTitle").textContent=
+    round===0
+    ? "Encuentra todos los objetivos"
+    : round===4
+    ? "¡Último reto!"
+    : "Continúa la búsqueda";
 
-    for(let i=0;i<targetAmount;i++){
-        items.push(targetSymbol);
-    }
+  document.getElementById("targetDisplay").textContent=target;
 
-    while(items.length < totalItems){
+  document.getElementById("progressBar").style.width=
+    `${(round/5)*100}%`;
 
-        const distractor =
-            group[1 + Math.floor(Math.random()*(group.length-1))];
+  const board=document.getElementById("board");
+  board.innerHTML="";
+  board.style.gridTemplateColumns=`repeat(${config.cols},1fr)`;
 
-        items.push(distractor);
-    }
+  let items=[];
 
-    shuffle(items);
+  for(let i=0;i<config.targets;i++){
+    items.push(target);
+  }
 
-    const board=document.getElementById("board");
+  while(items.length<config.total){
+    const distractor=
+      symbols[1+Math.floor(Math.random()*(symbols.length-1))];
 
-    board.innerHTML="";
-    board.style.gridTemplateColumns=`repeat(${columns},1fr)`;
+    items.push(distractor);
+  }
 
-    items.forEach(symbol=>{
+  shuffle(items);
 
-        const item=document.createElement("div");
+  items.forEach(symbol=>{
+    const button=document.createElement("button");
+    button.className="symbol";
+    button.type="button";
+    button.textContent=symbol;
 
-        item.className="symbol";
-        item.textContent=symbol;
-        item.dataset.symbol=symbol;
-
-        item.onclick=function(){
-
-            if(this.classList.contains("disabled")) return;
-
-            if(this.dataset.symbol===targetSymbol){
-
-                this.classList.add("correct","disabled");
-
-                correct++;
-
-                document.getElementById("correctStat")
-                .textContent=correct;
-
-                document.getElementById("remainingStat")
-                .textContent=targetAmount-correct;
-
-                if(correct===targetAmount){
-                    setTimeout(endGame,400);
-                }
-
-            }else{
-
-                this.classList.add("wrong","disabled");
-
-                errors++;
-
-                document.getElementById("errorStat")
-                .textContent=errors;
-            }
-        };
-
-        board.appendChild(item);
+    button.addEventListener("click",()=>{
+      checkSymbol(button,symbol,target);
     });
 
-    timer=setInterval(()=>{
+    board.appendChild(button);
+  });
+}
 
-        seconds++;
+function checkSymbol(button,symbol,target){
 
-        document.getElementById("timeStat")
-        .textContent=formatTime(seconds);
+  if(roundLocked || button.disabled) return;
 
-    },1000);
+  if(symbol===target){
+
+    button.disabled=true;
+    button.classList.add("correct");
+
+    hits++;
+    streak++;
+    targetsRemaining--;
+
+    score+=10+(Math.min(streak,5)*2);
+
+    const messages=[
+      "¡Muy bien! ✨",
+      "¡Lo encontraste! ⭐",
+      "¡Excelente búsqueda! 🎯",
+      "¡Sigue así! 🙌",
+      "¡Buen trabajo! 🌟"
+    ];
+
+    document.getElementById("feedback").textContent=
+      messages[Math.floor(Math.random()*messages.length)];
+
+    tone(650,0.07);
+
+    if(targetsRemaining===0){
+      completeRound();
+    }
+
+  }else{
+
+    errors++;
+    streak=0;
+
+    button.classList.add("wrong");
+
+    setTimeout(()=>{
+      button.classList.remove("wrong");
+    },250);
+
+    document.getElementById("feedback").textContent=
+      "Mira con atención y prueba otra vez 👀";
+
+    tone(220,0.05);
+  }
+
+  updateStats();
+}
+
+function completeRound(){
+
+  roundLocked=true;
+
+  score+=25;
+
+  updateStats();
+
+  document.getElementById("feedback").textContent="";
+
+  document.getElementById("roundMessage").textContent=
+    round===4
+    ? "¡Completaste todas las misiones!"
+    : "¡Misión superada!";
+
+  document.getElementById("nextBtn").textContent=
+    round===4
+    ? "VER RESULTADOS →"
+    : "SIGUIENTE RETO →";
+
+  document.getElementById("roundComplete").classList.add("show");
+
+  document.getElementById("progressBar").style.width=
+    `${((round+1)/5)*100}%`;
+
+  celebrationTone();
+}
+
+function nextRound(){
+
+  if(round<4){
+    round++;
+    createRound();
+  }else{
+    finishGame();
+  }
+}
+
+function finishGame(){
+
+  clearInterval(timer);
+
+  const totalAttempts=hits+errors;
+
+  const precision=
+    totalAttempts===0
+    ? 0
+    : Math.round((hits/totalAttempts)*100);
+
+  document.getElementById("finalScore").textContent=score;
+  document.getElementById("finalHits").textContent=hits;
+  document.getElementById("finalErrors").textContent=errors;
+  document.getElementById("finalPrecision").textContent=precision+"%";
+  document.getElementById("finalTime").textContent=formatTime(seconds);
+
+  const record=document.getElementById("record");
+  const printBtn=document.getElementById("printBtn");
+
+  if(mode==="session"){
+
+    record.classList.add("show");
+    printBtn.style.display="block";
+
+    document.getElementById("recordInitials").textContent=
+      document.getElementById("initials").value.trim() || "—";
+
+    document.getElementById("recordGrade").textContent=
+      document.getElementById("grade").value.trim() || "—";
+
+    document.getElementById("recordDate").textContent=
+      new Date().toLocaleDateString("es-DO");
+
+    document.getElementById("recordResult").textContent=
+      `${hits} aciertos · ${errors} errores · ${precision}% de precisión · ${formatTime(seconds)}`;
+
+    document.getElementById("recordLevel").textContent=
+      configs[level].name;
+
+  }else{
+
+    record.classList.remove("show");
+    printBtn.style.display="none";
+  }
+
+  showScreen("result");
+}
+
+function resetGame(){
+
+  clearInterval(timer);
+
+  document.getElementById("record").classList.remove("show");
+
+  showScreen("start");
+}
+
+function updateStats(){
+  document.getElementById("score").textContent=score;
+  document.getElementById("streak").textContent=streak;
+  document.getElementById("time").textContent=formatTime(seconds);
+}
+
+function formatTime(value){
+  const min=Math.floor(value/60);
+  const sec=value%60;
+  return `${min}:${sec.toString().padStart(2,"0")}`;
 }
 
 function shuffle(array){
-
-    for(let i=array.length-1;i>0;i--){
-
-        const j=Math.floor(Math.random()*(i+1));
-
-        [array[i],array[j]]=[array[j],array[i]];
-    }
-
-    return array;
+  for(let i=array.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [array[i],array[j]]=[array[j],array[i]];
+  }
 }
 
-function endGame(){
+function tone(freq,duration){
 
-    clearInterval(timer);
+  try{
+    const AudioContext=
+      window.AudioContext || window.webkitAudioContext;
 
-    document.getElementById("gameArea").style.display="none";
-    document.getElementById("result").style.display="block";
+    if(!AudioContext) return;
 
-    const attempts=correct+errors;
+    const ctx=new AudioContext();
+    const oscillator=ctx.createOscillator();
+    const gain=ctx.createGain();
 
-    const accuracy=
-        attempts===0 ? 100 :
-        Math.round((correct/attempts)*100);
+    oscillator.frequency.value=freq;
+    oscillator.type="sine";
 
-    document.getElementById("finalTime")
-    .textContent=formatTime(seconds);
+    gain.gain.setValueAtTime(.04,ctx.currentTime);
+    gain.gain.exponentialRampToValueAtTime(
+      .001,
+      ctx.currentTime+duration
+    );
 
-    document.getElementById("finalCorrect")
-    .textContent=correct;
+    oscillator.connect(gain);
+    gain.connect(ctx.destination);
 
-    document.getElementById("finalErrors")
-    .textContent=errors;
+    oscillator.start();
+    oscillator.stop(ctx.currentTime+duration);
 
-    document.getElementById("finalAccuracy")
-    .textContent=accuracy+"%";
-
-    let text="Actividad completada.";
-
-    if(accuracy===100){
-        text="Excelente precisión: no se registraron selecciones incorrectas.";
-    }
-    else if(accuracy>=90){
-        text="Muy buena precisión durante la actividad.";
-    }
-    else if(accuracy>=75){
-        text="Buena ejecución, con algunos errores de selección.";
-    }
-    else{
-        text="Se registraron varios errores de selección durante la actividad.";
-    }
-
-    document.getElementById("performanceText")
-    .textContent=text;
+  }catch(e){}
 }
 
-function restartGame(){
-    setupGame();
-}
-
-function playAgain(){
-
-    clearInterval(timer);
-
-    document.getElementById("result").style.display="none";
-    document.getElementById("startScreen").style.display="block";
-}
-
-function formatTime(total){
-
-    const min=Math.floor(total/60)
-    .toString().padStart(2,"0");
-
-    const sec=(total%60)
-    .toString().padStart(2,"0");
-
-    return min+":"+sec;
+function celebrationTone(){
+  tone(523,.08);
+  setTimeout(()=>tone(659,.08),100);
+  setTimeout(()=>tone(784,.12),200);
 }
 
 </script>
