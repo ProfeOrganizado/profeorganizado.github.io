@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Alfabetización | Profe Organizado</title>
 
 <style>
@@ -17,19 +16,17 @@
   --azul:#0F2C59;
   --salvia:#7C9A83;
   --salvia-claro:#EEF4EF;
-  --azul-claro:#EDF2F8;
-  --crema:#F8F5EE;
   --gris:#3E4651;
-  --gris-claro:#F5F7F9;
-  --borde:#E4E9EE;
+  --gris2:#727A83;
+  --fondo:#F7F8FA;
+  --borde:#E4E8EC;
   --blanco:#FFFFFF;
 }
 
 body{
-  font-family:Arial, Helvetica, sans-serif;
+  font-family:Arial,Helvetica,sans-serif;
+  background:var(--fondo);
   color:var(--gris);
-  background:white;
-  line-height:1.6;
 }
 
 a{
@@ -37,354 +34,363 @@ a{
   color:inherit;
 }
 
+button,
+input{
+  font:inherit;
+}
+
 .container{
-  width:min(1160px,92%);
+  width:min(1120px,94%);
   margin:auto;
 }
 
 /* HEADER */
 
 header{
+  height:58px;
   background:white;
   border-bottom:1px solid var(--borde);
-  position:sticky;
-  top:0;
-  z-index:100;
 }
 
 .nav{
-  min-height:70px;
+  height:58px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  gap:20px;
+  justify-content:space-between;
 }
 
 .logo{
+  font-size:.9rem;
+  font-weight:900;
   color:var(--azul);
-  font-size:1.2rem;
-  font-weight:800;
+  letter-spacing:.3px;
 }
 
 .logo span{
   color:var(--salvia);
 }
 
-.back{
-  font-size:.9rem;
+.home{
   color:var(--azul);
-  font-weight:700;
-}
-
-/* HERO */
-
-.hero{
-  padding:75px 0 65px;
-  background:
-    radial-gradient(circle at 90% 20%, #EEF4EF 0, transparent 28%),
-    white;
-}
-
-.label{
-  color:var(--salvia);
   font-size:.78rem;
-  font-weight:800;
-  letter-spacing:1.4px;
-  margin-bottom:12px;
-}
-
-h1{
-  color:var(--azul);
-  font-size:clamp(2.5rem,5vw,4.2rem);
-  line-height:1.08;
-  margin-bottom:20px;
-}
-
-.hero p{
-  max-width:750px;
-  color:#68717A;
-  font-size:1.05rem;
-}
-
-.hero-note{
-  margin-top:30px;
-  display:inline-flex;
-  gap:10px;
-  align-items:center;
-  background:var(--salvia-claro);
-  color:#496052;
-  padding:11px 16px;
-  border-radius:10px;
-  font-size:.88rem;
   font-weight:700;
 }
 
-/* SECTIONS */
+/* CONTENIDO */
 
-section{
-  padding:70px 0;
+main{
+  padding:24px 0;
 }
 
-.soft{
-  background:var(--gris-claro);
+/* CABECERA */
+
+.page-head{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  margin-bottom:18px;
 }
 
-.section-top{
-  max-width:760px;
-  margin-bottom:38px;
-}
-
-h2{
+.page-head h1{
   color:var(--azul);
-  font-size:clamp(1.8rem,4vw,2.7rem);
-  line-height:1.15;
-  margin-bottom:13px;
+  font-size:1.65rem;
+  margin-bottom:3px;
 }
 
-.section-top p{
-  color:#6A737C;
+.page-head p{
+  color:var(--gris2);
+  font-size:.78rem;
 }
 
-/* ROUTE */
-
-.route{
-  display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
+.search{
+  width:240px;
+  height:38px;
+  border:1px solid var(--borde);
+  background:white;
+  border-radius:8px;
+  padding:0 12px;
+  outline:none;
+  font-size:.78rem;
 }
 
-.route-card{
+.search:focus{
+  border-color:var(--salvia);
+}
+
+/* MENU DE HABILIDADES */
+
+.tabs{
   background:white;
   border:1px solid var(--borde);
-  border-radius:16px;
-  padding:24px;
-  min-height:210px;
-  position:relative;
-  transition:.2s;
-}
-
-.route-card:hover{
-  transform:translateY(-3px);
-  box-shadow:0 12px 30px rgba(15,44,89,.07);
-}
-
-.step{
-  width:32px;
-  height:32px;
-  border-radius:50%;
-  background:var(--azul);
-  color:white;
+  border-radius:11px;
+  padding:7px;
   display:grid;
-  place-items:center;
-  font-size:.8rem;
-  font-weight:bold;
-  margin-bottom:17px;
+  grid-template-columns:repeat(8,1fr);
+  gap:5px;
+  margin-bottom:14px;
 }
 
-.route-card h3{
-  color:var(--azul);
-  font-size:1.05rem;
-  margin-bottom:8px;
+.tab{
+  border:0;
+  background:transparent;
+  border-radius:7px;
+  padding:9px 5px;
+  cursor:pointer;
+  color:var(--gris);
+  font-size:.71rem;
+  font-weight:700;
+  transition:.15s;
 }
 
-.route-card p{
-  color:#6B747D;
-  font-size:.88rem;
+.tab:hover{
+  background:var(--fondo);
 }
 
-.status{
-  display:inline-block;
-  margin-top:15px;
-  padding:5px 9px;
+.tab.active{
   background:var(--salvia-claro);
-  color:var(--salvia);
-  font-size:.72rem;
-  font-weight:800;
-  border-radius:20px;
+  color:var(--azul);
 }
 
-/* WORK METHOD */
+/* PANEL PRINCIPAL */
 
-.method{
-  display:grid;
-  grid-template-columns:repeat(5,1fr);
-  gap:12px;
-}
-
-.method-card{
-  text-align:center;
-  padding:25px 15px;
-  border:1px solid var(--borde);
-  border-radius:15px;
+.workspace{
   background:white;
+  border:1px solid var(--borde);
+  border-radius:11px;
+  overflow:hidden;
 }
 
-.method-icon{
-  font-size:1.7rem;
-  margin-bottom:10px;
+.workspace-head{
+  min-height:52px;
+  padding:10px 15px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  border-bottom:1px solid var(--borde);
 }
 
-.method-card h3{
+.workspace-title{
+  display:flex;
+  align-items:center;
+  gap:9px;
+}
+
+.workspace-title .icon{
+  font-size:1.2rem;
+}
+
+.workspace-title h2{
   color:var(--azul);
   font-size:.95rem;
-  margin-bottom:6px;
 }
 
-.method-card p{
-  font-size:.8rem;
-  color:#707881;
+.workspace-title small{
+  display:block;
+  color:var(--gris2);
+  font-size:.66rem;
+  font-weight:400;
+  margin-top:2px;
 }
 
-/* FIRST MODULE */
-
-.module{
-  display:grid;
-  grid-template-columns:.8fr 1.2fr;
-  gap:30px;
-  align-items:stretch;
-}
-
-.module-info{
-  background:var(--azul);
-  color:white;
+.counter{
+  background:var(--salvia-claro);
+  color:#55725D;
   border-radius:20px;
-  padding:35px;
+  padding:5px 9px;
+  font-size:.65rem;
+  font-weight:800;
 }
 
-.module-info .label{
-  color:#BDD1C2;
-}
-
-.module-info h2{
-  color:white;
-}
-
-.module-info p{
-  opacity:.9;
-  margin-bottom:20px;
-}
-
-.module-info ul{
-  list-style:none;
-  display:grid;
-  gap:8px;
-  font-size:.9rem;
-}
-
-.activities{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:15px;
-}
+/* LISTA */
 
 .activity{
-  border:1px solid var(--borde);
-  border-radius:16px;
-  padding:22px;
-  background:white;
+  min-height:55px;
+  display:grid;
+  grid-template-columns:38px 1fr 150px 90px;
+  align-items:center;
+  gap:10px;
+  padding:8px 15px;
+  border-bottom:1px solid #EEF0F2;
+}
+
+.activity:last-child{
+  border-bottom:0;
+}
+
+.activity:hover{
+  background:#FAFBFC;
 }
 
 .activity-icon{
-  font-size:1.6rem;
-  margin-bottom:12px;
+  width:34px;
+  height:34px;
+  border-radius:8px;
+  background:#F0F4F8;
+  display:grid;
+  place-items:center;
+  font-size:1rem;
 }
 
 .activity h3{
   color:var(--azul);
-  margin-bottom:7px;
-  font-size:1rem;
+  font-size:.79rem;
+  margin-bottom:2px;
 }
 
 .activity p{
-  color:#6E767E;
-  font-size:.84rem;
+  color:var(--gris2);
+  font-size:.66rem;
 }
 
-.activity-state{
+.type{
+  color:var(--gris2);
+  font-size:.66rem;
+}
+
+.action{
+  justify-self:end;
+}
+
+.play{
   display:inline-block;
-  margin-top:13px;
-  color:var(--salvia);
-  font-size:.76rem;
+  min-width:70px;
+  text-align:center;
+  padding:7px 10px;
+  border-radius:7px;
+  background:var(--azul);
+  color:white;
+  font-size:.67rem;
   font-weight:800;
 }
 
-/* EVIDENCE */
+.play:hover{
+  opacity:.9;
+}
 
-.evidence{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:35px;
+.soon{
+  color:#969DA4;
+  font-size:.66rem;
+  font-weight:700;
+}
+
+/* PANELES */
+
+.panel{
+  display:none;
+}
+
+.panel.active{
+  display:block;
+}
+
+.empty{
+  min-height:180px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
   align-items:center;
+  text-align:center;
+  padding:20px;
 }
 
-.evidence-preview{
-  background:white;
-  border:1px solid var(--borde);
-  border-radius:18px;
-  padding:28px;
-  box-shadow:0 12px 30px rgba(15,44,89,.06);
+.empty span{
+  font-size:1.6rem;
+  margin-bottom:7px;
 }
 
-.evidence-preview h3{
+.empty h3{
   color:var(--azul);
-  margin-bottom:16px;
+  font-size:.9rem;
+  margin-bottom:4px;
 }
 
-.line{
-  padding:10px 0;
-  border-bottom:1px solid var(--borde);
-  font-size:.85rem;
+.empty p{
+  color:var(--gris2);
+  font-size:.72rem;
 }
 
-.line:last-child{
-  border:none;
+/* PIE PEQUEÑO */
+
+.tools{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  margin-top:10px;
+  color:var(--gris2);
+  font-size:.65rem;
 }
 
-.notice{
-  background:var(--crema);
-  border-radius:16px;
-  padding:23px;
-  font-size:.88rem;
-  margin-top:25px;
+.tools strong{
+  color:var(--azul);
 }
 
-/* FOOTER */
+/* RESPONSIVE */
 
-footer{
-  padding:35px 0;
-  border-top:1px solid var(--borde);
-  color:#747D85;
-  font-size:.83rem;
+@media(max-width:850px){
+
+  .tabs{
+    grid-template-columns:repeat(4,1fr);
+  }
+
+  .activity{
+    grid-template-columns:38px 1fr 80px;
+  }
+
+  .type{
+    display:none;
+  }
 }
 
-/* MOBILE */
+@media(max-width:600px){
 
-@media(max-width:900px){
-  .route{
+  main{
+    padding:16px 0;
+  }
+
+  .page-head{
+    display:block;
+  }
+
+  .page-head h1{
+    font-size:1.35rem;
+  }
+
+  .search{
+    width:100%;
+    margin-top:10px;
+  }
+
+  .tabs{
     grid-template-columns:repeat(2,1fr);
   }
 
-  .method{
-    grid-template-columns:repeat(2,1fr);
+  .tab{
+    padding:8px 4px;
   }
 
-  .module,
-  .evidence{
-    grid-template-columns:1fr;
+  .activity{
+    grid-template-columns:34px 1fr auto;
+    padding:9px 10px;
+  }
+
+  .activity p{
+    display:none;
+  }
+
+  .workspace-head{
+    padding:10px;
+  }
+
+  .tools{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:4px;
   }
 }
 
-@media(max-width:550px){
-  .route,
-  .activities,
-  .method{
-    grid-template-columns:1fr;
-  }
-
-  section{
-    padding:55px 0;
-  }
-}
 </style>
 </head>
 
@@ -397,343 +403,466 @@ footer{
       PROFE <span>ORGANIZADO</span>
     </a>
 
-    <a href="index.html" class="back">
-      ← Volver al inicio
+    <a href="index.html" class="home">
+      ← Inicio
     </a>
 
   </div>
 </header>
 
 
-<section class="hero">
-  <div class="container">
+<main>
+<div class="container">
 
-    <div class="label">ÁREA DE INTERVENCIÓN Y ENSEÑANZA</div>
+  <!-- CABECERA -->
 
-    <h1>📚 Alfabetización</h1>
-
-    <p>
-      Recursos para acompañar progresivamente el desarrollo de
-      habilidades relacionadas con la lectura y la escritura mediante
-      enseñanza guiada, práctica, actividades interactivas, juegos
-      y seguimiento.
-    </p>
-
-    <div class="hero-note">
-      🎯 Selecciona la habilidad que necesitas enseñar, reforzar o trabajar.
-    </div>
-
-  </div>
-</section>
-
-
-<section class="soft">
-  <div class="container">
-
-    <div class="section-top">
-      <div class="label">RUTA DE TRABAJO</div>
-      <h2>Habilidades de alfabetización</h2>
-      <p>
-        Las actividades estarán organizadas por habilidades para facilitar
-        la selección de apoyos según las necesidades observadas en el estudiante.
-      </p>
-    </div>
-
-    <div class="route">
-
-      <div class="route-card">
-        <div class="step">1</div>
-        <h3>Conciencia fonológica</h3>
-        <p>
-          Palabras, rimas, sílabas y reconocimiento progresivo
-          de los sonidos del habla.
-        </p>
-        <span class="status">Primer módulo</span>
-      </div>
-
-      <div class="route-card">
-        <div class="step">2</div>
-        <h3>Letras y sonidos</h3>
-        <p>
-          Reconocimiento de letras y establecimiento progresivo
-          de relaciones entre grafías y sonidos.
-        </p>
-        <span class="status">Próximamente</span>
-      </div>
-
-      <div class="route-card">
-        <div class="step">3</div>
-        <h3>Sílabas y palabras</h3>
-        <p>
-          Combinación, formación, lectura y escritura progresiva
-          de sílabas y palabras.
-        </p>
-        <span class="status">Próximamente</span>
-      </div>
-
-      <div class="route-card">
-        <div class="step">4</div>
-        <h3>Lectura de oraciones</h3>
-        <p>
-          Lectura progresiva de estructuras breves con atención
-          a precisión y significado.
-        </p>
-        <span class="status">Próximamente</span>
-      </div>
-
-      <div class="route-card">
-        <div class="step">5</div>
-        <h3>Fluidez lectora</h3>
-        <p>
-          Prácticas orientadas a favorecer precisión, continuidad
-          y expresión durante la lectura.
-        </p>
-        <span class="status">Próximamente</span>
-      </div>
-
-      <div class="route-card">
-        <div class="step">6</div>
-        <h3>Comprensión</h3>
-        <p>
-          Vocabulario, información explícita, secuencias,
-          inferencias y comprensión de textos.
-        </p>
-        <span class="status">Próximamente</span>
-      </div>
-
-      <div class="route-card">
-        <div class="step">7</div>
-        <h3>Escritura</h3>
-        <p>
-          Producción progresiva de palabras, oraciones y textos
-          de acuerdo con el nivel de desempeño.
-        </p>
-        <span class="status">Próximamente</span>
-      </div>
-
-      <div class="route-card">
-        <div class="step">✓</div>
-        <h3>Seguimiento</h3>
-        <p>
-          Registrar avances, apoyos requeridos, observaciones
-          y próximos objetivos de trabajo.
-        </p>
-        <span class="status">Evidencias</span>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-
-<section>
-  <div class="container">
-
-    <div class="section-top">
-      <div class="label">CÓMO TRABAJAREMOS</div>
-      <h2>Más que jugar</h2>
-      <p>
-        Las actividades se organizarán para que el estudiante pueda
-        recibir apoyo, practicar y mostrar progresivamente lo aprendido.
-      </p>
-    </div>
-
-    <div class="method">
-
-      <div class="method-card">
-        <div class="method-icon">📘</div>
-        <h3>Aprender</h3>
-        <p>Presentación y enseñanza de la habilidad.</p>
-      </div>
-
-      <div class="method-card">
-        <div class="method-icon">🤝</div>
-        <h3>Practicar con apoyo</h3>
-        <p>Ejercicios guiados y retroalimentación.</p>
-      </div>
-
-      <div class="method-card">
-        <div class="method-icon">🎮</div>
-        <h3>Jugar y practicar</h3>
-        <p>Actividades interactivas con propósito.</p>
-      </div>
-
-      <div class="method-card">
-        <div class="method-icon">🎯</div>
-        <h3>Comprobar</h3>
-        <p>Observar el desempeño con menor ayuda.</p>
-      </div>
-
-      <div class="method-card">
-        <div class="method-icon">📋</div>
-        <h3>Registrar</h3>
-        <p>Documentar resultados y próximos pasos.</p>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-
-<section class="soft">
-  <div class="container">
-
-    <div class="module">
-
-      <div class="module-info">
-
-        <div class="label">PRIMER MÓDULO</div>
-
-        <h2>Conciencia fonológica</h2>
-
-        <p>
-          Comenzaremos creando diferentes actividades para trabajar
-          progresivamente la capacidad de reconocer y manipular
-          unidades sonoras del lenguaje oral.
-        </p>
-
-        <ul>
-          <li>✓ Conciencia de palabras</li>
-          <li>✓ Rimas</li>
-          <li>✓ Conciencia silábica</li>
-          <li>✓ Sonido inicial</li>
-          <li>✓ Sonido final</li>
-          <li>✓ Actividades progresivas con sonidos</li>
-        </ul>
-
-      </div>
-
-
-      <div class="activities">
-
-        <div class="activity">
-          <div class="activity-icon">👏</div>
-          <h3>¿Cuántas sílabas tiene?</h3>
-          <p>
-            Escuchar, segmentar y reconocer las partes sonoras
-            de diferentes palabras.
-          </p>
-          <a href="silabas.html" class="activity-state">
-  Jugar ahora →
-</a>
-        </div>
-
-        <div class="activity">
-          <div class="activity-icon">🎵</div>
-          <h3>Encuentra la rima</h3>
-          <p>
-            Identificar palabras que presentan semejanzas
-            sonoras al final.
-          </p>
-          <span class="activity-state">Próximamente</span>
-        </div>
-
-        <div class="activity">
-          <div class="activity-icon">👂</div>
-          <h3>¿Con qué sonido empieza?</h3>
-          <p>
-            Reconocer progresivamente el sonido inicial
-            de palabras familiares.
-          </p>
-          <span class="activity-state">Próximamente</span>
-        </div>
-
-        <div class="activity">
-          <div class="activity-icon">🧺</div>
-          <h3>Agrupa por sonido</h3>
-          <p>
-            Clasificar palabras de acuerdo con características
-            sonoras compartidas.
-          </p>
-          <span class="activity-state">Próximamente</span>
-        </div>
-
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-
-<section>
-  <div class="container evidence">
+  <section class="page-head">
 
     <div>
+      <h1>📚 Alfabetización</h1>
+      <p>Selecciona una habilidad y comienza a trabajar.</p>
+    </div>
 
-      <div class="label">EVIDENCIA DEL TRABAJO</div>
+    <input
+      id="search"
+      class="search"
+      type="text"
+      placeholder="🔎 Buscar actividad..."
+      oninput="searchActivity()"
+    >
 
-      <h2>Registrar para poder dar seguimiento.</h2>
+  </section>
 
-      <p>
-        Las actividades que vayamos creando podrán incorporar un
-        registro imprimible para documentar qué se trabajó,
-        cómo respondió el estudiante y cuál será el próximo paso.
-      </p>
 
-      <div class="notice">
-        Los resultados de las actividades se utilizarán como información
-        de apoyo para la observación y el seguimiento educativo.
-        No deben interpretarse de manera aislada como un diagnóstico.
+  <!-- MENÚ -->
+
+  <nav class="tabs">
+
+    <button class="tab active"
+      onclick="openPanel('fonologica',this)">
+      👂 Fonológica
+    </button>
+
+    <button class="tab"
+      onclick="openPanel('letras',this)">
+      🔤 Letras
+    </button>
+
+    <button class="tab"
+      onclick="openPanel('palabras',this)">
+      🧩 Palabras
+    </button>
+
+    <button class="tab"
+      onclick="openPanel('lectura',this)">
+      📖 Lectura
+    </button>
+
+    <button class="tab"
+      onclick="openPanel('comprension',this)">
+      💡 Comprensión
+    </button>
+
+    <button class="tab"
+      onclick="openPanel('escritura',this)">
+      ✏️ Escritura
+    </button>
+
+    <button class="tab"
+      onclick="openPanel('juegos',this)">
+      🎮 Juegos
+    </button>
+
+    <button class="tab"
+      onclick="openPanel('seguimiento',this)">
+      📋 Seguimiento
+    </button>
+
+  </nav>
+
+
+  <!-- ÁREA DE TRABAJO -->
+
+  <section class="workspace">
+
+
+    <!-- FONOLÓGICA -->
+
+    <div id="fonologica" class="panel active">
+
+      <div class="workspace-head">
+
+        <div class="workspace-title">
+
+          <span class="icon">👂</span>
+
+          <div>
+            <h2>Conciencia fonológica</h2>
+            <small>Rimas, sílabas y sonidos.</small>
+          </div>
+
+        </div>
+
+        <span class="counter">1 disponible</span>
+
+      </div>
+
+
+      <div class="activity searchable">
+
+        <div class="activity-icon">👏</div>
+
+        <div>
+          <h3>¿Cuántas sílabas tiene?</h3>
+          <p>Segmentación y reconocimiento de sílabas.</p>
+        </div>
+
+        <div class="type">
+          Conciencia silábica
+        </div>
+
+        <div class="action">
+          <a href="silabas.html" class="play">
+            JUGAR
+          </a>
+        </div>
+
+      </div>
+
+
+      <div class="activity searchable">
+
+        <div class="activity-icon">🎵</div>
+
+        <div>
+          <h3>Encuentra la rima</h3>
+          <p>Reconocimiento de semejanzas sonoras.</p>
+        </div>
+
+        <div class="type">
+          Rimas
+        </div>
+
+        <div class="action">
+          <span class="soon">Próx.</span>
+        </div>
+
+      </div>
+
+
+      <div class="activity searchable">
+
+        <div class="activity-icon">👂</div>
+
+        <div>
+          <h3>Sonido inicial</h3>
+          <p>Identificar el sonido con el que comienza una palabra.</p>
+        </div>
+
+        <div class="type">
+          Sonidos
+        </div>
+
+        <div class="action">
+          <span class="soon">Próx.</span>
+        </div>
+
+      </div>
+
+
+      <div class="activity searchable">
+
+        <div class="activity-icon">🧺</div>
+
+        <div>
+          <h3>Agrupa por sonido</h3>
+          <p>Clasificar palabras según características sonoras.</p>
+        </div>
+
+        <div class="type">
+          Clasificación
+        </div>
+
+        <div class="action">
+          <span class="soon">Próx.</span>
+        </div>
+
       </div>
 
     </div>
 
 
-    <div class="evidence-preview">
+    <!-- LETRAS -->
 
-      <h3>📄 Registro de intervención</h3>
+    <div id="letras" class="panel">
 
-      <div class="line">
-        <strong>Estudiante:</strong> ______________________
+      <div class="workspace-head">
+
+        <div class="workspace-title">
+          <span class="icon">🔤</span>
+
+          <div>
+            <h2>Letras y sonidos</h2>
+            <small>Reconocimiento de grafías y sonidos.</small>
+          </div>
+        </div>
+
+        <span class="counter">En preparación</span>
+
       </div>
 
-      <div class="line">
-        <strong>Fecha:</strong> ___________________________
-      </div>
-
-      <div class="line">
-        <strong>Área:</strong> Alfabetización
-      </div>
-
-      <div class="line">
-        <strong>Habilidad:</strong> _______________________
-      </div>
-
-      <div class="line">
-        <strong>Actividad:</strong> _______________________
-      </div>
-
-      <div class="line">
-        <strong>Resultado:</strong> _______________________
-      </div>
-
-      <div class="line">
-        <strong>Nivel de apoyo:</strong> __________________
-      </div>
-
-      <div class="line">
-        <strong>Observaciones:</strong> ___________________
-      </div>
-
-      <div class="line">
-        <strong>Próximo paso:</strong> ____________________
+      <div class="empty">
+        <span>🔤</span>
+        <h3>Letras y sonidos</h3>
+        <p>Próximamente añadiremos actividades en esta sección.</p>
       </div>
 
     </div>
 
-  </div>
-</section>
+
+    <!-- PALABRAS -->
+
+    <div id="palabras" class="panel">
+
+      <div class="workspace-head">
+        <div class="workspace-title">
+          <span class="icon">🧩</span>
+          <div>
+            <h2>Sílabas y palabras</h2>
+            <small>Construcción, lectura y escritura.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="empty">
+        <span>🧩</span>
+        <h3>Sílabas y palabras</h3>
+        <p>Las actividades aparecerán aquí.</p>
+      </div>
+
+    </div>
 
 
-<footer>
-  <div class="container">
-    <strong style="color:#0F2C59;">PROFE ORGANIZADO</strong>
-    · Recursos para acompañar el aprendizaje.
+    <!-- LECTURA -->
+
+    <div id="lectura" class="panel">
+
+      <div class="workspace-head">
+        <div class="workspace-title">
+          <span class="icon">📖</span>
+          <div>
+            <h2>Lectura</h2>
+            <small>Palabras, oraciones y fluidez.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="empty">
+        <span>📖</span>
+        <h3>Lectura</h3>
+        <p>Las actividades de lectura aparecerán aquí.</p>
+      </div>
+
+    </div>
+
+
+    <!-- COMPRENSIÓN -->
+
+    <div id="comprension" class="panel">
+
+      <div class="workspace-head">
+        <div class="workspace-title">
+          <span class="icon">💡</span>
+          <div>
+            <h2>Comprensión</h2>
+            <small>Comprender información y construir significado.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="empty">
+        <span>💡</span>
+        <h3>Comprensión</h3>
+        <p>Las actividades de comprensión aparecerán aquí.</p>
+      </div>
+
+    </div>
+
+
+    <!-- ESCRITURA -->
+
+    <div id="escritura" class="panel">
+
+      <div class="workspace-head">
+        <div class="workspace-title">
+          <span class="icon">✏️</span>
+          <div>
+            <h2>Escritura</h2>
+            <small>Palabras, oraciones y producción escrita.</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="empty">
+        <span>✏️</span>
+        <h3>Escritura</h3>
+        <p>Las actividades de escritura aparecerán aquí.</p>
+      </div>
+
+    </div>
+
+
+    <!-- JUEGOS -->
+
+    <div id="juegos" class="panel">
+
+      <div class="workspace-head">
+
+        <div class="workspace-title">
+          <span class="icon">🎮</span>
+          <div>
+            <h2>Juegos</h2>
+            <small>Actividades interactivas de alfabetización.</small>
+          </div>
+        </div>
+
+        <span class="counter">1 disponible</span>
+
+      </div>
+
+
+      <div class="activity searchable">
+
+        <div class="activity-icon">👏</div>
+
+        <div>
+          <h3>¿Cuántas sílabas tiene?</h3>
+          <p>Segmentación silábica.</p>
+        </div>
+
+        <div class="type">
+          Conciencia fonológica
+        </div>
+
+        <div class="action">
+          <a href="silabas.html" class="play">
+            JUGAR
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- SEGUIMIENTO -->
+
+    <div id="seguimiento" class="panel">
+
+      <div class="workspace-head">
+
+        <div class="workspace-title">
+          <span class="icon">📋</span>
+
+          <div>
+            <h2>Seguimiento</h2>
+            <small>Resultados y evidencias de intervención.</small>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="empty">
+        <span>📋</span>
+        <h3>Evidencias</h3>
+        <p>
+          Las actividades compatibles generan su registro al finalizar.
+        </p>
+      </div>
+
+    </div>
+
+
+  </section>
+
+
+  <div class="tools">
+
+    <span>
+      🔒 Utiliza únicamente las iniciales del estudiante.
+    </span>
+
+    <span>
+      <strong>Profe Organizado</strong> · Apoyo y seguimiento psicopedagógico
+    </span>
+
   </div>
-</footer>
+
+</div>
+</main>
+
+
+<script>
+
+function openPanel(id,button){
+
+  document.querySelectorAll(".panel").forEach(function(panel){
+    panel.classList.remove("active");
+  });
+
+  document.getElementById(id).classList.add("active");
+
+  document.querySelectorAll(".tab").forEach(function(tab){
+    tab.classList.remove("active");
+  });
+
+  button.classList.add("active");
+
+  document.getElementById("search").value="";
+
+  document.querySelectorAll(".searchable").forEach(function(item){
+    item.style.display="grid";
+  });
+}
+
+
+function searchActivity(){
+
+  const value =
+    document.getElementById("search").value.toLowerCase().trim();
+
+  if(value===""){
+    document.querySelectorAll(".searchable").forEach(function(item){
+      item.style.display="grid";
+    });
+    return;
+  }
+
+  document.querySelectorAll(".panel").forEach(function(panel){
+    panel.classList.remove("active");
+  });
+
+  document.getElementById("fonologica").classList.add("active");
+
+  document.querySelectorAll(".tab").forEach(function(tab){
+    tab.classList.remove("active");
+  });
+
+  document.querySelector(".tab").classList.add("active");
+
+  document.querySelectorAll("#fonologica .searchable")
+    .forEach(function(item){
+
+      const text=item.innerText.toLowerCase();
+
+      item.style.display =
+        text.includes(value) ? "grid" : "none";
+
+    });
+
+}
+
+</script>
 
 </body>
 </html>
