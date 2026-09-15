@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Búsqueda Visual | Profe Organizado</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f6f8f7;
+    color:#2f3437;
+    min-height:100vh;
+}
+
+header{
+    background:#fff;
+    border-bottom:1px solid #e5e8e6;
+}
+
+.nav{
+    max-width:1050px;
+    margin:auto;
+    padding:18px 24px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:21px;
+    font-weight:800;
+    color:#0F2C59;
+}
+
+.logo span{color:#7C9A83}
+
+.back{
+    color:#0F2C59;
+    text-decoration:none;
+    font-weight:bold;
+    font-size:14px;
+}
+
+main{
+    max-width:900px;
+    margin:auto;
+    padding:45px 20px 70px;
+}
+
+.intro{text-align:center;margin-bottom:30px}
+
+.badge{
+    display:inline-block;
+    background:#e5ece6;
+    color:#55705c;
+    padding:6px 13px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    margin-bottom:12px;
+}
+
+h1{
+    color:#0F2C59;
+    font-size:38px;
+    margin-bottom:10px;
+}
+
+.intro p{
+    max-width:600px;
+    margin:auto;
+    color:#697075;
+}
+
+/* INICIO */
+
+.start-screen{
+    max-width:620px;
+    margin:30px auto;
+    background:#fff;
+    border:1px solid #e4e8e5;
+    border-radius:16px;
+    padding:35px;
+    text-align:center;
+}
+
+.start-screen h2{
+    color:#0F2C59;
+    margin-bottom:8px;
+}
+
+.start-screen > p{
+    color:#707579;
+    margin-bottom:25px;
+}
+
+.levels{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-bottom:25px;
+}
+
+.level{
+    border:2px solid #e2e6e3;
+    background:#fff;
+    border-radius:10px;
+    padding:15px 8px;
+    cursor:pointer;
+}
+
+.level:hover{border-color:#7C9A83}
+
+.level.selected{
+    border-color:#0F2C59;
+    background:#f3f6f9;
+}
+
+.level strong{
+    display:block;
+    color:#0F2C59;
+    margin-bottom:4px;
+}
+
+.level span{
+    color:#777;
+    font-size:12px;
+}
+
+.instructions{
+    background:#f7f5ef;
+    padding:17px;
+    border-radius:10px;
+    text-align:left;
+    margin-bottom:25px;
+    color:#60666a;
+    font-size:14px;
+}
+
+.primary-btn{
+    border:0;
+    background:#0F2C59;
+    color:#fff;
+    padding:14px 25px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
+    font-weight:bold;
+}
+
+/* JUEGO */
+
+.game-area{display:none}
+
+.target-box{
+    background:#fff;
+    border:1px solid #e4e8e5;
+    border-radius:14px;
+    padding:20px;
+    margin-bottom:18px;
+    text-align:center;
+}
+
+.target-box span{
+    color:#697075;
+    font-size:13px;
+    display:block;
+}
+
+.target{
+    font-size:48px;
+    margin-top:5px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    background:#fff;
+    border:1px solid #e4e8e5;
+    border-radius:12px;
+    padding:14px 5px;
+    margin-bottom:20px;
+}
+
+.stat{
+    text-align:center;
+    border-right:1px solid #e9ecea;
+}
+
+.stat:last-child{border:0}
+
+.stat span{
+    display:block;
+    font-size:11px;
+    color:#777;
+}
+
+.stat strong{
+    color:#0F2C59;
+    font-size:18px;
+}
+
+.board{
+    background:#fff;
+    border:1px solid #e2e6e3;
+    border-radius:16px;
+    padding:22px;
+    display:grid;
+    gap:8px;
+    user-select:none;
+}
+
+.symbol{
+    min-height:58px;
+    border:2px solid transparent;
+    background:#f7f8f7;
+    border-radius:9px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:31px;
+    cursor:pointer;
+    transition:.15s;
+}
+
+.symbol:hover{
+    background:#eef2ef;
+    transform:scale(1.03);
+}
+
+.symbol.correct{
+    background:#e8f2ea;
+    border-color:#7C9A83;
+}
+
+.symbol.wrong{
+    background:#f7eaea;
+    border-color:#c88b8b;
+}
+
+.symbol.disabled{
+    pointer-events:none;
+}
+
+.controls{
+    text-align:center;
+    margin-top:25px;
+}
+
+.secondary-btn{
+    background:#fff;
+    color:#0F2C59;
+    border:1px solid #d6dcda;
+    border-radius:8px;
+    padding:11px 18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* RESULTADOS */
+
+.result{
+    display:none;
+    max-width:650px;
+    margin:25px auto;
+    background:#fff;
+    border:1px solid #e3e7e5;
+    border-radius:16px;
+    padding:38px;
+    text-align:center;
+}
+
+.result-icon{
+    font-size:48px;
+    margin-bottom:8px;
+}
+
+.result h2{
+    color:#0F2C59;
+    font-size:28px;
+}
+
+.result > p{
+    color:#6d7377;
+    margin:8px 0 25px;
+}
+
+.result-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:10px;
+    margin-bottom:25px;
+}
+
+.result-item{
+    background:#f6f8f7;
+    border-radius:10px;
+    padding:16px 6px;
+}
+
+.result-item strong{
+    display:block;
+    color:#0F2C59;
+    font-size:20px;
+}
+
+.result-item span{
+    font-size:11px;
+    color:#777;
+}
+
+.performance{
+    background:#eaf1eb;
+    border-radius:10px;
+    padding:17px;
+    margin-bottom:15px;
+}
+
+.performance strong{
+    color:#0F2C59;
+}
+
+.note{
+    text-align:left;
+    background:#f7f5ef;
+    padding:18px;
+    border-radius:10px;
+    margin-bottom:25px;
+    font-size:13px;
+    color:#5f6468;
+}
+
+footer{
+    text-align:center;
+    color:#888;
+    font-size:12px;
+    padding:25px;
+}
+
+@media(max-width:650px){
+
+    h1{font-size:30px}
+
+    .levels{grid-template-columns:1fr}
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+        gap:12px;
+    }
+
+    .stat{border:0}
+
+    .result-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .symbol{
+        min-height:48px;
+        font-size:25px;
+    }
+
+    .board{padding:12px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="nav">
+    <div class="logo">Profe <span>Organizado</span></div>
+    <a class="back" href="index.html">← Volver al inicio</a>
+</div>
+</header>
+
+<main>
+
+<div class="intro">
+    <div class="badge">ATENCIÓN SELECTIVA</div>
+    <h1>Búsqueda visual</h1>
+    <p>
+        Localiza el estímulo objetivo entre diferentes distractores
+        de la forma más precisa posible.
+    </p>
+</div>
+
+<div class="start-screen" id="startScreen">
+
+    <h2>Selecciona un nivel</h2>
+    <p>La cantidad y similitud de los distractores aumentará.</p>
+
+    <div class="levels">
+
+        <button class="level selected"
+        onclick="selectLevel(this,'Fácil',24,4,4)">
+            <strong>Fácil</strong>
+            <span>24 elementos</span>
+        </button>
+
+        <button class="level"
+        onclick="selectLevel(this,'Medio',40,6,5)">
+            <strong>Medio</strong>
+            <span>40 elementos</span>
+        </button>
+
+        <button class="level"
+        onclick="selectLevel(this,'Difícil',60,8,6)">
+            <strong>Difícil</strong>
+            <span>60 elementos</span>
+        </button>
+
+    </div>
+
+    <div class="instructions">
+        <strong>¿Cómo jugar?</strong><br><br>
+        Observa el símbolo que aparece como objetivo. Encuentra y selecciona
+        todos los símbolos iguales dentro del tablero. Evita seleccionar
+        los distractores.
+    </div>
+
+    <button class="primary-btn" onclick="startGame()">
+        Comenzar actividad
+    </button>
+
+</div>
+
+
+<div class="game-area" id="gameArea">
+
+    <div class="target-box">
+        <span>ENCUENTRA TODOS LOS</span>
+        <div class="target" id="target">★</div>
+    </div>
+
+    <div class="stats">
+
+        <div class="stat">
+            <span>NIVEL</span>
+            <strong id="levelStat">Fácil</strong>
+        </div>
+
+        <div class="stat">
+            <span>TIEMPO</span>
+            <strong id="timeStat">00:00</strong>
+        </div>
+
+        <div class="stat">
+            <span>ACIERTOS</span>
+            <strong id="correctStat">0</strong>
+        </div>
+
+        <div class="stat">
+            <span>ERRORES</span>
+            <strong id="errorStat">0</strong>
+        </div>
+
+        <div class="stat">
+            <span>FALTAN</span>
+            <strong id="remainingStat">0</strong>
+        </div>
+
+    </div>
+
+    <div class="board" id="board"></div>
+
+    <div class="controls">
+        <button class="secondary-btn" onclick="restartGame()">
+            ↻ Reiniciar
+        </button>
+    </div>
+
+</div>
+
+
+<div class="result" id="result">
+
+    <div class="result-icon">🎯</div>
+
+    <h2>¡Actividad completada!</h2>
+
+    <p>Localizaste todos los estímulos objetivo.</p>
+
+    <div class="result-grid">
+
+        <div class="result-item">
+            <strong id="finalTime">00:00</strong>
+            <span>Tiempo</span>
+        </div>
+
+        <div class="result-item">
+            <strong id="finalCorrect">0</strong>
+            <span>Aciertos</span>
+        </div>
+
+        <div class="result-item">
+            <strong id="finalErrors">0</strong>
+            <span>Errores</span>
+        </div>
+
+        <div class="result-item">
+            <strong id="finalAccuracy">100%</strong>
+            <span>Precisión</span>
+        </div>
+
+    </div>
+
+    <div class="performance">
+        <strong id="performanceText">
+            Actividad completada
+        </strong>
+    </div>
+
+    <div class="note">
+        <strong>Para el acompañamiento educativo:</strong><br><br>
+        Puedes observar aspectos como precisión, cantidad de errores,
+        tiempo empleado, necesidad de redirección y forma de abordar
+        la búsqueda. Los resultados de esta actividad son orientativos
+        y no constituyen por sí mismos una evaluación diagnóstica.
+    </div>
+
+    <button class="primary-btn" onclick="playAgain()">
+        Jugar otra vez
+    </button>
+
+</div>
+
+</main>
+
+<footer>
+© 2026 Profe Organizado · Recursos educativos
+</footer>
+
+<script>
+
+const symbolGroups = [
+    ["●","○","◉","◎","◌","◍"],
+    ["▲","△","▼","▽","◆","◇"],
+    ["★","☆","✦","✧","✶","✷"],
+    ["■","□","▪","▫","▣","▢"],
+    ["⬆","⬇","⬅","➡","↗","↘"]
+];
+
+let levelName = "Fácil";
+let totalItems = 24;
+let targetAmount = 4;
+let columns = 4;
+
+let targetSymbol = "";
+let correct = 0;
+let errors = 0;
+let seconds = 0;
+let timer = null;
+
+function selectLevel(button,name,total,targets,cols){
+
+    document.querySelectorAll(".level")
+    .forEach(b => b.classList.remove("selected"));
+
+    button.classList.add("selected");
+
+    levelName = name;
+    totalItems = total;
+    targetAmount = targets;
+    columns = cols;
+}
+
+function startGame(){
+
+    document.getElementById("startScreen").style.display="none";
+    document.getElementById("result").style.display="none";
+    document.getElementById("gameArea").style.display="block";
+
+    setupGame();
+}
+
+function setupGame(){
+
+    clearInterval(timer);
+
+    correct = 0;
+    errors = 0;
+    seconds = 0;
+
+    document.getElementById("correctStat").textContent="0";
+    document.getElementById("errorStat").textContent="0";
+    document.getElementById("timeStat").textContent="00:00";
+    document.getElementById("levelStat").textContent=levelName;
+    document.getElementById("remainingStat").textContent=targetAmount;
+
+    const group =
+        symbolGroups[Math.floor(Math.random()*symbolGroups.length)];
+
+    targetSymbol = group[0];
+
+    document.getElementById("target").textContent=targetSymbol;
+
+    let items = [];
+
+    for(let i=0;i<targetAmount;i++){
+        items.push(targetSymbol);
+    }
+
+    while(items.length < totalItems){
+
+        const distractor =
+            group[1 + Math.floor(Math.random()*(group.length-1))];
+
+        items.push(distractor);
+    }
+
+    shuffle(items);
+
+    const board=document.getElementById("board");
+
+    board.innerHTML="";
+    board.style.gridTemplateColumns=`repeat(${columns},1fr)`;
+
+    items.forEach(symbol=>{
+
+        const item=document.createElement("div");
+
+        item.className="symbol";
+        item.textContent=symbol;
+        item.dataset.symbol=symbol;
+
+        item.onclick=function(){
+
+            if(this.classList.contains("disabled")) return;
+
+            if(this.dataset.symbol===targetSymbol){
+
+                this.classList.add("correct","disabled");
+
+                correct++;
+
+                document.getElementById("correctStat")
+                .textContent=correct;
+
+                document.getElementById("remainingStat")
+                .textContent=targetAmount-correct;
+
+                if(correct===targetAmount){
+                    setTimeout(endGame,400);
+                }
+
+            }else{
+
+                this.classList.add("wrong","disabled");
+
+                errors++;
+
+                document.getElementById("errorStat")
+                .textContent=errors;
+            }
+        };
+
+        board.appendChild(item);
+    });
+
+    timer=setInterval(()=>{
+
+        seconds++;
+
+        document.getElementById("timeStat")
+        .textContent=formatTime(seconds);
+
+    },1000);
+}
+
+function shuffle(array){
+
+    for(let i=array.length-1;i>0;i--){
+
+        const j=Math.floor(Math.random()*(i+1));
+
+        [array[i],array[j]]=[array[j],array[i]];
+    }
+
+    return array;
+}
+
+function endGame(){
+
+    clearInterval(timer);
+
+    document.getElementById("gameArea").style.display="none";
+    document.getElementById("result").style.display="block";
+
+    const attempts=correct+errors;
+
+    const accuracy=
+        attempts===0 ? 100 :
+        Math.round((correct/attempts)*100);
+
+    document.getElementById("finalTime")
+    .textContent=formatTime(seconds);
+
+    document.getElementById("finalCorrect")
+    .textContent=correct;
+
+    document.getElementById("finalErrors")
+    .textContent=errors;
+
+    document.getElementById("finalAccuracy")
+    .textContent=accuracy+"%";
+
+    let text="Actividad completada.";
+
+    if(accuracy===100){
+        text="Excelente precisión: no se registraron selecciones incorrectas.";
+    }
+    else if(accuracy>=90){
+        text="Muy buena precisión durante la actividad.";
+    }
+    else if(accuracy>=75){
+        text="Buena ejecución, con algunos errores de selección.";
+    }
+    else{
+        text="Se registraron varios errores de selección durante la actividad.";
+    }
+
+    document.getElementById("performanceText")
+    .textContent=text;
+}
+
+function restartGame(){
+    setupGame();
+}
+
+function playAgain(){
+
+    clearInterval(timer);
+
+    document.getElementById("result").style.display="none";
+    document.getElementById("startScreen").style.display="block";
+}
+
+function formatTime(total){
+
+    const min=Math.floor(total/60)
+    .toString().padStart(2,"0");
+
+    const sec=(total%60)
+    .toString().padStart(2,"0");
+
+    return min+":"+sec;
+}
+
+</script>
+
+</body>
+</html>
