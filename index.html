@@ -61,15 +61,32 @@
     }
 
     .logo{
-      color:var(--azul);
-      font-size:1.25rem;
-      font-weight:800;
-      letter-spacing:.3px;
-    }
+  display:flex;
+  align-items:center;
+  gap:9px;
+  color:var(--azul);
+  font-size:1.25rem;
+  font-weight:800;
+  letter-spacing:.3px;
+}
 
-    .logo span{
-      color:var(--salvia);
-    }
+.logo img{
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  object-fit:cover;
+  flex-shrink:0;
+}
+
+.logo-text{
+  display:flex;
+  align-items:center;
+  gap:4px;
+}
+
+.logo-text strong{
+  color:var(--salvia);
+}
 
     nav{
       display:flex;
@@ -488,8 +505,9 @@
 <header>
   <div class="container nav">
     <a href="index.html" class="logo">
-      PROFE <span>ORGANIZADO</span>
-    </a>
+  <img src="logo-profe-organizado.png" alt="Logo Profe Organizado">
+  <span class="logo-text">PROFE <strong>ORGANIZADO</strong></span>
+</a>
 
     <nav>
       <a href="#areas">Áreas</a>
