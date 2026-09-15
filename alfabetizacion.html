@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Alfabetización | Profe Organizado</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+:root{
+  --azul:#0F2C59;
+  --salvia:#7C9A83;
+  --salvia-claro:#EEF4EF;
+  --azul-claro:#EDF2F8;
+  --crema:#F8F5EE;
+  --gris:#3E4651;
+  --gris-claro:#F5F7F9;
+  --borde:#E4E9EE;
+  --blanco:#FFFFFF;
+}
+
+body{
+  font-family:Arial, Helvetica, sans-serif;
+  color:var(--gris);
+  background:white;
+  line-height:1.6;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+.container{
+  width:min(1160px,92%);
+  margin:auto;
+}
+
+/* HEADER */
+
+header{
+  background:white;
+  border-bottom:1px solid var(--borde);
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+
+.nav{
+  min-height:70px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+}
+
+.logo{
+  color:var(--azul);
+  font-size:1.2rem;
+  font-weight:800;
+}
+
+.logo span{
+  color:var(--salvia);
+}
+
+.back{
+  font-size:.9rem;
+  color:var(--azul);
+  font-weight:700;
+}
+
+/* HERO */
+
+.hero{
+  padding:75px 0 65px;
+  background:
+    radial-gradient(circle at 90% 20%, #EEF4EF 0, transparent 28%),
+    white;
+}
+
+.label{
+  color:var(--salvia);
+  font-size:.78rem;
+  font-weight:800;
+  letter-spacing:1.4px;
+  margin-bottom:12px;
+}
+
+h1{
+  color:var(--azul);
+  font-size:clamp(2.5rem,5vw,4.2rem);
+  line-height:1.08;
+  margin-bottom:20px;
+}
+
+.hero p{
+  max-width:750px;
+  color:#68717A;
+  font-size:1.05rem;
+}
+
+.hero-note{
+  margin-top:30px;
+  display:inline-flex;
+  gap:10px;
+  align-items:center;
+  background:var(--salvia-claro);
+  color:#496052;
+  padding:11px 16px;
+  border-radius:10px;
+  font-size:.88rem;
+  font-weight:700;
+}
+
+/* SECTIONS */
+
+section{
+  padding:70px 0;
+}
+
+.soft{
+  background:var(--gris-claro);
+}
+
+.section-top{
+  max-width:760px;
+  margin-bottom:38px;
+}
+
+h2{
+  color:var(--azul);
+  font-size:clamp(1.8rem,4vw,2.7rem);
+  line-height:1.15;
+  margin-bottom:13px;
+}
+
+.section-top p{
+  color:#6A737C;
+}
+
+/* ROUTE */
+
+.route{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:16px;
+}
+
+.route-card{
+  background:white;
+  border:1px solid var(--borde);
+  border-radius:16px;
+  padding:24px;
+  min-height:210px;
+  position:relative;
+  transition:.2s;
+}
+
+.route-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 12px 30px rgba(15,44,89,.07);
+}
+
+.step{
+  width:32px;
+  height:32px;
+  border-radius:50%;
+  background:var(--azul);
+  color:white;
+  display:grid;
+  place-items:center;
+  font-size:.8rem;
+  font-weight:bold;
+  margin-bottom:17px;
+}
+
+.route-card h3{
+  color:var(--azul);
+  font-size:1.05rem;
+  margin-bottom:8px;
+}
+
+.route-card p{
+  color:#6B747D;
+  font-size:.88rem;
+}
+
+.status{
+  display:inline-block;
+  margin-top:15px;
+  padding:5px 9px;
+  background:var(--salvia-claro);
+  color:var(--salvia);
+  font-size:.72rem;
+  font-weight:800;
+  border-radius:20px;
+}
+
+/* WORK METHOD */
+
+.method{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:12px;
+}
+
+.method-card{
+  text-align:center;
+  padding:25px 15px;
+  border:1px solid var(--borde);
+  border-radius:15px;
+  background:white;
+}
+
+.method-icon{
+  font-size:1.7rem;
+  margin-bottom:10px;
+}
+
+.method-card h3{
+  color:var(--azul);
+  font-size:.95rem;
+  margin-bottom:6px;
+}
+
+.method-card p{
+  font-size:.8rem;
+  color:#707881;
+}
+
+/* FIRST MODULE */
+
+.module{
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  gap:30px;
+  align-items:stretch;
+}
+
+.module-info{
+  background:var(--azul);
+  color:white;
+  border-radius:20px;
+  padding:35px;
+}
+
+.module-info .label{
+  color:#BDD1C2;
+}
+
+.module-info h2{
+  color:white;
+}
+
+.module-info p{
+  opacity:.9;
+  margin-bottom:20px;
+}
+
+.module-info ul{
+  list-style:none;
+  display:grid;
+  gap:8px;
+  font-size:.9rem;
+}
+
+.activities{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+.activity{
+  border:1px solid var(--borde);
+  border-radius:16px;
+  padding:22px;
+  background:white;
+}
+
+.activity-icon{
+  font-size:1.6rem;
+  margin-bottom:12px;
+}
+
+.activity h3{
+  color:var(--azul);
+  margin-bottom:7px;
+  font-size:1rem;
+}
+
+.activity p{
+  color:#6E767E;
+  font-size:.84rem;
+}
+
+.activity-state{
+  display:inline-block;
+  margin-top:13px;
+  color:var(--salvia);
+  font-size:.76rem;
+  font-weight:800;
+}
+
+/* EVIDENCE */
+
+.evidence{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:35px;
+  align-items:center;
+}
+
+.evidence-preview{
+  background:white;
+  border:1px solid var(--borde);
+  border-radius:18px;
+  padding:28px;
+  box-shadow:0 12px 30px rgba(15,44,89,.06);
+}
+
+.evidence-preview h3{
+  color:var(--azul);
+  margin-bottom:16px;
+}
+
+.line{
+  padding:10px 0;
+  border-bottom:1px solid var(--borde);
+  font-size:.85rem;
+}
+
+.line:last-child{
+  border:none;
+}
+
+.notice{
+  background:var(--crema);
+  border-radius:16px;
+  padding:23px;
+  font-size:.88rem;
+  margin-top:25px;
+}
+
+/* FOOTER */
+
+footer{
+  padding:35px 0;
+  border-top:1px solid var(--borde);
+  color:#747D85;
+  font-size:.83rem;
+}
+
+/* MOBILE */
+
+@media(max-width:900px){
+  .route{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .method{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .module,
+  .evidence{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:550px){
+  .route,
+  .activities,
+  .method{
+    grid-template-columns:1fr;
+  }
+
+  section{
+    padding:55px 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container nav">
+
+    <a href="index.html" class="logo">
+      PROFE <span>ORGANIZADO</span>
+    </a>
+
+    <a href="index.html" class="back">
+      ← Volver al inicio
+    </a>
+
+  </div>
+</header>
+
+
+<section class="hero">
+  <div class="container">
+
+    <div class="label">ÁREA DE INTERVENCIÓN Y ENSEÑANZA</div>
+
+    <h1>📚 Alfabetización</h1>
+
+    <p>
+      Recursos para acompañar progresivamente el desarrollo de
+      habilidades relacionadas con la lectura y la escritura mediante
+      enseñanza guiada, práctica, actividades interactivas, juegos
+      y seguimiento.
+    </p>
+
+    <div class="hero-note">
+      🎯 Selecciona la habilidad que necesitas enseñar, reforzar o trabajar.
+    </div>
+
+  </div>
+</section>
+
+
+<section class="soft">
+  <div class="container">
+
+    <div class="section-top">
+      <div class="label">RUTA DE TRABAJO</div>
+      <h2>Habilidades de alfabetización</h2>
+      <p>
+        Las actividades estarán organizadas por habilidades para facilitar
+        la selección de apoyos según las necesidades observadas en el estudiante.
+      </p>
+    </div>
+
+    <div class="route">
+
+      <div class="route-card">
+        <div class="step">1</div>
+        <h3>Conciencia fonológica</h3>
+        <p>
+          Palabras, rimas, sílabas y reconocimiento progresivo
+          de los sonidos del habla.
+        </p>
+        <span class="status">Primer módulo</span>
+      </div>
+
+      <div class="route-card">
+        <div class="step">2</div>
+        <h3>Letras y sonidos</h3>
+        <p>
+          Reconocimiento de letras y establecimiento progresivo
+          de relaciones entre grafías y sonidos.
+        </p>
+        <span class="status">Próximamente</span>
+      </div>
+
+      <div class="route-card">
+        <div class="step">3</div>
+        <h3>Sílabas y palabras</h3>
+        <p>
+          Combinación, formación, lectura y escritura progresiva
+          de sílabas y palabras.
+        </p>
+        <span class="status">Próximamente</span>
+      </div>
+
+      <div class="route-card">
+        <div class="step">4</div>
+        <h3>Lectura de oraciones</h3>
+        <p>
+          Lectura progresiva de estructuras breves con atención
+          a precisión y significado.
+        </p>
+        <span class="status">Próximamente</span>
+      </div>
+
+      <div class="route-card">
+        <div class="step">5</div>
+        <h3>Fluidez lectora</h3>
+        <p>
+          Prácticas orientadas a favorecer precisión, continuidad
+          y expresión durante la lectura.
+        </p>
+        <span class="status">Próximamente</span>
+      </div>
+
+      <div class="route-card">
+        <div class="step">6</div>
+        <h3>Comprensión</h3>
+        <p>
+          Vocabulario, información explícita, secuencias,
+          inferencias y comprensión de textos.
+        </p>
+        <span class="status">Próximamente</span>
+      </div>
+
+      <div class="route-card">
+        <div class="step">7</div>
+        <h3>Escritura</h3>
+        <p>
+          Producción progresiva de palabras, oraciones y textos
+          de acuerdo con el nivel de desempeño.
+        </p>
+        <span class="status">Próximamente</span>
+      </div>
+
+      <div class="route-card">
+        <div class="step">✓</div>
+        <h3>Seguimiento</h3>
+        <p>
+          Registrar avances, apoyos requeridos, observaciones
+          y próximos objetivos de trabajo.
+        </p>
+        <span class="status">Evidencias</span>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section>
+  <div class="container">
+
+    <div class="section-top">
+      <div class="label">CÓMO TRABAJAREMOS</div>
+      <h2>Más que jugar</h2>
+      <p>
+        Las actividades se organizarán para que el estudiante pueda
+        recibir apoyo, practicar y mostrar progresivamente lo aprendido.
+      </p>
+    </div>
+
+    <div class="method">
+
+      <div class="method-card">
+        <div class="method-icon">📘</div>
+        <h3>Aprender</h3>
+        <p>Presentación y enseñanza de la habilidad.</p>
+      </div>
+
+      <div class="method-card">
+        <div class="method-icon">🤝</div>
+        <h3>Practicar con apoyo</h3>
+        <p>Ejercicios guiados y retroalimentación.</p>
+      </div>
+
+      <div class="method-card">
+        <div class="method-icon">🎮</div>
+        <h3>Jugar y practicar</h3>
+        <p>Actividades interactivas con propósito.</p>
+      </div>
+
+      <div class="method-card">
+        <div class="method-icon">🎯</div>
+        <h3>Comprobar</h3>
+        <p>Observar el desempeño con menor ayuda.</p>
+      </div>
+
+      <div class="method-card">
+        <div class="method-icon">📋</div>
+        <h3>Registrar</h3>
+        <p>Documentar resultados y próximos pasos.</p>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section class="soft">
+  <div class="container">
+
+    <div class="module">
+
+      <div class="module-info">
+
+        <div class="label">PRIMER MÓDULO</div>
+
+        <h2>Conciencia fonológica</h2>
+
+        <p>
+          Comenzaremos creando diferentes actividades para trabajar
+          progresivamente la capacidad de reconocer y manipular
+          unidades sonoras del lenguaje oral.
+        </p>
+
+        <ul>
+          <li>✓ Conciencia de palabras</li>
+          <li>✓ Rimas</li>
+          <li>✓ Conciencia silábica</li>
+          <li>✓ Sonido inicial</li>
+          <li>✓ Sonido final</li>
+          <li>✓ Actividades progresivas con sonidos</li>
+        </ul>
+
+      </div>
+
+
+      <div class="activities">
+
+        <div class="activity">
+          <div class="activity-icon">👏</div>
+          <h3>¿Cuántas sílabas tiene?</h3>
+          <p>
+            Escuchar, segmentar y reconocer las partes sonoras
+            de diferentes palabras.
+          </p>
+          <span class="activity-state">PRIMER JUEGO A CREAR →</span>
+        </div>
+
+        <div class="activity">
+          <div class="activity-icon">🎵</div>
+          <h3>Encuentra la rima</h3>
+          <p>
+            Identificar palabras que presentan semejanzas
+            sonoras al final.
+          </p>
+          <span class="activity-state">Próximamente</span>
+        </div>
+
+        <div class="activity">
+          <div class="activity-icon">👂</div>
+          <h3>¿Con qué sonido empieza?</h3>
+          <p>
+            Reconocer progresivamente el sonido inicial
+            de palabras familiares.
+          </p>
+          <span class="activity-state">Próximamente</span>
+        </div>
+
+        <div class="activity">
+          <div class="activity-icon">🧺</div>
+          <h3>Agrupa por sonido</h3>
+          <p>
+            Clasificar palabras de acuerdo con características
+            sonoras compartidas.
+          </p>
+          <span class="activity-state">Próximamente</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section>
+  <div class="container evidence">
+
+    <div>
+
+      <div class="label">EVIDENCIA DEL TRABAJO</div>
+
+      <h2>Registrar para poder dar seguimiento.</h2>
+
+      <p>
+        Las actividades que vayamos creando podrán incorporar un
+        registro imprimible para documentar qué se trabajó,
+        cómo respondió el estudiante y cuál será el próximo paso.
+      </p>
+
+      <div class="notice">
+        Los resultados de las actividades se utilizarán como información
+        de apoyo para la observación y el seguimiento educativo.
+        No deben interpretarse de manera aislada como un diagnóstico.
+      </div>
+
+    </div>
+
+
+    <div class="evidence-preview">
+
+      <h3>📄 Registro de intervención</h3>
+
+      <div class="line">
+        <strong>Estudiante:</strong> ______________________
+      </div>
+
+      <div class="line">
+        <strong>Fecha:</strong> ___________________________
+      </div>
+
+      <div class="line">
+        <strong>Área:</strong> Alfabetización
+      </div>
+
+      <div class="line">
+        <strong>Habilidad:</strong> _______________________
+      </div>
+
+      <div class="line">
+        <strong>Actividad:</strong> _______________________
+      </div>
+
+      <div class="line">
+        <strong>Resultado:</strong> _______________________
+      </div>
+
+      <div class="line">
+        <strong>Nivel de apoyo:</strong> __________________
+      </div>
+
+      <div class="line">
+        <strong>Observaciones:</strong> ___________________
+      </div>
+
+      <div class="line">
+        <strong>Próximo paso:</strong> ____________________
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+<footer>
+  <div class="container">
+    <strong style="color:#0F2C59;">PROFE ORGANIZADO</strong>
+    · Recursos para acompañar el aprendizaje.
+  </div>
+</footer>
+
+</body>
+</html>
