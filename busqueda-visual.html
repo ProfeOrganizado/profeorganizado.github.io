@@ -7,46 +7,40 @@
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-
 :root{
   --azul:#0F2C59;
   --salvia:#7C9A83;
-  --salvia-claro:#EEF4EF;
-  --azul-claro:#EEF3F8;
-  --crema:#FAF8F3;
+  --salvia2:#EEF4EF;
   --gris:#3E4651;
   --gris2:#737B84;
   --borde:#E3E7EB;
-  --blanco:#fff;
+  --fondo:#F7F8FA;
+  --crema:#FFF9ED;
 }
-
 body{
   font-family:Arial,Helvetica,sans-serif;
-  background:#F7F8FA;
+  background:var(--fondo);
   color:var(--gris);
   min-height:100vh;
 }
-
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
 a{text-decoration:none;color:inherit}
 
 header{
   height:58px;
-  background:white;
+  background:#fff;
   border-bottom:1px solid var(--borde);
 }
-
 .nav{
-  max-width:1080px;
+  max-width:1000px;
   height:58px;
   margin:auto;
-  padding:0 20px;
+  padding:0 18px;
   display:flex;
   align-items:center;
   justify-content:space-between;
 }
-
 .logo{
   display:flex;
   align-items:center;
@@ -55,538 +49,544 @@ header{
   font-size:.85rem;
   font-weight:900;
 }
-
 .logo img{
-  width:38px;
-  height:38px;
+  width:38px;height:38px;
   border-radius:50%;
   object-fit:cover;
 }
-
 .logo strong{color:var(--salvia)}
-
 .back{
   color:var(--azul);
-  font-size:.75rem;
+  font-size:.72rem;
   font-weight:700;
 }
 
 main{
-  max-width:900px;
+  width:min(900px,94%);
   margin:auto;
-  padding:22px 18px 40px;
+  padding:20px 0 35px;
 }
-
 .screen{display:none}
 .screen.active{display:block}
 
-/* ---------- INICIO ---------- */
-
-.hero{
+/* INICIO */
+.start{
+  max-width:690px;
+  margin:auto;
   text-align:center;
-  max-width:650px;
-  margin:10px auto 22px;
 }
-
-.eyebrow{
+.badge{
   display:inline-block;
+  background:var(--salvia2);
+  color:#55705D;
   padding:5px 10px;
-  background:var(--salvia-claro);
-  color:#587361;
   border-radius:20px;
-  font-size:.65rem;
+  font-size:.63rem;
   font-weight:800;
-  margin-bottom:10px;
+  margin-bottom:9px;
 }
-
-.hero h1{
+.start h1{
   color:var(--azul);
   font-size:2rem;
-  margin-bottom:7px;
+  margin-bottom:6px;
+}
+.start>p{
+  color:var(--gris2);
+  font-size:.82rem;
+  line-height:1.5;
+  margin-bottom:18px;
 }
 
-.hero p{
-  color:var(--gris2);
-  font-size:.85rem;
-  line-height:1.5;
+.preview{
+  display:flex;
+  justify-content:center;
+  gap:8px;
+  margin-bottom:20px;
+}
+.preview span{
+  width:44px;height:44px;
+  display:grid;
+  place-items:center;
+  background:#fff;
+  border:1px solid var(--borde);
+  border-radius:10px;
+  font-size:1.35rem;
 }
 
 .setup{
-  max-width:650px;
-  margin:auto;
-  background:white;
+  background:#fff;
   border:1px solid var(--borde);
   border-radius:14px;
-  padding:20px;
+  padding:18px;
+  text-align:left;
 }
-
-.section-label{
+.setup-title{
   color:var(--azul);
   font-size:.72rem;
   font-weight:800;
-  margin-bottom:8px;
+  margin-bottom:9px;
 }
-
-.mode-grid,
-.level-grid{
+.levels{
   display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:9px;
-  margin-bottom:18px;
-}
-
-.level-grid{
   grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-bottom:15px;
 }
-
-.option{
-  position:relative;
+.level{
   border:1px solid var(--borde);
-  background:white;
-  border-radius:10px;
-  padding:13px 10px;
-  text-align:center;
-  transition:.15s;
-}
-
-.option:hover{
-  border-color:var(--salvia);
-  transform:translateY(-1px);
-}
-
-.option.selected{
-  border:2px solid var(--salvia);
-  background:var(--salvia-claro);
-}
-
-.option .big{
-  display:block;
-  font-size:1.35rem;
-  margin-bottom:4px;
-}
-
-.option strong{
-  display:block;
-  color:var(--azul);
-  font-size:.75rem;
-}
-
-.option small{
-  display:block;
-  color:var(--gris2);
-  font-size:.6rem;
-  margin-top:3px;
-}
-
-.session-fields{
-  display:none;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  padding:12px;
-  margin-bottom:18px;
-  background:var(--crema);
+  background:#fff;
   border-radius:9px;
+  padding:11px 7px;
+  text-align:center;
 }
-
-.session-fields.show{display:grid}
-
-.field label{
+.level.selected{
+  border:2px solid var(--salvia);
+  background:var(--salvia2);
+}
+.level span{
   display:block;
+  font-size:1.3rem;
+  margin-bottom:3px;
+}
+.level strong{
   color:var(--azul);
-  font-size:.65rem;
-  font-weight:700;
-  margin-bottom:4px;
+  display:block;
+  font-size:.72rem;
 }
-
-.field input,
-.field select,
-.record textarea{
-  width:100%;
-  border:1px solid var(--borde);
-  border-radius:7px;
-  padding:9px;
-  background:white;
-  color:var(--gris);
-  outline:none;
-}
-
-.privacy{
-  grid-column:1/-1;
+.level small{
   color:var(--gris2);
-  font-size:.6rem;
+  font-size:.57rem;
 }
-
-.primary{
+.start-btn{
   width:100%;
   border:0;
-  border-radius:8px;
-  padding:11px;
   background:var(--azul);
-  color:white;
-  font-weight:800;
+  color:#fff;
+  border-radius:8px;
+  padding:12px;
+  font-weight:900;
   font-size:.76rem;
 }
 
-/* ---------- JUEGO ---------- */
-
-.game-top{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:15px;
-  align-items:center;
-  margin-bottom:12px;
-}
-
-.mission small{
-  color:var(--salvia);
-  font-weight:800;
-  font-size:.65rem;
-}
-
-.mission h2{
-  color:var(--azul);
-  font-size:1.2rem;
-  margin-top:3px;
-}
-
-.stats{
+/* JUEGO */
+.topbar{
   display:flex;
-  gap:7px;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  margin-bottom:10px;
 }
-
-.stat{
-  background:white;
+.mission-info small{
+  color:var(--salvia);
+  font-size:.63rem;
+  font-weight:900;
+}
+.mission-info h2{
+  color:var(--azul);
+  font-size:1.05rem;
+  margin-top:2px;
+}
+.game-stats{
+  display:flex;
+  gap:6px;
+}
+.game-stat{
+  min-width:63px;
+  background:#fff;
   border:1px solid var(--borde);
   border-radius:8px;
-  padding:7px 10px;
-  min-width:62px;
+  padding:6px;
   text-align:center;
 }
-
-.stat strong{
+.game-stat strong{
   display:block;
   color:var(--azul);
-  font-size:.85rem;
+  font-size:.82rem;
 }
-
-.stat span{
+.game-stat span{
   color:var(--gris2);
-  font-size:.55rem;
+  font-size:.52rem;
 }
 
-.progress-track{
+.progress{
   height:6px;
-  background:#E9ECEF;
+  background:#E6EAED;
   border-radius:10px;
   overflow:hidden;
-  margin-bottom:14px;
+  margin-bottom:12px;
 }
-
-.progress-bar{
-  width:0%;
+.progress div{
   height:100%;
   background:var(--salvia);
   transition:.3s;
 }
 
-.challenge{
-  background:white;
+/* ESCENARIO */
+.scene{
+  background:#fff;
   border:1px solid var(--borde);
-  border-radius:14px;
-  padding:17px;
+  border-radius:15px;
+  overflow:hidden;
+}
+.scene-banner{
+  padding:15px;
+  text-align:center;
+  transition:.3s;
+}
+.scene-banner.ocean{
+  background:linear-gradient(135deg,#EAF8FF,#F1FCFA);
+}
+.scene-banner.jungle{
+  background:linear-gradient(135deg,#F1F8EC,#FFF9E8);
+}
+.scene-banner.space{
+  background:linear-gradient(135deg,#EEF1FF,#F7F0FF);
+}
+.scene-banner.letters{
+  background:linear-gradient(135deg,#FFF6E7,#F2F7FF);
+}
+.scene-banner.shapes{
+  background:linear-gradient(135deg,#F1F4F7,#F8F8F8);
+}
+
+.scene-icon{
+  font-size:1.8rem;
+  margin-bottom:3px;
+}
+.scene-banner h3{
+  color:var(--azul);
+  font-size:.95rem;
+}
+.scene-banner p{
+  color:var(--gris2);
+  font-size:.67rem;
+  margin-top:3px;
 }
 
 .instruction{
+  padding:13px 15px 5px;
   text-align:center;
-  margin-bottom:13px;
 }
-
-.instruction span{
+.instruction-text{
   color:var(--gris2);
   font-size:.7rem;
 }
-
 .target{
-  display:inline-grid;
-  place-items:center;
-  width:50px;
-  height:50px;
-  margin-left:7px;
-  border-radius:10px;
-  background:var(--salvia-claro);
-  font-size:1.8rem;
-  vertical-align:middle;
-}
-
-.board{
-  display:grid;
-  gap:8px;
-  max-width:650px;
-  margin:auto;
-}
-
-.symbol{
-  aspect-ratio:1;
-  min-height:48px;
-  border:1px solid #E6E9EC;
-  background:#FAFBFC;
-  border-radius:10px;
-  font-size:1.55rem;
-  display:flex;
+  display:inline-flex;
   align-items:center;
   justify-content:center;
-  transition:.15s;
+  min-width:52px;
+  height:52px;
+  padding:0 10px;
+  margin-left:6px;
+  background:var(--salvia2);
+  border:2px solid #D7E5DA;
+  border-radius:11px;
+  color:var(--azul);
+  font-size:1.8rem;
+  font-weight:900;
+  vertical-align:middle;
+}
+.sound-btn{
+  display:block;
+  margin:9px auto 0;
+  border:1px solid #D8DEE4;
+  background:#fff;
+  color:var(--azul);
+  border-radius:20px;
+  padding:6px 12px;
+  font-size:.63rem;
+  font-weight:800;
+}
+.sound-btn:hover{background:#F5F7F9}
+
+.board-wrap{padding:12px 15px 5px}
+.board{
+  max-width:650px;
+  margin:auto;
+  display:grid;
+  gap:8px;
+}
+.item{
+  position:relative;
+  min-height:58px;
+  aspect-ratio:1;
+  border:1px solid #E5E8EB;
+  background:#FAFBFC;
+  border-radius:11px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:1.6rem;
+  color:var(--azul);
+  font-weight:900;
   user-select:none;
+  transition:transform .15s,background .15s,border .15s;
 }
-
-.symbol:hover{
-  background:var(--azul-claro);
-  transform:scale(1.03);
+.item:hover{
+  transform:scale(1.04);
+  background:#F2F6F8;
 }
-
-.symbol.correct{
-  background:var(--salvia-claro);
-  border-color:var(--salvia);
-  transform:scale(.92);
+.item.correct{
+  background:#EAF5EC;
+  border:2px solid var(--salvia);
+  transform:scale(.91);
 }
-
-.symbol.correct::after{
+.item.correct::after{
   content:"✓";
   position:absolute;
+  right:3px;
+  top:2px;
+  width:18px;height:18px;
+  border-radius:50%;
+  background:var(--salvia);
+  color:white;
+  font-size:.65rem;
+  display:grid;
+  place-items:center;
 }
-
-.symbol.wrong{
-  animation:shake .22s;
-}
-
-.symbol{
-  position:relative;
-}
-
+.item.wrong{animation:shake .25s}
 @keyframes shake{
   0%,100%{transform:translateX(0)}
-  30%{transform:translateX(-4px)}
-  70%{transform:translateX(4px)}
+  25%{transform:translateX(-4px)}
+  75%{transform:translateX(4px)}
+}
+@keyframes pop{
+  0%{transform:scale(.7);opacity:0}
+  70%{transform:scale(1.15)}
+  100%{transform:scale(1);opacity:1}
 }
 
 .feedback{
-  min-height:38px;
+  height:38px;
   display:flex;
-  align-items:center;
   justify-content:center;
-  text-align:center;
+  align-items:center;
+  color:#66856E;
+  font-size:.72rem;
   font-weight:800;
-  color:var(--salvia);
-  font-size:.75rem;
-  margin-top:7px;
-}
-
-.round-complete{
   text-align:center;
-  padding:16px 5px 3px;
+}
+.complete{
   display:none;
+  text-align:center;
+  padding:3px 10px 15px;
 }
-
-.round-complete.show{display:block}
-
-.round-complete .celebrate{
+.complete.show{display:block}
+.complete .party{
   font-size:2rem;
-  margin-bottom:5px;
+  animation:pop .35s;
 }
-
-.round-complete h3{
+.complete h3{
   color:var(--azul);
-  margin-bottom:4px;
+  font-size:.9rem;
+  margin-top:3px;
 }
-
-.next{
+.complete p{
+  color:var(--gris2);
+  font-size:.62rem;
+  margin-top:3px;
+}
+.next-btn{
+  margin-top:9px;
   border:0;
   background:var(--azul);
   color:white;
   border-radius:7px;
-  padding:9px 18px;
-  font-weight:800;
-  font-size:.7rem;
-  margin-top:9px;
+  padding:9px 17px;
+  font-size:.68rem;
+  font-weight:900;
 }
 
-/* ---------- RESULTADO ---------- */
-
+/* RESULTADO */
+.result{
+  max-width:700px;
+  margin:auto;
+}
 .result-card{
-  max-width:680px;
-  margin:10px auto;
-  background:white;
+  background:#fff;
   border:1px solid var(--borde);
-  border-radius:14px;
+  border-radius:15px;
   overflow:hidden;
 }
-
-.result-main{
+.result-head{
   text-align:center;
-  padding:25px 20px 18px;
+  padding:23px 18px 17px;
 }
-
-.trophy{
-  font-size:2.8rem;
-  margin-bottom:5px;
-}
-
-.result-main h2{
+.result-head .cup{font-size:2.6rem}
+.result-head h2{
   color:var(--azul);
-  font-size:1.35rem;
+  font-size:1.3rem;
+  margin-top:3px;
 }
-
-.result-main p{
+.result-head p{
   color:var(--gris2);
-  font-size:.75rem;
-  margin-top:5px;
+  font-size:.7rem;
+  margin-top:4px;
 }
-
-.score-big{
+.big-score{
+  font-size:2rem;
   color:var(--azul);
-  font-size:2.2rem;
   font-weight:900;
-  margin:12px 0 2px;
+  margin-top:10px;
 }
-
-.score-label{
-  color:var(--gris2);
-  font-size:.62rem;
-}
-
-.result-stats{
+.result-grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
   border-top:1px solid var(--borde);
   border-bottom:1px solid var(--borde);
 }
-
-.result-stat{
+.result-data{
   text-align:center;
-  padding:13px 5px;
+  padding:12px 5px;
   border-right:1px solid var(--borde);
 }
-
-.result-stat:last-child{border:0}
-
-.result-stat strong{
+.result-data:last-child{border:0}
+.result-data strong{
   display:block;
+  color:var(--azul);
+  font-size:.9rem;
+}
+.result-data span{
+  color:var(--gris2);
+  font-size:.54rem;
+}
+.actions{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:7px;
+  padding:14px;
+}
+.action{
+  border-radius:7px;
+  padding:10px 5px;
+  font-size:.65rem;
+  font-weight:800;
+  text-align:center;
+}
+.again{
+  border:0;
+  background:var(--azul);
+  color:#fff;
+}
+.register{
+  border:0;
+  background:var(--salvia);
+  color:#fff;
+}
+.return{
+  border:1px solid var(--borde);
+  background:#fff;
+  color:var(--azul);
+}
+
+/* REGISTRO */
+.record{
+  display:none;
+  border-top:1px solid var(--borde);
+  padding:18px;
+}
+.record.show{display:block}
+.record h3{
   color:var(--azul);
   font-size:.95rem;
 }
-
-.result-stat span{
-  color:var(--gris2);
-  font-size:.57rem;
-}
-
-.result-actions{
-  display:flex;
-  gap:8px;
-  padding:14px;
-}
-
-.result-actions button{
-  flex:1;
-  border-radius:7px;
-  padding:9px;
-  font-size:.68rem;
-  font-weight:800;
-}
-
-.play-again{
-  border:0;
-  background:var(--azul);
-  color:white;
-}
-
-.print-btn{
-  border:1px solid var(--azul);
-  color:var(--azul);
-  background:white;
-}
-
-/* ---------- REGISTRO ---------- */
-
-.record{
-  display:none;
-  padding:18px;
-  border-top:1px solid var(--borde);
-}
-
-.record.show{display:block}
-
-.record h3{
-  color:var(--azul);
-  font-size:.9rem;
-  margin-bottom:4px;
-}
-
-.record-intro{
+.record>p{
   color:var(--gris2);
   font-size:.63rem;
-  margin-bottom:13px;
+  margin:4px 0 13px;
 }
-
-.record-grid{
-  display:grid;
-  grid-template-columns:repeat(2,1fr);
-  gap:10px;
-}
-
-.record .full{grid-column:1/-1}
-
-.record label{
-  display:block;
-  color:var(--azul);
-  font-size:.62rem;
-  font-weight:700;
-  margin-bottom:4px;
-}
-
-.record textarea{
-  min-height:70px;
-  resize:vertical;
-}
-
-.record-data{
-  padding:9px;
-  border:1px solid var(--borde);
-  border-radius:7px;
-  background:#FAFBFC;
-  min-height:35px;
-  font-size:.7rem;
-}
-
-.disclaimer{
-  margin-top:12px;
-  padding:9px;
-  background:var(--salvia-claro);
+.privacy{
+  padding:8px 10px;
+  background:var(--salvia2);
   border-radius:7px;
   color:#587361;
   font-size:.6rem;
+  margin-bottom:12px;
+}
+.form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.form-field.full{grid-column:1/-1}
+.form-field label{
+  display:block;
+  color:var(--azul);
+  font-size:.62rem;
+  font-weight:800;
+  margin-bottom:4px;
+}
+.form-field input,
+.form-field select,
+.form-field textarea{
+  width:100%;
+  border:1px solid var(--borde);
+  border-radius:7px;
+  padding:9px;
+  background:#fff;
+  color:var(--gris);
+}
+.form-field textarea{
+  min-height:65px;
+  resize:vertical;
+}
+.auto{
+  min-height:35px;
+  padding:9px;
+  background:#F8F9FA;
+  border:1px solid var(--borde);
+  border-radius:7px;
+  font-size:.67rem;
+}
+.record-actions{
+  display:flex;
+  gap:8px;
+  margin-top:13px;
+}
+.print{
+  border:0;
+  background:var(--azul);
+  color:#fff;
+  border-radius:7px;
+  padding:10px 15px;
+  font-size:.66rem;
+  font-weight:800;
+}
+.close-record{
+  border:1px solid var(--borde);
+  background:#fff;
+  color:var(--azul);
+  border-radius:7px;
+  padding:10px 15px;
+  font-size:.66rem;
+  font-weight:800;
+}
+.note{
+  margin-top:11px;
+  font-size:.58rem;
   line-height:1.4;
+  color:var(--gris2);
 }
 
 @media(max-width:650px){
-  .hero h1{font-size:1.55rem}
-  .game-top{grid-template-columns:1fr}
-  .stats{justify-content:space-between}
-  .stat{flex:1}
-  .result-stats{grid-template-columns:repeat(2,1fr)}
-  .result-stat:nth-child(2){border-right:0}
-  .result-stat:nth-child(-n+2){border-bottom:1px solid var(--borde)}
-  .record-grid,.session-fields{grid-template-columns:1fr}
-  .privacy,.record .full{grid-column:auto}
-  .level-grid{grid-template-columns:1fr}
+  .levels{grid-template-columns:1fr}
+  .topbar{display:block}
+  .game-stats{margin-top:8px}
+  .game-stat{flex:1}
+  .item{min-height:45px;font-size:1.3rem}
+  .result-grid{grid-template-columns:repeat(2,1fr)}
+  .result-data:nth-child(2){border-right:0}
+  .actions{grid-template-columns:1fr}
+  .form-grid{grid-template-columns:1fr}
+  .form-field.full{grid-column:auto}
 }
-
 @media print{
-  body{background:white}
-  header,.hero,.result-main,.result-stats,.result-actions{display:none!important}
-  main{padding:0}
-  .result-card{border:0;margin:0;max-width:none}
-  .record{display:block!important;border:0;padding:0}
+  header,.result-head,.result-grid,.actions,.record-actions{display:none!important}
+  body{background:#fff}
+  main{width:100%;padding:0}
+  .result-card{border:0}
+  .record{display:block!important;border:0}
 }
 </style>
 </head>
@@ -599,7 +599,6 @@ main{
       <img src="logo.png" alt="Logo Profe Organizado">
       <span>PROFE <strong>ORGANIZADO</strong></span>
     </a>
-
     <a href="estimulacion.html" class="back">← Estimulación</a>
   </div>
 </header>
@@ -607,678 +606,691 @@ main{
 <main>
 
 <!-- INICIO -->
-
 <section id="startScreen" class="screen active">
-
-  <div class="hero">
-    <span class="eyebrow">🎯 ATENCIÓN SELECTIVA</span>
+  <div class="start">
+    <span class="badge">🎯 ATENCIÓN · EXPLORACIÓN VISUAL</span>
     <h1>🔎 Búsqueda visual</h1>
     <p>
-      Encuentra los objetivos entre los distractores.
-      Cada ronda será un poco diferente.
+      Supera 5 misiones diferentes. Busca animales, objetos,
+      letras y figuras entre distintos distractores.
     </p>
+
+    <div class="preview">
+      <span>🐠</span>
+      <span>🚀</span>
+      <span>M</span>
+      <span>🦁</span>
+      <span>◆</span>
+    </div>
+
+    <div class="setup">
+      <div class="setup-title">Selecciona la dificultad</div>
+
+      <div class="levels">
+        <button class="level selected" data-level="easy">
+          <span>🌱</span>
+          <strong>Fácil</strong>
+          <small>Objetos claros y menos distractores</small>
+        </button>
+
+        <button class="level" data-level="medium">
+          <span>⭐</span>
+          <strong>Medio</strong>
+          <small>Más elementos y mayor búsqueda</small>
+        </button>
+
+        <button class="level" data-level="hard">
+          <span>🚀</span>
+          <strong>Difícil</strong>
+          <small>Distractores más semejantes</small>
+        </button>
+      </div>
+
+      <button id="startBtn" class="start-btn">▶ COMENZAR LAS MISIONES</button>
+    </div>
   </div>
-
-  <div class="setup">
-
-    <div class="section-label">¿Cómo deseas utilizar la actividad?</div>
-
-    <div class="mode-grid">
-      <button class="option selected" data-mode="game">
-        <span class="big">🎮</span>
-        <strong>Modo juego</strong>
-        <small>Jugar y practicar</small>
-      </button>
-
-      <button class="option" data-mode="session">
-        <span class="big">📋</span>
-        <strong>Modo sesión</strong>
-        <small>Actividad + registro</small>
-      </button>
-    </div>
-
-    <div id="sessionFields" class="session-fields">
-      <div class="privacy">
-        🔒 Utilice únicamente las iniciales del estudiante. No introduzca nombres completos.
-      </div>
-
-      <div class="field">
-        <label>Iniciales</label>
-        <input id="initials" maxlength="8" placeholder="Ej. A.M.">
-      </div>
-
-      <div class="field">
-        <label>Curso / grado</label>
-        <input id="grade" maxlength="25" placeholder="Ej. 3.º Primaria">
-      </div>
-    </div>
-
-    <div class="section-label">Selecciona el nivel</div>
-
-    <div class="level-grid">
-      <button class="option selected" data-level="easy">
-        <span class="big">🌱</span>
-        <strong>Fácil</strong>
-        <small>Menos distractores</small>
-      </button>
-
-      <button class="option" data-level="medium">
-        <span class="big">⭐</span>
-        <strong>Medio</strong>
-        <small>Más elementos</small>
-      </button>
-
-      <button class="option" data-level="hard">
-        <span class="big">🚀</span>
-        <strong>Difícil</strong>
-        <small>Mayor semejanza visual</small>
-      </button>
-    </div>
-
-    <button id="startBtn" class="primary">COMENZAR RETO →</button>
-
-  </div>
-
 </section>
-
 
 <!-- JUEGO -->
-
 <section id="gameScreen" class="screen">
 
-  <div class="game-top">
-
-    <div class="mission">
-      <small id="roundText">MISIÓN 1 DE 5</small>
-      <h2 id="missionTitle">Encuentra todos los objetivos</h2>
+  <div class="topbar">
+    <div class="mission-info">
+      <small id="missionNumber">MISIÓN 1 DE 5</small>
+      <h2 id="missionName">Mundo submarino</h2>
     </div>
 
-    <div class="stats">
-      <div class="stat">
+    <div class="game-stats">
+      <div class="game-stat">
         <strong id="score">0</strong>
-        <span>⭐ Puntos</span>
+        <span>⭐ PUNTOS</span>
       </div>
-
-      <div class="stat">
+      <div class="game-stat">
         <strong id="streak">0</strong>
-        <span>🔥 Racha</span>
+        <span>🔥 RACHA</span>
       </div>
-
-      <div class="stat">
-        <strong id="time">0:00</strong>
-        <span>⏱ Tiempo</span>
+      <div class="game-stat">
+        <strong id="timer">0:00</strong>
+        <span>⏱ TIEMPO</span>
       </div>
     </div>
-
   </div>
 
-  <div class="progress-track">
-    <div id="progressBar" class="progress-bar"></div>
+  <div class="progress">
+    <div id="progressBar"></div>
   </div>
 
-  <div class="challenge">
+  <div class="scene">
+
+    <div id="sceneBanner" class="scene-banner ocean">
+      <div id="sceneIcon" class="scene-icon">🌊</div>
+      <h3 id="sceneTitle">¡Explora el océano!</h3>
+      <p id="sceneDescription">Observa con atención antes de seleccionar.</p>
+    </div>
 
     <div class="instruction">
-      <span>Encuentra todos los</span>
-      <span id="targetDisplay" class="target">⭐</span>
+      <span id="instructionText" class="instruction-text">Encuentra todos los</span>
+      <span id="targetDisplay" class="target">🐠</span>
+
+      <button id="soundBtn" class="sound-btn" type="button">
+        🔊 Escuchar la misión
+      </button>
     </div>
 
-    <div id="board" class="board"></div>
+    <div class="board-wrap">
+      <div id="board" class="board"></div>
+    </div>
 
-    <div id="feedback" class="feedback"></div>
+    <div id="feedback" class="feedback" aria-live="polite"></div>
 
-    <div id="roundComplete" class="round-complete">
-      <div class="celebrate">🎉</div>
-      <h3 id="roundMessage">¡Ronda completada!</h3>
-      <button id="nextBtn" class="next">SIGUIENTE RETO →</button>
+    <div id="complete" class="complete">
+      <div class="party">🎉✨</div>
+      <h3 id="completeTitle">¡Misión superada!</h3>
+      <p id="completeText">Encontraste todos los objetivos.</p>
+      <button id="nextBtn" class="next-btn">SIGUIENTE MISIÓN →</button>
     </div>
 
   </div>
-
 </section>
 
-
 <!-- RESULTADOS -->
-
 <section id="resultScreen" class="screen">
+  <div class="result">
+    <div class="result-card">
 
-  <div class="result-card">
+      <div class="result-head">
+        <div class="cup">🏆</div>
+        <h2>¡Completaste las 5 misiones!</h2>
+        <p>Terminaste el reto de búsqueda visual.</p>
+        <div id="finalScore" class="big-score">0 ⭐</div>
+      </div>
 
-    <div class="result-main">
-      <div class="trophy">🏆</div>
-      <h2>¡Reto completado!</h2>
-      <p>Terminaste todas las misiones de búsqueda visual.</p>
+      <div class="result-grid">
+        <div class="result-data">
+          <strong id="finalHits">0</strong>
+          <span>ACIERTOS</span>
+        </div>
+        <div class="result-data">
+          <strong id="finalErrors">0</strong>
+          <span>ERRORES</span>
+        </div>
+        <div class="result-data">
+          <strong id="finalPrecision">0%</strong>
+          <span>PRECISIÓN</span>
+        </div>
+        <div class="result-data">
+          <strong id="finalTime">0:00</strong>
+          <span>TIEMPO</span>
+        </div>
+      </div>
 
-      <div id="finalScore" class="score-big">0</div>
-      <div class="score-label">PUNTOS</div>
+      <div class="actions">
+        <button id="againBtn" class="action again">🔄 JUGAR OTRA VEZ</button>
+        <button id="registerBtn" class="action register">📋 REGISTRAR ESTA ACTIVIDAD</button>
+        <a href="estimulacion.html" class="action return">← VOLVER A ESTIMULACIÓN</a>
+      </div>
+
+      <!-- REGISTRO OPCIONAL -->
+      <div id="record" class="record">
+        <h3>📋 Registro de intervención</h3>
+        <p>Complete únicamente los datos necesarios para documentar esta actividad.</p>
+
+        <div class="privacy">
+          🔒 Confidencialidad: utilice únicamente las iniciales del estudiante.
+          No introduzca nombres completos.
+        </div>
+
+        <div class="form-grid">
+
+          <div class="form-field">
+            <label>Iniciales del estudiante</label>
+            <input type="text" maxlength="8" placeholder="Ej. A.M.">
+          </div>
+
+          <div class="form-field">
+            <label>Curso / grado</label>
+            <input type="text" maxlength="25" placeholder="Ej. 3.º Primaria">
+          </div>
+
+          <div class="form-field">
+            <label>Fecha</label>
+            <div id="recordDate" class="auto"></div>
+          </div>
+
+          <div class="form-field">
+            <label>Nivel utilizado</label>
+            <div id="recordLevel" class="auto"></div>
+          </div>
+
+          <div class="form-field">
+            <label>Área</label>
+            <div class="auto">Estimulación cognitiva para el aprendizaje</div>
+          </div>
+
+          <div class="form-field">
+            <label>Actividad</label>
+            <div class="auto">Búsqueda visual · 5 misiones</div>
+          </div>
+
+          <div class="form-field full">
+            <label>Habilidades implicadas en la actividad</label>
+            <div class="auto">
+              Atención selectiva, exploración visual y discriminación visual.
+              Algunas rondas incorporan reconocimiento visual de letras y símbolos.
+            </div>
+          </div>
+
+          <div class="form-field full">
+            <label>Resultado de esta actividad</label>
+            <div id="recordResult" class="auto"></div>
+          </div>
+
+          <div class="form-field">
+            <label>Nivel de apoyo</label>
+            <select>
+              <option>Independiente</option>
+              <option>Consigna repetida</option>
+              <option>Apoyo verbal ocasional</option>
+              <option>Apoyo verbal frecuente</option>
+              <option>Modelado</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label>Respuesta ante la actividad</label>
+            <select>
+              <option>Participación adecuada</option>
+              <option>Requirió redirección ocasional</option>
+              <option>Requirió redirección frecuente</option>
+              <option>Presentó dificultad para mantener la tarea</option>
+            </select>
+          </div>
+
+          <div class="form-field full">
+            <label>Observaciones</label>
+            <textarea placeholder="Ej. mantuvo la búsqueda de izquierda a derecha, necesitó recordar la consigna, confundió estímulos semejantes..."></textarea>
+          </div>
+
+          <div class="form-field full">
+            <label>Próxima acción / seguimiento</label>
+            <textarea placeholder="Ej. continuar aumentando progresivamente la cantidad y semejanza de distractores."></textarea>
+          </div>
+
+          <div class="form-field">
+            <label>Responsable</label>
+            <input type="text" placeholder="Nombre o firma">
+          </div>
+
+          <div class="form-field">
+            <label>Rol</label>
+            <select>
+              <option>Psicología escolar</option>
+              <option>Orientación</option>
+              <option>Docente</option>
+              <option>Psicopedagogía</option>
+              <option>Otro</option>
+            </select>
+          </div>
+
+        </div>
+
+        <div class="record-actions">
+          <button id="printBtn" class="print">🖨️ IMPRIMIR / GUARDAR PDF</button>
+          <button id="closeRecord" class="close-record">Cerrar registro</button>
+        </div>
+
+        <div class="note">
+          Este registro documenta el desempeño observado durante una actividad
+          específica y puede utilizarse como evidencia de seguimiento educativo.
+          El resultado aislado no constituye una evaluación diagnóstica.
+        </div>
+      </div>
+
     </div>
-
-    <div class="result-stats">
-
-      <div class="result-stat">
-        <strong id="finalHits">0</strong>
-        <span>ACIERTOS</span>
-      </div>
-
-      <div class="result-stat">
-        <strong id="finalErrors">0</strong>
-        <span>ERRORES</span>
-      </div>
-
-      <div class="result-stat">
-        <strong id="finalPrecision">0%</strong>
-        <span>PRECISIÓN</span>
-      </div>
-
-      <div class="result-stat">
-        <strong id="finalTime">0:00</strong>
-        <span>TIEMPO</span>
-      </div>
-
-    </div>
-
-    <div id="record" class="record">
-
-      <h3>📋 Registro de intervención</h3>
-
-      <div class="record-intro">
-        Evidencia de la actividad realizada para fines de observación y seguimiento educativo.
-      </div>
-
-      <div class="record-grid">
-
-        <div>
-          <label>Iniciales</label>
-          <div id="recordInitials" class="record-data">—</div>
-        </div>
-
-        <div>
-          <label>Curso / grado</label>
-          <div id="recordGrade" class="record-data">—</div>
-        </div>
-
-        <div>
-          <label>Fecha</label>
-          <div id="recordDate" class="record-data"></div>
-        </div>
-
-        <div>
-          <label>Área</label>
-          <div class="record-data">Estimulación cognitiva para el aprendizaje</div>
-        </div>
-
-        <div>
-          <label>Habilidad trabajada</label>
-          <div class="record-data">Atención selectiva y exploración visual</div>
-        </div>
-
-        <div>
-          <label>Actividad</label>
-          <div class="record-data">Búsqueda visual</div>
-        </div>
-
-        <div>
-          <label>Resultado</label>
-          <div id="recordResult" class="record-data"></div>
-        </div>
-
-        <div>
-          <label>Nivel utilizado</label>
-          <div id="recordLevel" class="record-data"></div>
-        </div>
-
-        <div>
-          <label>Nivel de apoyo durante la actividad</label>
-          <select id="support">
-            <option>Independiente</option>
-            <option>Consigna repetida</option>
-            <option>Apoyo verbal ocasional</option>
-            <option>Apoyo verbal frecuente</option>
-            <option>Modelado</option>
-          </select>
-        </div>
-
-        <div>
-          <label>Respuesta ante la actividad</label>
-          <select>
-            <option>Participación adecuada</option>
-            <option>Requirió redirección ocasional</option>
-            <option>Requirió redirección frecuente</option>
-            <option>Presentó dificultad para mantener la tarea</option>
-          </select>
-        </div>
-
-        <div class="full">
-          <label>Observaciones</label>
-          <textarea placeholder="Ej. estrategia de búsqueda utilizada, necesidad de redirección, distractibilidad observada..."></textarea>
-        </div>
-
-        <div class="full">
-          <label>Próxima acción / seguimiento</label>
-          <textarea placeholder="Ej. continuar con actividades de atención selectiva aumentando progresivamente la complejidad."></textarea>
-        </div>
-
-        <div>
-          <label>Responsable</label>
-          <input type="text" placeholder="Nombre o firma">
-        </div>
-
-        <div>
-          <label>Rol</label>
-          <select>
-            <option>Psicología escolar</option>
-            <option>Orientación</option>
-            <option>Docente</option>
-            <option>Psicopedagogía</option>
-            <option>Otro</option>
-          </select>
-        </div>
-
-      </div>
-
-      <div class="disclaimer">
-        Este registro documenta el desempeño observado durante una actividad específica.
-        Sus resultados no constituyen por sí solos una evaluación diagnóstica.
-      </div>
-
-    </div>
-
-    <div class="result-actions">
-      <button id="againBtn" class="play-again">🔄 JUGAR OTRA VEZ</button>
-      <button id="printBtn" class="print-btn">🖨️ IMPRIMIR REGISTRO</button>
-    </div>
-
   </div>
-
 </section>
 
 </main>
 
-
 <script>
+let level="easy";
+let missionIndex=0;
+let score=0;
+let hits=0;
+let errors=0;
+let streak=0;
+let seconds=0;
+let timerInterval=null;
+let remaining=0;
+let locked=false;
+
 const screens={
   start:document.getElementById("startScreen"),
   game:document.getElementById("gameScreen"),
   result:document.getElementById("resultScreen")
 };
 
-let mode="game";
-let level="easy";
-let round=0;
-let score=0;
-let hits=0;
-let errors=0;
-let streak=0;
-let seconds=0;
-let timer=null;
-let targetsRemaining=0;
-let roundLocked=false;
-
-const configs={
-  easy:{
-    cols:4,
-    total:20,
-    targets:4,
-    name:"Fácil"
-  },
-  medium:{
-    cols:5,
-    total:35,
-    targets:5,
-    name:"Medio"
-  },
-  hard:{
-    cols:6,
-    total:48,
-    targets:6,
-    name:"Difícil"
-  }
+const difficulty={
+  easy:{total:16,targets:4,cols:4,name:"Fácil"},
+  medium:{total:25,targets:5,cols:5,name:"Medio"},
+  hard:{total:36,targets:6,cols:6,name:"Difícil"}
 };
 
-const setsEasy=[
-  ["🐶","🐱","🐰","🐼","🐸"],
-  ["🍎","🍌","🍇","🍓","🍊"],
-  ["⭐","❤️","🌙","☀️","☁️"],
-  ["🚗","🚌","🚲","🚕","🚙"],
-  ["⚽","🏀","🎾","🏐","⚾"]
+/* MISIONES */
+const missions=[
+  {
+    name:"Mundo submarino",
+    icon:"🌊",
+    title:"¡Explora el océano!",
+    description:"Busca con atención entre los animales marinos.",
+    scene:"ocean",
+    type:"emoji",
+    target:"🐠",
+    speak:"Encuentra todos los peces.",
+    easy:["🐠","🐟","🐙","🦀","🐚"],
+    medium:["🐠","🐟","🐡","🦑","🐙","🦀"],
+    hard:["🐠","🐟","🐡","🦈","🐬","🐳"]
+  },
+  {
+    name:"Safari de animales",
+    icon:"🌿",
+    title:"¡Misión en la selva!",
+    description:"Encuentra el animal indicado entre sus compañeros.",
+    scene:"jungle",
+    type:"emoji",
+    target:"🦁",
+    speak:"Encuentra todos los leones.",
+    easy:["🦁","🐘","🦒","🐒","🦓"],
+    medium:["🦁","🐯","🐆","🐘","🦒","🦓"],
+    hard:["🦁","🐯","🐆","🐅","🐈","🐕"]
+  },
+  {
+    name:"Planeta de las letras",
+    icon:"🚀",
+    title:"¡Llegamos al planeta de las letras!",
+    description:"Observa cada letra antes de responder.",
+    scene:"letters",
+    type:"letter",
+    target:"M",
+    speak:"Encuentra todas las letras eme.",
+    easy:["M","A","S","L","P"],
+    medium:["M","N","W","H","A","V"],
+    hard:["M","N","W","H","V","Ñ"]
+  },
+  {
+    name:"Detectives de letras",
+    icon:"🔤",
+    title:"¡Atención a las letras parecidas!",
+    description:"Busca únicamente la letra indicada.",
+    scene:"letters",
+    type:"letter",
+    target:"b",
+    speak:"Encuentra todas las letras be minúscula.",
+    easy:["b","d","a","p","o"],
+    medium:["b","d","p","q","h","o"],
+    hard:["b","d","p","q","h","g"]
+  },
+  {
+    name:"Laboratorio visual",
+    icon:"🔷",
+    title:"¡Última misión!",
+    description:"Distingue cuidadosamente las figuras semejantes.",
+    scene:"shapes",
+    type:"shape",
+    target:"◆",
+    speak:"Encuentra todos los rombos negros.",
+    easy:["◆","◇","●","■","▲"],
+    medium:["◆","◇","♦","■","●","◈"],
+    hard:["◆","◇","♦","◈","⬥","◊"]
+  }
 ];
 
-const setsMedium=[
-  ["🐶","🐺","🦊","🐱","🦁"],
-  ["🍎","🍅","🍒","🍓","🌶️"],
-  ["⭐","🌟","✨","💫","☀️"],
-  ["🚗","🚙","🚕","🛻","🚐"],
-  ["🔵","🟣","🟢","🟡","🟠"]
-];
-
-const setsHard=[
-  ["◯","○","●","◎","⊙"],
-  ["▲","△","▴","▵","▼"],
-  ["■","□","▪","▫","▣"],
-  ["◆","◇","♦","◈","⬥"],
-  ["➕","✚","✜","✛","✙"]
-];
-
-document.querySelectorAll("[data-mode]").forEach(btn=>{
+document.querySelectorAll(".level").forEach(btn=>{
   btn.addEventListener("click",()=>{
-    document.querySelectorAll("[data-mode]").forEach(b=>b.classList.remove("selected"));
-    btn.classList.add("selected");
-    mode=btn.dataset.mode;
-
-    document.getElementById("sessionFields")
-      .classList.toggle("show",mode==="session");
-  });
-});
-
-document.querySelectorAll("[data-level]").forEach(btn=>{
-  btn.addEventListener("click",()=>{
-    document.querySelectorAll("[data-level]").forEach(b=>b.classList.remove("selected"));
+    document.querySelectorAll(".level").forEach(b=>b.classList.remove("selected"));
     btn.classList.add("selected");
     level=btn.dataset.level;
   });
 });
 
 document.getElementById("startBtn").addEventListener("click",startGame);
-document.getElementById("nextBtn").addEventListener("click",nextRound);
-document.getElementById("againBtn").addEventListener("click",resetGame);
+document.getElementById("nextBtn").addEventListener("click",nextMission);
+document.getElementById("againBtn").addEventListener("click",restart);
+document.getElementById("registerBtn").addEventListener("click",openRecord);
+document.getElementById("closeRecord").addEventListener("click",()=>{
+  document.getElementById("record").classList.remove("show");
+});
 document.getElementById("printBtn").addEventListener("click",()=>window.print());
+document.getElementById("soundBtn").addEventListener("click",speakMission);
 
 function showScreen(name){
   Object.values(screens).forEach(s=>s.classList.remove("active"));
   screens[name].classList.add("active");
+  window.scrollTo({top:0,behavior:"smooth"});
 }
 
 function startGame(){
-  round=0;
+  missionIndex=0;
   score=0;
   hits=0;
   errors=0;
   streak=0;
   seconds=0;
 
-  clearInterval(timer);
+  clearInterval(timerInterval);
 
-  updateStats();
-
-  timer=setInterval(()=>{
+  timerInterval=setInterval(()=>{
     seconds++;
-    document.getElementById("time").textContent=formatTime(seconds);
+    document.getElementById("timer").textContent=formatTime(seconds);
   },1000);
 
+  updateStats();
   showScreen("game");
-  createRound();
+  createMission();
+
+  setTimeout(speakMission,500);
 }
 
-function getSymbolSet(){
-  if(level==="easy") return setsEasy[round % setsEasy.length];
-  if(level==="medium") return setsMedium[round % setsMedium.length];
-  return setsHard[round % setsHard.length];
-}
+function createMission(){
+  locked=false;
 
-function createRound(){
+  const mission=missions[missionIndex];
+  const config=difficulty[level];
 
-  roundLocked=false;
-
-  document.getElementById("roundComplete").classList.remove("show");
+  document.getElementById("complete").classList.remove("show");
   document.getElementById("feedback").textContent="";
 
-  const config=configs[level];
-  const symbols=getSymbolSet();
-  const target=symbols[0];
+  document.getElementById("missionNumber").textContent=
+    `MISIÓN ${missionIndex+1} DE ${missions.length}`;
 
-  targetsRemaining=config.targets;
+  document.getElementById("missionName").textContent=mission.name;
+  document.getElementById("sceneIcon").textContent=mission.icon;
+  document.getElementById("sceneTitle").textContent=mission.title;
+  document.getElementById("sceneDescription").textContent=mission.description;
 
-  document.getElementById("roundText").textContent=
-    `MISIÓN ${round+1} DE 5`;
+  document.getElementById("sceneBanner").className=
+    "scene-banner "+mission.scene;
 
-  document.getElementById("missionTitle").textContent=
-    round===0
-    ? "Encuentra todos los objetivos"
-    : round===4
-    ? "¡Último reto!"
-    : "Continúa la búsqueda";
-
-  document.getElementById("targetDisplay").textContent=target;
+  document.getElementById("targetDisplay").textContent=mission.target;
 
   document.getElementById("progressBar").style.width=
-    `${(round/5)*100}%`;
+    `${(missionIndex/missions.length)*100}%`;
 
   const board=document.getElementById("board");
   board.innerHTML="";
   board.style.gridTemplateColumns=`repeat(${config.cols},1fr)`;
 
+  remaining=config.targets;
+
+  let options=mission[level];
   let items=[];
 
   for(let i=0;i<config.targets;i++){
-    items.push(target);
+    items.push(mission.target);
   }
 
   while(items.length<config.total){
-    const distractor=
-      symbols[1+Math.floor(Math.random()*(symbols.length-1))];
-
-    items.push(distractor);
+    const distractors=options.filter(x=>x!==mission.target);
+    items.push(
+      distractors[Math.floor(Math.random()*distractors.length)]
+    );
   }
 
   shuffle(items);
 
-  items.forEach(symbol=>{
-    const button=document.createElement("button");
-    button.className="symbol";
-    button.type="button";
-    button.textContent=symbol;
+  items.forEach(value=>{
+    const btn=document.createElement("button");
+    btn.type="button";
+    btn.className="item";
+    btn.textContent=value;
 
-    button.addEventListener("click",()=>{
-      checkSymbol(button,symbol,target);
+    if(mission.type==="letter"){
+      btn.style.fontSize=level==="hard" ? "1.45rem" : "1.7rem";
+      btn.style.fontFamily="Arial, sans-serif";
+    }
+
+    btn.addEventListener("click",()=>{
+      chooseItem(btn,value,mission.target);
     });
 
-    board.appendChild(button);
+    board.appendChild(btn);
   });
 }
 
-function checkSymbol(button,symbol,target){
+function chooseItem(btn,value,target){
+  if(locked || btn.disabled)return;
 
-  if(roundLocked || button.disabled) return;
-
-  if(symbol===target){
-
-    button.disabled=true;
-    button.classList.add("correct");
+  if(value===target){
+    btn.disabled=true;
+    btn.classList.add("correct");
 
     hits++;
     streak++;
-    targetsRemaining--;
+    remaining--;
 
-    score+=10+(Math.min(streak,5)*2);
+    score+=10+Math.min(streak,5)*2;
 
     const messages=[
-      "¡Muy bien! ✨",
-      "¡Lo encontraste! ⭐",
-      "¡Excelente búsqueda! 🎯",
-      "¡Sigue así! 🙌",
-      "¡Buen trabajo! 🌟"
+      "¡Lo encontraste! ✨",
+      "¡Muy bien! ⭐",
+      "¡Excelente observación! 🎯",
+      "¡Sigue así! 🌟",
+      "¡Buen trabajo! 🙌"
     ];
 
     document.getElementById("feedback").textContent=
       messages[Math.floor(Math.random()*messages.length)];
 
-    tone(650,0.07);
+    playTone(650,.07);
 
-    if(targetsRemaining===0){
-      completeRound();
+    if(remaining===0){
+      completeMission();
     }
 
   }else{
-
     errors++;
     streak=0;
 
-    button.classList.add("wrong");
+    btn.classList.add("wrong");
+    setTimeout(()=>btn.classList.remove("wrong"),280);
 
-    setTimeout(()=>{
-      button.classList.remove("wrong");
-    },250);
+    const messages=[
+      "Mira otra vez 👀",
+      "Observa con atención 🔎",
+      "Casi. Busca el que es igual al modelo.",
+      "Inténtalo nuevamente 🌱"
+    ];
 
     document.getElementById("feedback").textContent=
-      "Mira con atención y prueba otra vez 👀";
+      messages[Math.floor(Math.random()*messages.length)];
 
-    tone(220,0.05);
+    playTone(230,.05);
   }
 
   updateStats();
 }
 
-function completeRound(){
-
-  roundLocked=true;
-
+function completeMission(){
+  locked=true;
   score+=25;
-
   updateStats();
+
+  document.getElementById("progressBar").style.width=
+    `${((missionIndex+1)/missions.length)*100}%`;
 
   document.getElementById("feedback").textContent="";
 
-  document.getElementById("roundMessage").textContent=
-    round===4
-    ? "¡Completaste todas las misiones!"
-    : "¡Misión superada!";
+  const last=missionIndex===missions.length-1;
+
+  document.getElementById("completeTitle").textContent=
+    last ? "¡Superaste el reto final!" : "¡Misión superada!";
+
+  document.getElementById("completeText").textContent=
+    last
+    ? "Completaste las cinco misiones."
+    : "Encontraste todos los objetivos.";
 
   document.getElementById("nextBtn").textContent=
-    round===4
-    ? "VER RESULTADOS →"
-    : "SIGUIENTE RETO →";
+    last ? "VER MIS RESULTADOS 🏆" : "SIGUIENTE MISIÓN →";
 
-  document.getElementById("roundComplete").classList.add("show");
+  document.getElementById("complete").classList.add("show");
 
-  document.getElementById("progressBar").style.width=
-    `${((round+1)/5)*100}%`;
-
-  celebrationTone();
+  celebrationSound();
 }
 
-function nextRound(){
-
-  if(round<4){
-    round++;
-    createRound();
+function nextMission(){
+  if(missionIndex<missions.length-1){
+    missionIndex++;
+    createMission();
+    setTimeout(speakMission,350);
   }else{
     finishGame();
   }
 }
 
 function finishGame(){
+  clearInterval(timerInterval);
 
-  clearInterval(timer);
+  const attempts=hits+errors;
+  const precision=attempts
+    ? Math.round((hits/attempts)*100)
+    : 0;
 
-  const totalAttempts=hits+errors;
-
-  const precision=
-    totalAttempts===0
-    ? 0
-    : Math.round((hits/totalAttempts)*100);
-
-  document.getElementById("finalScore").textContent=score;
+  document.getElementById("finalScore").textContent=score+" ⭐";
   document.getElementById("finalHits").textContent=hits;
   document.getElementById("finalErrors").textContent=errors;
   document.getElementById("finalPrecision").textContent=precision+"%";
   document.getElementById("finalTime").textContent=formatTime(seconds);
 
-  const record=document.getElementById("record");
-  const printBtn=document.getElementById("printBtn");
-
-  if(mode==="session"){
-
-    record.classList.add("show");
-    printBtn.style.display="block";
-
-    document.getElementById("recordInitials").textContent=
-      document.getElementById("initials").value.trim() || "—";
-
-    document.getElementById("recordGrade").textContent=
-      document.getElementById("grade").value.trim() || "—";
-
-    document.getElementById("recordDate").textContent=
-      new Date().toLocaleDateString("es-DO");
-
-    document.getElementById("recordResult").textContent=
-      `${hits} aciertos · ${errors} errores · ${precision}% de precisión · ${formatTime(seconds)}`;
-
-    document.getElementById("recordLevel").textContent=
-      configs[level].name;
-
-  }else{
-
-    record.classList.remove("show");
-    printBtn.style.display="none";
-  }
+  document.getElementById("record").classList.remove("show");
 
   showScreen("result");
 }
 
-function resetGame(){
+function openRecord(){
+  const attempts=hits+errors;
+  const precision=attempts
+    ? Math.round((hits/attempts)*100)
+    : 0;
 
-  clearInterval(timer);
+  document.getElementById("recordDate").textContent=
+    new Date().toLocaleDateString("es-DO");
 
+  document.getElementById("recordLevel").textContent=
+    difficulty[level].name;
+
+  document.getElementById("recordResult").textContent=
+    `${hits} aciertos · ${errors} errores · ${precision}% de precisión · Tiempo: ${formatTime(seconds)}`;
+
+  document.getElementById("record").classList.add("show");
+
+  setTimeout(()=>{
+    document.getElementById("record").scrollIntoView({
+      behavior:"smooth",
+      block:"start"
+    });
+  },100);
+}
+
+function restart(){
+  clearInterval(timerInterval);
   document.getElementById("record").classList.remove("show");
-
   showScreen("start");
 }
 
 function updateStats(){
   document.getElementById("score").textContent=score;
   document.getElementById("streak").textContent=streak;
-  document.getElementById("time").textContent=formatTime(seconds);
+  document.getElementById("timer").textContent=formatTime(seconds);
 }
 
-function formatTime(value){
-  const min=Math.floor(value/60);
-  const sec=value%60;
-  return `${min}:${sec.toString().padStart(2,"0")}`;
+function formatTime(sec){
+  const m=Math.floor(sec/60);
+  const s=sec%60;
+  return `${m}:${String(s).padStart(2,"0")}`;
 }
 
-function shuffle(array){
-  for(let i=array.length-1;i>0;i--){
+function shuffle(arr){
+  for(let i=arr.length-1;i>0;i--){
     const j=Math.floor(Math.random()*(i+1));
-    [array[i],array[j]]=[array[j],array[i]];
+    [arr[i],arr[j]]=[arr[j],arr[i]];
   }
 }
 
-function tone(freq,duration){
+/* VOZ */
+function speakMission(){
+  if(!("speechSynthesis" in window)){
+    document.getElementById("feedback").textContent=
+      "El audio no está disponible en este navegador.";
+    return;
+  }
 
+  window.speechSynthesis.cancel();
+
+  const mission=missions[missionIndex];
+  const utterance=new SpeechSynthesisUtterance(mission.speak);
+
+  utterance.lang="es-DO";
+  utterance.rate=.85;
+  utterance.pitch=1.05;
+
+  window.speechSynthesis.speak(utterance);
+}
+
+/* SONIDOS */
+function playTone(freq,duration){
   try{
-    const AudioContext=
-      window.AudioContext || window.webkitAudioContext;
+    const AC=window.AudioContext||window.webkitAudioContext;
+    if(!AC)return;
 
-    if(!AudioContext) return;
-
-    const ctx=new AudioContext();
-    const oscillator=ctx.createOscillator();
+    const ctx=new AC();
+    const osc=ctx.createOscillator();
     const gain=ctx.createGain();
 
-    oscillator.frequency.value=freq;
-    oscillator.type="sine";
+    osc.frequency.value=freq;
+    osc.type="sine";
 
-    gain.gain.setValueAtTime(.04,ctx.currentTime);
+    gain.gain.setValueAtTime(.035,ctx.currentTime);
     gain.gain.exponentialRampToValueAtTime(
       .001,
       ctx.currentTime+duration
     );
 
-    oscillator.connect(gain);
+    osc.connect(gain);
     gain.connect(ctx.destination);
 
-    oscillator.start();
-    oscillator.stop(ctx.currentTime+duration);
+    osc.start();
+    osc.stop(ctx.currentTime+duration);
 
+    osc.onended=()=>ctx.close();
   }catch(e){}
 }
 
-function celebrationTone(){
-  tone(523,.08);
-  setTimeout(()=>tone(659,.08),100);
-  setTimeout(()=>tone(784,.12),200);
+function celebrationSound(){
+  playTone(523,.08);
+  setTimeout(()=>playTone(659,.08),100);
+  setTimeout(()=>playTone(784,.12),200);
 }
-
 </script>
 
 </body>
