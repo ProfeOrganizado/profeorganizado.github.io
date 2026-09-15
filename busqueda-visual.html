@@ -2,139 +2,525 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Búsqueda Visual | Profe Organizado</title>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
- --azul:#0F2C59;--salvia:#7C9A83;--salvia2:#EEF4EF;
- --gris:#3E4651;--gris2:#737B84;--borde:#E3E7EB;
- --fondo:#F7F8FA;--crema:#FFF9ED;
+ --azul:#0F2C59;
+ --salvia:#7C9A83;
+ --salvia-claro:#EEF4EF;
+ --crema:#FFF9ED;
+ --gris:#3E4651;
+ --gris2:#737B84;
+ --borde:#E2E7EB;
+ --fondo:#F6F8FA;
+ --blanco:#fff;
 }
-body{font-family:Arial,Helvetica,sans-serif;background:var(--fondo);color:var(--gris);min-height:100vh}
+html,body{height:100%;overflow:hidden}
+body{font-family:Arial,Helvetica,sans-serif;background:var(--fondo);color:var(--gris)}
 button,input,select,textarea{font:inherit}
 button{cursor:pointer}
 a{text-decoration:none;color:inherit}
-header{height:58px;background:#fff;border-bottom:1px solid var(--borde)}
-.nav{max-width:1000px;height:58px;margin:auto;padding:0 18px;display:flex;align-items:center;justify-content:space-between}
-.logo{display:flex;align-items:center;gap:8px;color:var(--azul);font-size:.85rem;font-weight:900}
-.logo img{width:38px;height:38px;border-radius:50%;object-fit:cover}
+
+/* HEADER */
+header{
+ height:54px;background:#fff;border-bottom:1px solid var(--borde);
+ display:flex;align-items:center;flex-shrink:0
+}
+.nav{
+ width:min(1180px,96%);margin:auto;display:flex;
+ align-items:center;justify-content:space-between
+}
+.logo{display:flex;align-items:center;gap:8px;color:var(--azul);font-size:.8rem;font-weight:900}
+.logo img{width:36px;height:36px;border-radius:50%;object-fit:cover}
 .logo strong{color:var(--salvia)}
-.back{color:var(--azul);font-size:.72rem;font-weight:700}
-main{width:min(900px,94%);margin:auto;padding:20px 0 35px}
-.screen{display:none}.screen.active{display:block}
+.back{font-size:.68rem;font-weight:800;color:var(--azul)}
+
+/* APP */
+.app{
+ height:calc(100vh - 54px);
+ width:min(1180px,96%);
+ margin:auto;
+ padding:10px 0;
+}
+.screen{display:none;height:100%}
+.screen.active{display:flex}
 
 /* INICIO */
-.start{max-width:690px;margin:auto;text-align:center}
-.badge{display:inline-block;background:var(--salvia2);color:#55705D;padding:5px 10px;border-radius:20px;font-size:.63rem;font-weight:800;margin-bottom:9px}
-.start h1{color:var(--azul);font-size:2rem;margin-bottom:6px}
-.start>p{color:var(--gris2);font-size:.82rem;line-height:1.5;margin-bottom:18px}
-.preview{display:flex;justify-content:center;gap:8px;margin-bottom:20px}
-.preview span{width:44px;height:44px;display:grid;place-items:center;background:#fff;border:1px solid var(--borde);border-radius:10px;font-size:1.35rem}
-.setup{background:#fff;border:1px solid var(--borde);border-radius:14px;padding:18px;text-align:left}
-.setup-title{color:var(--azul);font-size:.72rem;font-weight:800;margin-bottom:9px}
-.levels{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:15px}
-.level{border:1px solid var(--borde);background:#fff;border-radius:9px;padding:11px 7px;text-align:center}
-.level.selected{border:2px solid var(--salvia);background:var(--salvia2)}
-.level span{display:block;font-size:1.3rem;margin-bottom:3px}
-.level strong{color:var(--azul);display:block;font-size:.72rem}
-.level small{color:var(--gris2);font-size:.57rem}
-.start-btn{width:100%;border:0;background:var(--azul);color:#fff;border-radius:8px;padding:12px;font-weight:900;font-size:.76rem}
+.start-screen{
+ align-items:center;
+ justify-content:center;
+}
+.start-card{
+ width:min(680px,100%);
+ background:#fff;
+ border:1px solid var(--borde);
+ border-radius:18px;
+ padding:clamp(18px,3vh,30px);
+ text-align:center;
+ box-shadow:0 12px 35px rgba(15,44,89,.05);
+}
+.badge{
+ display:inline-block;background:var(--salvia-claro);
+ color:#587361;border-radius:20px;padding:5px 11px;
+ font-size:.59rem;font-weight:900
+}
+.start-card h1{
+ color:var(--azul);
+ font-size:clamp(1.55rem,4vh,2.15rem);
+ margin:8px 0 4px
+}
+.start-card>p{
+ color:var(--gris2);font-size:.75rem;
+ line-height:1.45
+}
+.preview{
+ display:flex;justify-content:center;gap:7px;
+ margin:14px 0
+}
+.preview span{
+ width:42px;height:42px;border:1px solid var(--borde);
+ border-radius:10px;background:#FAFBFC;
+ display:grid;place-items:center;font-size:1.3rem
+}
+.level-title{
+ text-align:left;color:var(--azul);
+ font-size:.65rem;font-weight:900;margin-bottom:6px
+}
+.levels{
+ display:grid;grid-template-columns:repeat(3,1fr);
+ gap:8px
+}
+.level{
+ border:1px solid var(--borde);background:#fff;
+ border-radius:10px;padding:9px 5px;text-align:center
+}
+.level.selected{
+ border:2px solid var(--salvia);
+ background:var(--salvia-claro)
+}
+.level span{display:block;font-size:1.2rem}
+.level strong{display:block;color:var(--azul);font-size:.68rem;margin:2px 0}
+.level small{font-size:.54rem;color:var(--gris2)}
+.start-btn{
+ width:100%;border:0;background:var(--azul);
+ color:#fff;border-radius:9px;padding:11px;
+ margin-top:12px;font-size:.7rem;font-weight:900
+}
 
 /* JUEGO */
-.topbar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px}
-.mission-info small{color:var(--salvia);font-size:.63rem;font-weight:900}
-.mission-info h2{color:var(--azul);font-size:1.05rem;margin-top:2px}
-.game-stats{display:flex;gap:6px}
-.game-stat{min-width:63px;background:#fff;border:1px solid var(--borde);border-radius:8px;padding:6px;text-align:center}
-.game-stat strong{display:block;color:var(--azul);font-size:.82rem}
-.game-stat span{color:var(--gris2);font-size:.52rem}
-.progress{height:6px;background:#E6EAED;border-radius:10px;overflow:hidden;margin-bottom:12px}
-.progress div{height:100%;background:var(--salvia);transition:.3s}
-.scene{background:#fff;border:1px solid var(--borde);border-radius:15px;overflow:hidden}
-.scene-banner{padding:15px;text-align:center}
-.scene-banner.ocean{background:linear-gradient(135deg,#EAF8FF,#F1FCFA)}
-.scene-banner.jungle{background:linear-gradient(135deg,#F1F8EC,#FFF9E8)}
-.scene-banner.space{background:linear-gradient(135deg,#EEF1FF,#F7F0FF)}
-.scene-banner.letters{background:linear-gradient(135deg,#FFF6E7,#F2F7FF)}
-.scene-banner.shapes{background:linear-gradient(135deg,#F1F4F7,#F8F8F8)}
-.scene-icon{font-size:1.8rem;margin-bottom:3px}
-.scene-banner h3{color:var(--azul);font-size:.95rem}
-.scene-banner p{color:var(--gris2);font-size:.67rem;margin-top:3px}
-.instruction{padding:13px 15px 5px;text-align:center}
-.instruction-text{color:var(--gris2);font-size:.7rem}
-.target{display:inline-flex;align-items:center;justify-content:center;min-width:52px;height:52px;padding:0 10px;margin-left:6px;background:var(--salvia2);border:2px solid #D7E5DA;border-radius:11px;color:var(--azul);font-size:1.8rem;font-weight:900;vertical-align:middle}
-.sound-btn{display:block;margin:9px auto 0;border:1px solid #D8DEE4;background:#fff;color:var(--azul);border-radius:20px;padding:6px 12px;font-size:.63rem;font-weight:800}
-.board-wrap{padding:12px 15px 5px}
-.board{max-width:650px;margin:auto;display:grid;gap:8px}
-.item{position:relative;min-height:58px;aspect-ratio:1;border:1px solid #E5E8EB;background:#FAFBFC;border-radius:11px;display:flex;justify-content:center;align-items:center;font-size:1.6rem;color:var(--azul);font-weight:900;user-select:none;transition:.15s}
-.item:hover{transform:scale(1.04);background:#F2F6F8}
-.item.correct{background:#EAF5EC;border:2px solid var(--salvia);transform:scale(.91)}
-.item.correct::after{content:"✓";position:absolute;right:3px;top:2px;width:18px;height:18px;border-radius:50%;background:var(--salvia);color:white;font-size:.65rem;display:grid;place-items:center}
+.game-screen{
+ flex-direction:column;
+ min-height:0;
+}
+.game-header{
+ display:flex;align-items:center;justify-content:space-between;
+ gap:10px;flex-shrink:0
+}
+.mission-label{font-size:.56rem;color:var(--salvia);font-weight:900}
+.mission-name{font-size:.92rem;color:var(--azul);font-weight:900;margin-top:1px}
+.stats{display:flex;gap:5px}
+.stat{
+ background:#fff;border:1px solid var(--borde);
+ border-radius:8px;min-width:64px;
+ padding:5px 8px;text-align:center
+}
+.stat strong{display:block;color:var(--azul);font-size:.78rem}
+.stat small{display:block;color:var(--gris2);font-size:.48rem;margin-top:1px}
+.progress{
+ height:5px;background:#E4E9EC;border-radius:10px;
+ overflow:hidden;margin:7px 0;flex-shrink:0
+}
+.progress>div{height:100%;background:var(--salvia);transition:.3s}
+
+.game-card{
+ flex:1;min-height:0;
+ background:#fff;border:1px solid var(--borde);
+ border-radius:15px;
+ overflow:hidden;
+ display:grid;
+ grid-template-columns:190px 1fr;
+}
+
+/* LADO IZQUIERDO */
+.mission-panel{
+ padding:15px;
+ display:flex;flex-direction:column;
+ justify-content:center;
+ text-align:center;
+ border-right:1px solid var(--borde)
+}
+.mission-panel.ocean{background:linear-gradient(145deg,#E9F8FF,#F1FCFA)}
+.mission-panel.jungle{background:linear-gradient(145deg,#F0F8EB,#FFF9E9)}
+.mission-panel.letters{background:linear-gradient(145deg,#FFF7E9,#F1F6FF)}
+.mission-panel.shapes{background:linear-gradient(145deg,#F0F3F6,#FAFAFA)}
+.scene-icon{font-size:2rem}
+.mission-panel h2{
+ color:var(--azul);font-size:.9rem;margin:5px 0 3px
+}
+.mission-panel p{
+ color:var(--gris2);font-size:.61rem;line-height:1.4
+}
+.target-label{
+ font-size:.56rem;color:var(--gris2);margin-top:12px
+}
+.target{
+ width:64px;height:64px;margin:5px auto;
+ display:grid;place-items:center;
+ background:#fff;border:2px solid #D9E6DC;
+ border-radius:13px;
+ color:var(--azul);font-size:2rem;font-weight:900;
+ box-shadow:0 5px 15px rgba(15,44,89,.05)
+}
+.sound-btn{
+ margin:5px auto 0;border:1px solid #D7DEE4;
+ background:#fff;color:var(--azul);
+ border-radius:18px;padding:6px 9px;
+ font-size:.55rem;font-weight:800
+}
+
+/* TABLERO */
+.play-area{
+ min-width:0;min-height:0;
+ display:flex;flex-direction:column;
+ padding:10px 14px
+}
+.play-top{
+ display:flex;align-items:center;justify-content:space-between;
+ min-height:28px;gap:10px;flex-shrink:0
+}
+.play-top strong{font-size:.67rem;color:var(--azul)}
+.feedback{
+ font-size:.63rem;color:#64816C;
+ font-weight:800;text-align:right
+}
+.board{
+ flex:1;min-height:0;
+ display:grid;
+ gap:clamp(4px,1vh,8px);
+ align-content:center;
+ justify-content:center
+}
+.item{
+ border:1px solid #E4E8EB;
+ background:#FAFBFC;
+ border-radius:10px;
+ display:grid;place-items:center;
+ color:var(--azul);font-weight:900;
+ font-size:clamp(1.05rem,3.5vh,1.65rem);
+ min-width:0;min-height:0;
+ transition:.13s;
+ position:relative
+}
+.item:hover{background:#F0F5F2;transform:scale(1.035)}
+.item.correct{
+ background:#EAF5EC;border:2px solid var(--salvia);
+ transform:scale(.92)
+}
+.item.correct:after{
+ content:"✓";position:absolute;right:3px;top:3px;
+ width:16px;height:16px;border-radius:50%;
+ background:var(--salvia);color:#fff;
+ font-size:.55rem;display:grid;place-items:center
+}
 .item.wrong{animation:shake .25s}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
-@keyframes pop{0%{transform:scale(.7);opacity:0}70%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
-.feedback{height:38px;display:flex;justify-content:center;align-items:center;color:#66856E;font-size:.72rem;font-weight:800;text-align:center}
-.complete{display:none;text-align:center;padding:3px 10px 15px}.complete.show{display:block}
-.complete .party{font-size:2rem;animation:pop .35s}
-.complete h3{color:var(--azul);font-size:.9rem;margin-top:3px}
-.complete p{color:var(--gris2);font-size:.62rem;margin-top:3px}
-.next-btn{margin-top:9px;border:0;background:var(--azul);color:white;border-radius:7px;padding:9px 17px;font-size:.68rem;font-weight:900}
+@keyframes shake{
+ 0%,100%{transform:translateX(0)}
+ 25%{transform:translateX(-4px)}
+ 75%{transform:translateX(4px)}
+}
+
+/* MISIÓN SUPERADA */
+.mission-complete{
+ position:absolute;inset:0;
+ background:rgba(15,44,89,.15);
+ backdrop-filter:blur(3px);
+ display:none;align-items:center;justify-content:center;
+ z-index:20
+}
+.mission-complete.show{display:flex}
+.mini-modal{
+ width:min(330px,90%);
+ background:#fff;border-radius:16px;
+ padding:22px;text-align:center;
+ box-shadow:0 20px 60px rgba(15,44,89,.2)
+}
+.mini-modal .party{font-size:2rem}
+.mini-modal h3{color:var(--azul);font-size:1rem;margin:5px 0}
+.mini-modal p{font-size:.64rem;color:var(--gris2)}
+.next-btn{
+ border:0;background:var(--azul);color:#fff;
+ border-radius:8px;padding:9px 17px;
+ margin-top:11px;font-size:.65rem;font-weight:900
+}
 
 /* RESULTADO */
-.result{max-width:720px;margin:auto}
-.result-card{background:#fff;border:1px solid var(--borde);border-radius:15px;overflow:hidden}
-.result-head{text-align:center;padding:23px 18px 17px}
-.result-head .cup{font-size:2.6rem}.result-head h2{color:var(--azul);font-size:1.3rem;margin-top:3px}
-.result-head p{color:var(--gris2);font-size:.7rem;margin-top:4px}
-.big-score{font-size:2rem;color:var(--azul);font-weight:900;margin-top:10px}
-.result-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--borde);border-bottom:1px solid var(--borde)}
-.result-data{text-align:center;padding:12px 5px;border-right:1px solid var(--borde)}
-.result-data:last-child{border:0}.result-data strong{display:block;color:var(--azul);font-size:.9rem}.result-data span{color:var(--gris2);font-size:.54rem}
-.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;padding:14px}
-.action{border-radius:7px;padding:10px 5px;font-size:.65rem;font-weight:800;text-align:center}
-.again{border:0;background:var(--azul);color:#fff}.register{border:0;background:var(--salvia);color:#fff}
+.result-screen{align-items:center;justify-content:center}
+.result-card{
+ width:min(650px,100%);
+ background:#fff;border:1px solid var(--borde);
+ border-radius:18px;padding:22px;text-align:center
+}
+.cup{font-size:2.4rem}
+.result-card h2{color:var(--azul);font-size:1.25rem;margin:4px 0}
+.result-card>p{font-size:.66rem;color:var(--gris2)}
+.final-score{
+ color:var(--azul);font-size:1.7rem;
+ font-weight:900;margin:10px 0
+}
+.result-grid{
+ display:grid;grid-template-columns:repeat(4,1fr);
+ border:1px solid var(--borde);border-radius:10px;
+ overflow:hidden
+}
+.result-data{padding:10px 4px;border-right:1px solid var(--borde)}
+.result-data:last-child{border:0}
+.result-data strong{display:block;color:var(--azul);font-size:.85rem}
+.result-data span{font-size:.49rem;color:var(--gris2)}
+.result-actions{
+ display:grid;grid-template-columns:repeat(3,1fr);
+ gap:7px;margin-top:12px
+}
+.result-actions button,.result-actions a{
+ border-radius:8px;padding:9px 5px;
+ font-size:.6rem;font-weight:900
+}
+.again{border:0;background:var(--azul);color:#fff}
+.register{border:0;background:var(--salvia);color:#fff}
 .return{border:1px solid var(--borde);background:#fff;color:var(--azul)}
 
-/* REGISTRO */
-.record{display:none;border-top:1px solid var(--borde);padding:18px}.record.show{display:block}
-.record h3{color:var(--azul);font-size:.95rem}.record>p{color:var(--gris2);font-size:.63rem;margin:4px 0 13px}
-.privacy{padding:8px 10px;background:var(--salvia2);border-radius:7px;color:#587361;font-size:.6rem;margin-bottom:12px}
-.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.form-field.full{grid-column:1/-1}
-.form-field label{display:block;color:var(--azul);font-size:.62rem;font-weight:800;margin-bottom:4px}
-.form-field input,.form-field select,.form-field textarea{width:100%;border:1px solid var(--borde);border-radius:7px;padding:9px;background:#fff;color:var(--gris)}
-.form-field textarea{min-height:65px;resize:vertical}
-.auto{min-height:35px;padding:9px;background:#F8F9FA;border:1px solid var(--borde);border-radius:7px;font-size:.67rem;line-height:1.45}
-
-/* SUGERENCIAS */
-.suggestion-box{background:#F7FAF7;border:1px solid #DCE8DF;border-radius:10px;padding:11px}
-.suggestion-intro{font-size:.61rem;color:#607367;margin-bottom:8px;line-height:1.4}
-.suggestion{display:flex;gap:8px;align-items:flex-start;background:#fff;border:1px solid #E2E9E4;border-radius:8px;padding:9px;margin-top:6px}
-.suggestion input{width:auto;margin-top:2px}
-.suggestion label{font-size:.64rem!important;color:var(--gris)!important;font-weight:400!important;line-height:1.4;margin:0!important}
-.refresh-btn{border:0;background:transparent;color:var(--azul);font-size:.61rem;font-weight:800;margin-top:9px;padding:3px 0}
-
-.record-actions{display:flex;gap:8px;margin-top:13px}
-.print{border:0;background:var(--azul);color:#fff;border-radius:7px;padding:10px 15px;font-size:.66rem;font-weight:800}
-.close-record{border:1px solid var(--borde);background:#fff;color:var(--azul);border-radius:7px;padding:10px 15px;font-size:.66rem;font-weight:800}
-.note{margin-top:11px;font-size:.58rem;line-height:1.4;color:var(--gris2)}
-
-@media(max-width:650px){
- .levels{grid-template-columns:1fr}.topbar{display:block}.game-stats{margin-top:8px}.game-stat{flex:1}
- .item{min-height:45px;font-size:1.3rem}.result-grid{grid-template-columns:repeat(2,1fr)}
- .result-data:nth-child(2){border-right:0}.actions{grid-template-columns:1fr}.form-grid{grid-template-columns:1fr}
- .form-field.full{grid-column:auto}
+/* REGISTRO MODAL */
+.modal-overlay{
+ position:fixed;inset:0;
+ background:rgba(22,34,48,.45);
+ backdrop-filter:blur(4px);
+ z-index:100;
+ display:none;
+ align-items:center;justify-content:center;
+ padding:12px
 }
+.modal-overlay.show{display:flex}
+.record-modal{
+ width:min(820px,96vw);
+ height:min(570px,88vh);
+ background:#fff;border-radius:17px;
+ box-shadow:0 25px 70px rgba(0,0,0,.22);
+ overflow:hidden;
+ display:flex;flex-direction:column
+}
+.modal-head{
+ height:54px;padding:0 16px;
+ display:flex;align-items:center;
+ justify-content:space-between;
+ border-bottom:1px solid var(--borde);
+ flex-shrink:0
+}
+.modal-head h2{color:var(--azul);font-size:.9rem}
+.modal-head p{font-size:.53rem;color:var(--gris2);margin-top:2px}
+.close-x{
+ border:0;background:#F1F3F5;
+ width:30px;height:30px;border-radius:50%;
+ color:var(--azul);font-weight:900
+}
+.tabs{
+ display:grid;grid-template-columns:repeat(4,1fr);
+ border-bottom:1px solid var(--borde);
+ flex-shrink:0
+}
+.tab{
+ border:0;background:#fff;color:var(--gris2);
+ padding:10px 5px;font-size:.6rem;font-weight:800
+}
+.tab.active{
+ color:var(--azul);
+ background:var(--salvia-claro);
+ box-shadow:inset 0 -2px 0 var(--salvia)
+}
+.tab-content{
+ flex:1;min-height:0;padding:14px 16px;
+ overflow:hidden
+}
+.tab-panel{display:none;height:100%}
+.tab-panel.active{display:block}
+.panel-title{
+ color:var(--azul);font-size:.78rem;font-weight:900;
+ margin-bottom:9px
+}
+.privacy{
+ background:var(--salvia-claro);
+ color:#587361;padding:7px 9px;
+ border-radius:7px;font-size:.55rem;margin-bottom:9px
+}
+.form-grid{
+ display:grid;grid-template-columns:1fr 1fr;
+ gap:8px
+}
+.field label{
+ display:block;color:var(--azul);
+ font-size:.55rem;font-weight:800;margin-bottom:3px
+}
+.field input,.field select,.field textarea{
+ width:100%;border:1px solid var(--borde);
+ border-radius:7px;padding:7px 8px;
+ background:#fff;color:var(--gris);font-size:.63rem
+}
+.field textarea{height:62px;resize:none}
+.full{grid-column:1/-1}
+.auto{
+ background:#F7F9FA;border:1px solid var(--borde);
+ border-radius:7px;padding:7px 8px;
+ font-size:.61rem;line-height:1.4
+}
+
+/* DESEMPEÑO */
+.performance-grid{
+ display:grid;grid-template-columns:repeat(4,1fr);
+ gap:7px;margin-bottom:10px
+}
+.performance-box{
+ border:1px solid var(--borde);
+ border-radius:9px;padding:9px;text-align:center
+}
+.performance-box strong{
+ display:block;color:var(--azul);font-size:.9rem
+}
+.performance-box span{font-size:.49rem;color:var(--gris2)}
+.mission-list{
+ display:grid;grid-template-columns:1fr 1fr;
+ gap:6px
+}
+.mission-row{
+ border:1px solid var(--borde);border-radius:8px;
+ padding:7px;font-size:.58rem;line-height:1.35
+}
+.mission-row strong{color:var(--azul)}
+
+/* SEGUIMIENTO */
+.follow-layout{
+ display:grid;grid-template-columns:1.1fr .9fr;
+ gap:10px;height:calc(100% - 25px)
+}
+.suggestions{
+ background:#F7FAF7;border:1px solid #DCE8DF;
+ border-radius:10px;padding:9px
+}
+.suggestions>p{
+ font-size:.54rem;color:#607367;line-height:1.35;
+ margin-bottom:6px
+}
+.suggestion{
+ background:#fff;border:1px solid #E1E8E3;
+ border-radius:7px;padding:7px;margin-bottom:5px;
+ display:flex;gap:6px;align-items:flex-start
+}
+.suggestion label{
+ font-size:.56rem;line-height:1.35;cursor:pointer
+}
+.refresh{
+ border:0;background:transparent;color:var(--azul);
+ font-size:.55rem;font-weight:900
+}
+.follow-right textarea{
+ width:100%;height:95px;border:1px solid var(--borde);
+ border-radius:7px;padding:8px;resize:none;
+ font-size:.6rem
+}
+.follow-right label{
+ display:block;color:var(--azul);
+ font-size:.55rem;font-weight:900;margin-bottom:4px
+}
+.disclaimer{
+ font-size:.5rem;color:var(--gris2);
+ line-height:1.35;margin-top:7px
+}
+
+/* EVIDENCIA */
+.evidence{
+ border:1px solid var(--borde);border-radius:10px;
+ padding:12px;height:calc(100% - 36px);
+ font-size:.58rem;line-height:1.45
+}
+.evidence h3{
+ text-align:center;color:var(--azul);
+ font-size:.85rem;margin-bottom:8px
+}
+.evidence-grid{
+ display:grid;grid-template-columns:1fr 1fr;gap:5px 15px
+}
+.evidence-section{
+ margin-top:8px;padding-top:7px;border-top:1px solid var(--borde)
+}
+.modal-footer{
+ height:48px;border-top:1px solid var(--borde);
+ display:flex;align-items:center;justify-content:flex-end;
+ gap:7px;padding:0 15px;flex-shrink:0
+}
+.modal-footer button{
+ border-radius:7px;padding:8px 12px;
+ font-size:.57rem;font-weight:900
+}
+.print-btn{border:0;background:var(--azul);color:#fff}
+.close-btn{border:1px solid var(--borde);background:#fff;color:var(--azul)}
+
+@media(max-width:700px){
+ .game-card{grid-template-columns:140px 1fr}
+ .mission-panel{padding:8px}
+ .target{width:50px;height:50px;font-size:1.5rem}
+ .stats .stat{min-width:52px;padding:4px}
+ .mission-list{grid-template-columns:1fr}
+ .follow-layout{grid-template-columns:1fr}
+ .record-modal{height:92vh}
+}
+
+@media(max-width:520px){
+ header{height:48px}
+ .logo img{width:31px;height:31px}
+ .app{height:calc(100vh - 48px);padding:6px 0}
+ .game-header{align-items:flex-start}
+ .mission-name{font-size:.72rem}
+ .stat{min-width:45px!important;padding:4px 3px}
+ .stat small{font-size:.4rem}
+ .game-card{grid-template-columns:105px 1fr}
+ .mission-panel h2{font-size:.68rem}
+ .mission-panel p{display:none}
+ .scene-icon{font-size:1.45rem}
+ .target-label{margin-top:6px}
+ .target{width:43px;height:43px;font-size:1.25rem}
+ .sound-btn{font-size:0;width:34px;height:30px;padding:0}
+ .sound-btn:after{content:"🔊";font-size:.8rem}
+ .play-area{padding:6px}
+ .item{border-radius:7px}
+ .result-grid{grid-template-columns:repeat(2,1fr)}
+ .result-actions{grid-template-columns:1fr}
+ .levels{grid-template-columns:1fr}
+ .preview{margin:8px 0}
+ .tabs .tab{font-size:.5rem}
+ .form-grid{grid-template-columns:1fr 1fr}
+ .performance-grid{grid-template-columns:repeat(2,1fr)}
+}
+
 @media print{
- header,.result-head,.result-grid,.actions,.record-actions,.refresh-btn{display:none!important}
- body{background:#fff}main{width:100%;padding:0}.result-card{border:0}.record{display:block!important;border:0}
+ body{overflow:visible;background:#fff}
+ header,.app,.modal-head,.tabs,.modal-footer{display:none!important}
+ .modal-overlay{
+  display:block!important;position:static;
+  background:#fff;padding:0
+ }
+ .record-modal{
+  width:100%;height:auto;box-shadow:none;border-radius:0
+ }
+ .tab-content{padding:0;overflow:visible}
+ .tab-panel{display:none!important}
+ #evidencePanel{display:block!important}
+ .evidence{border:0;height:auto;font-size:10pt}
 }
 </style>
 </head>
 
 <body>
+
 <header>
  <div class="nav">
   <a href="index.html" class="logo">
@@ -145,74 +531,84 @@ main{width:min(900px,94%);margin:auto;padding:20px 0 35px}
  </div>
 </header>
 
-<main>
+<div class="app">
 
-<section id="startScreen" class="screen active">
- <div class="start">
+<!-- INICIO -->
+<section id="startScreen" class="screen start-screen active">
+ <div class="start-card">
   <span class="badge">🎯 ATENCIÓN · EXPLORACIÓN VISUAL</span>
   <h1>🔎 Búsqueda visual</h1>
-  <p>Supera 5 misiones diferentes buscando imágenes, letras y figuras entre distractores.</p>
+  <p>Completa cinco misiones buscando imágenes, letras y figuras entre diferentes distractores.</p>
 
   <div class="preview">
    <span>🐠</span><span>🦁</span><span>M</span><span>b</span><span>◆</span>
   </div>
 
-  <div class="setup">
-   <div class="setup-title">Selecciona la dificultad</div>
-   <div class="levels">
-    <button class="level selected" data-level="easy"><span>🌱</span><strong>Fácil</strong><small>Menos distractores</small></button>
-    <button class="level" data-level="medium"><span>⭐</span><strong>Medio</strong><small>Mayor búsqueda visual</small></button>
-    <button class="level" data-level="hard"><span>🚀</span><strong>Difícil</strong><small>Mayor semejanza visual</small></button>
-   </div>
-   <button id="startBtn" class="start-btn">▶ COMENZAR LAS MISIONES</button>
+  <div class="level-title">Selecciona la dificultad</div>
+  <div class="levels">
+   <button class="level selected" data-level="easy">
+    <span>🌱</span><strong>Fácil</strong><small>Menos distractores</small>
+   </button>
+   <button class="level" data-level="medium">
+    <span>⭐</span><strong>Medio</strong><small>Mayor búsqueda</small>
+   </button>
+   <button class="level" data-level="hard">
+    <span>🚀</span><strong>Difícil</strong><small>Estímulos semejantes</small>
+   </button>
   </div>
+
+  <button id="startBtn" class="start-btn">▶ COMENZAR LAS MISIONES</button>
  </div>
 </section>
 
-<section id="gameScreen" class="screen">
- <div class="topbar">
-  <div class="mission-info"><small id="missionNumber"></small><h2 id="missionName"></h2></div>
-  <div class="game-stats">
-   <div class="game-stat"><strong id="score">0</strong><span>⭐ PUNTOS</span></div>
-   <div class="game-stat"><strong id="streak">0</strong><span>🔥 RACHA</span></div>
-   <div class="game-stat"><strong id="timer">0:00</strong><span>⏱ TIEMPO</span></div>
+<!-- JUEGO -->
+<section id="gameScreen" class="screen game-screen">
+
+ <div class="game-header">
+  <div>
+   <div id="missionNumber" class="mission-label"></div>
+   <div id="missionName" class="mission-name"></div>
+  </div>
+
+  <div class="stats">
+   <div class="stat"><strong id="score">0</strong><small>⭐ PUNTOS</small></div>
+   <div class="stat"><strong id="streak">0</strong><small>🔥 RACHA</small></div>
+   <div class="stat"><strong id="timer">0:00</strong><small>⏱ TIEMPO</small></div>
   </div>
  </div>
 
  <div class="progress"><div id="progressBar"></div></div>
 
- <div class="scene">
-  <div id="sceneBanner" class="scene-banner ocean">
+ <div class="game-card">
+  <aside id="missionPanel" class="mission-panel ocean">
    <div id="sceneIcon" class="scene-icon"></div>
-   <h3 id="sceneTitle"></h3><p id="sceneDescription"></p>
-  </div>
+   <h2 id="sceneTitle"></h2>
+   <p id="sceneDescription"></p>
 
-  <div class="instruction">
-   <span class="instruction-text">Encuentra todos los</span>
-   <span id="targetDisplay" class="target"></span>
-   <button id="soundBtn" class="sound-btn">🔊 Escuchar la misión</button>
-  </div>
+   <div class="target-label">ENCUENTRA</div>
+   <div id="targetDisplay" class="target"></div>
+   <button id="soundBtn" class="sound-btn">🔊 Escuchar</button>
+  </aside>
 
-  <div class="board-wrap"><div id="board" class="board"></div></div>
-  <div id="feedback" class="feedback"></div>
-
-  <div id="complete" class="complete">
-   <div class="party">🎉✨</div>
-   <h3 id="completeTitle"></h3><p id="completeText"></p>
-   <button id="nextBtn" class="next-btn"></button>
+  <div class="play-area">
+   <div class="play-top">
+    <strong>Selecciona todos los iguales al modelo.</strong>
+    <div id="feedback" class="feedback"></div>
+   </div>
+   <div id="board" class="board"></div>
   </div>
  </div>
+
 </section>
 
-<section id="resultScreen" class="screen">
- <div class="result"><div class="result-card">
+<!-- RESULTADO -->
+<section id="resultScreen" class="screen result-screen">
+ <div class="result-card">
+  <div class="cup">🏆</div>
+  <h2>¡Completaste las 5 misiones!</h2>
+  <p>Resultado de esta actividad.</p>
 
-  <div class="result-head">
-   <div class="cup">🏆</div>
-   <h2>¡Completaste las 5 misiones!</h2>
-   <p>Terminaste el reto de búsqueda visual.</p>
-   <div id="finalScore" class="big-score"></div>
-  </div>
+  <div id="finalScore" class="final-score"></div>
 
   <div class="result-grid">
    <div class="result-data"><strong id="finalHits"></strong><span>ACIERTOS</span></div>
@@ -221,104 +617,202 @@ main{width:min(900px,94%);margin:auto;padding:20px 0 35px}
    <div class="result-data"><strong id="finalTime"></strong><span>TIEMPO</span></div>
   </div>
 
-  <div class="actions">
-   <button id="againBtn" class="action again">🔄 JUGAR OTRA VEZ</button>
-   <button id="registerBtn" class="action register">📋 REGISTRAR ESTA ACTIVIDAD</button>
-   <a href="estimulacion.html" class="action return">← VOLVER A ESTIMULACIÓN</a>
+  <div class="result-actions">
+   <button id="againBtn" class="again">🔄 JUGAR OTRA VEZ</button>
+   <button id="registerBtn" class="register">📋 REGISTRAR ACTIVIDAD</button>
+   <a href="estimulacion.html" class="return">← VOLVER A ESTIMULACIÓN</a>
+  </div>
+ </div>
+</section>
+
+</div>
+
+<!-- MENSAJE MISIÓN -->
+<div id="missionComplete" class="mission-complete">
+ <div class="mini-modal">
+  <div class="party">🎉✨</div>
+  <h3 id="completeTitle">¡Misión superada!</h3>
+  <p id="completeText"></p>
+  <button id="nextBtn" class="next-btn">SIGUIENTE MISIÓN →</button>
+ </div>
+</div>
+
+<!-- REGISTRO -->
+<div id="recordModal" class="modal-overlay">
+ <div class="record-modal">
+
+  <div class="modal-head">
+   <div>
+    <h2>📋 Registro de intervención</h2>
+    <p>Búsqueda visual · Evidencia y seguimiento</p>
+   </div>
+   <button id="closeX" class="close-x">×</button>
   </div>
 
-  <div id="record" class="record">
-   <h3>📋 Registro de intervención</h3>
-   <p>Documentación de la actividad realizada y orientación para el seguimiento.</p>
+  <div class="tabs">
+   <button class="tab active" data-tab="dataPanel">👤 Datos</button>
+   <button class="tab" data-tab="performancePanel">📊 Desempeño</button>
+   <button class="tab" data-tab="followPanel">💡 Seguimiento</button>
+   <button class="tab" data-tab="evidencePanel">🖨️ Evidencia</button>
+  </div>
 
-   <div class="privacy">🔒 Utilice únicamente las iniciales del estudiante. No introduzca nombres completos.</div>
+  <div class="tab-content">
 
-   <div class="form-grid">
-    <div class="form-field"><label>Iniciales</label><input type="text" maxlength="8" placeholder="Ej. A.M."></div>
-    <div class="form-field"><label>Curso / grado</label><input type="text" placeholder="Ej. 3.º Primaria"></div>
-    <div class="form-field"><label>Fecha</label><div id="recordDate" class="auto"></div></div>
-    <div class="form-field"><label>Nivel utilizado</label><div id="recordLevel" class="auto"></div></div>
-    <div class="form-field"><label>Área</label><div class="auto">Estimulación cognitiva para el aprendizaje</div></div>
-    <div class="form-field"><label>Actividad</label><div class="auto">Búsqueda visual · 5 misiones</div></div>
+   <!-- DATOS -->
+   <div id="dataPanel" class="tab-panel active">
+    <div class="panel-title">Datos de la intervención</div>
+    <div class="privacy">🔒 Utilice únicamente las iniciales del estudiante. No introduzca nombres completos.</div>
 
-    <div class="form-field full">
-     <label>Habilidades implicadas</label>
-     <div class="auto">Atención selectiva, exploración y discriminación visual. Las rondas 3 y 4 incorporan reconocimiento y discriminación visual de letras.</div>
-    </div>
+    <div class="form-grid">
+     <div class="field">
+      <label>Iniciales</label>
+      <input id="initials" maxlength="8" placeholder="Ej. A.M.">
+     </div>
 
-    <div class="form-field full"><label>Resultado</label><div id="recordResult" class="auto"></div></div>
+     <div class="field">
+      <label>Curso / grado</label>
+      <input id="grade" placeholder="Ej. 3.º Primaria">
+     </div>
 
-    <div class="form-field full">
-     <label>Desempeño por misión</label>
-     <div id="missionSummary" class="auto"></div>
-    </div>
+     <div class="field">
+      <label>Fecha</label>
+      <div id="recordDate" class="auto"></div>
+     </div>
 
-    <div class="form-field">
-     <label>Nivel de apoyo</label>
-     <select id="support">
-      <option value="independent">Independiente</option>
-      <option value="repeat">Consigna repetida</option>
-      <option value="occasional">Apoyo verbal ocasional</option>
-      <option value="frequent">Apoyo verbal frecuente</option>
-      <option value="model">Modelado</option>
-     </select>
-    </div>
+     <div class="field">
+      <label>Nivel utilizado</label>
+      <div id="recordLevel" class="auto"></div>
+     </div>
 
-    <div class="form-field">
-     <label>Respuesta ante la actividad</label>
-     <select id="response">
-      <option>Participación adecuada</option>
-      <option>Requirió redirección ocasional</option>
-      <option>Requirió redirección frecuente</option>
-      <option>Presentó dificultad para mantener la tarea</option>
-     </select>
-    </div>
+     <div class="field">
+      <label>Nivel de apoyo</label>
+      <select id="support">
+       <option value="independent">Independiente</option>
+       <option value="repeat">Consigna repetida</option>
+       <option value="occasional">Apoyo verbal ocasional</option>
+       <option value="frequent">Apoyo verbal frecuente</option>
+       <option value="model">Modelado</option>
+      </select>
+     </div>
 
-    <div class="form-field full">
-     <label>Observaciones</label>
-     <textarea placeholder="Registre aspectos relevantes observados durante la actividad."></textarea>
-    </div>
+     <div class="field">
+      <label>Respuesta ante la actividad</label>
+      <select id="response">
+       <option>Participación adecuada</option>
+       <option>Requirió redirección ocasional</option>
+       <option>Requirió redirección frecuente</option>
+       <option>Presentó dificultad para mantener la tarea</option>
+      </select>
+     </div>
 
-    <div class="form-field full">
-     <label>💡 Próxima acción / seguimiento</label>
-     <div class="suggestion-box">
-      <div class="suggestion-intro">
-       Sugerencias generadas a partir del desempeño observado. Seleccione las que considere pertinentes. Puede modificarlas antes de imprimir.
-      </div>
-      <div id="suggestions"></div>
-      <button id="refreshSuggestions" type="button" class="refresh-btn">↻ Ver otras sugerencias pertinentes</button>
+     <div class="field full">
+      <label>Observaciones</label>
+      <textarea id="observations" placeholder="Aspectos relevantes observados durante la actividad."></textarea>
      </div>
     </div>
+   </div>
 
-    <div class="form-field full">
-     <label>Próxima acción seleccionada / editada</label>
-     <textarea id="nextAction" placeholder="Seleccione una sugerencia arriba o escriba una acción diferente."></textarea>
+   <!-- DESEMPEÑO -->
+   <div id="performancePanel" class="tab-panel">
+    <div class="panel-title">Desempeño observado</div>
+
+    <div class="performance-grid">
+     <div class="performance-box"><strong id="pHits"></strong><span>ACIERTOS</span></div>
+     <div class="performance-box"><strong id="pErrors"></strong><span>ERRORES</span></div>
+     <div class="performance-box"><strong id="pPrecision"></strong><span>PRECISIÓN</span></div>
+     <div class="performance-box"><strong id="pTime"></strong><span>TIEMPO</span></div>
     </div>
 
-    <div class="form-field"><label>Responsable</label><input type="text" placeholder="Nombre o firma"></div>
-    <div class="form-field">
-     <label>Rol</label>
-     <select>
-      <option>Psicología escolar</option><option>Orientación</option><option>Docente</option><option>Psicopedagogía</option><option>Otro</option>
-     </select>
+    <div id="missionList" class="mission-list"></div>
+   </div>
+
+   <!-- SEGUIMIENTO -->
+   <div id="followPanel" class="tab-panel">
+    <div class="panel-title">Próxima acción / seguimiento</div>
+
+    <div class="follow-layout">
+     <div class="suggestions">
+      <p>Opciones generadas según el desempeño de esta actividad. Seleccione las que considere pertinentes.</p>
+      <div id="suggestions"></div>
+      <button id="refreshSuggestions" class="refresh">↻ Ver otras sugerencias pertinentes</button>
+     </div>
+
+     <div class="follow-right">
+      <label>Acción seleccionada / editada</label>
+      <textarea id="nextAction" placeholder="Seleccione una sugerencia o escriba su propia acción."></textarea>
+
+      <div class="disclaimer">
+       Las sugerencias sirven como orientación educativa y deben valorarse junto con la observación profesional y demás información disponible. Esta actividad aislada no constituye diagnóstico.
+      </div>
+     </div>
     </div>
    </div>
 
-   <div class="record-actions">
-    <button id="printBtn" class="print">🖨️ IMPRIMIR / GUARDAR PDF</button>
-    <button id="closeRecord" class="close-record">Cerrar registro</button>
+   <!-- EVIDENCIA -->
+   <div id="evidencePanel" class="tab-panel">
+    <div class="panel-title">Vista de evidencia</div>
+
+    <div class="evidence">
+     <h3>PROFE ORGANIZADO · REGISTRO DE INTERVENCIÓN</h3>
+
+     <div class="evidence-grid">
+      <div><strong>Iniciales:</strong> <span id="eInitials">—</span></div>
+      <div><strong>Curso:</strong> <span id="eGrade">—</span></div>
+      <div><strong>Fecha:</strong> <span id="eDate"></span></div>
+      <div><strong>Nivel:</strong> <span id="eLevel"></span></div>
+     </div>
+
+     <div class="evidence-section">
+      <strong>Área:</strong> Estimulación cognitiva para el aprendizaje<br>
+      <strong>Actividad:</strong> Búsqueda visual · 5 misiones<br>
+      <strong>Habilidades implicadas:</strong> Atención selectiva, exploración y discriminación visual. Las misiones de letras incorporan reconocimiento y discriminación visual de grafías.
+     </div>
+
+     <div class="evidence-section">
+      <strong>Resultado:</strong> <span id="eResult"></span><br>
+      <strong>Nivel de apoyo:</strong> <span id="eSupport"></span><br>
+      <strong>Respuesta:</strong> <span id="eResponse"></span>
+     </div>
+
+     <div class="evidence-section">
+      <strong>Observaciones:</strong><br>
+      <span id="eObservations">—</span>
+     </div>
+
+     <div class="evidence-section">
+      <strong>Próxima acción / seguimiento:</strong><br>
+      <span id="eNextAction">—</span>
+     </div>
+
+     <div class="evidence-section">
+      <strong>Responsable / firma:</strong> ______________________________
+     </div>
+    </div>
    </div>
 
-   <div class="note">Las sugerencias constituyen orientaciones para la continuidad educativa y deben ser valoradas por el profesional según el contexto y demás información disponible. El resultado de una actividad aislada no constituye diagnóstico.</div>
   </div>
 
- </div></div>
-</section>
-</main>
+  <div class="modal-footer">
+   <button id="closeRecord" class="close-btn">Cerrar</button>
+   <button id="printBtn" class="print-btn">🖨️ IMPRIMIR / GUARDAR PDF</button>
+  </div>
+
+ </div>
+</div>
 
 <script>
-let level="easy",missionIndex=0,score=0,hits=0,errors=0,streak=0,seconds=0,timerInterval=null,remaining=0,locked=false;
+let level="easy";
+let missionIndex=0;
+let score=0;
+let hits=0;
+let errors=0;
+let streak=0;
+let seconds=0;
+let timerInterval=null;
+let remaining=0;
+let locked=false;
 let missionResults=[];
+let suggestionOffset=0;
 
 const difficulty={
  easy:{total:16,targets:4,cols:4,name:"Fácil"},
@@ -327,265 +821,640 @@ const difficulty={
 };
 
 const missions=[
- {name:"Mundo submarino",icon:"🌊",title:"¡Explora el océano!",description:"Busca con atención entre los animales marinos.",scene:"ocean",target:"🐠",speak:"Encuentra todos los peces.",easy:["🐠","🐟","🐙","🦀","🐚"],medium:["🐠","🐟","🐡","🦑","🐙","🦀"],hard:["🐠","🐟","🐡","🦈","🐬","🐳"]},
- {name:"Safari de animales",icon:"🌿",title:"¡Misión en la selva!",description:"Encuentra el animal indicado.",scene:"jungle",target:"🦁",speak:"Encuentra todos los leones.",easy:["🦁","🐘","🦒","🐒","🦓"],medium:["🦁","🐯","🐆","🐘","🦒","🦓"],hard:["🦁","🐯","🐆","🐅","🐈","🐕"]},
- {name:"Planeta de las letras",icon:"🚀",title:"¡Planeta de las letras!",description:"Observa cada letra antes de responder.",scene:"letters",target:"M",speak:"Encuentra todas las letras eme.",easy:["M","A","S","L","P"],medium:["M","N","W","H","A","V"],hard:["M","N","W","H","V","Ñ"]},
- {name:"Detectives de letras",icon:"🔤",title:"¡Letras parecidas!",description:"Busca únicamente la letra indicada.",scene:"letters",target:"b",speak:"Encuentra todas las letras be minúscula.",easy:["b","d","a","p","o"],medium:["b","d","p","q","h","o"],hard:["b","d","p","q","h","g"]},
- {name:"Laboratorio visual",icon:"🔷",title:"¡Última misión!",description:"Distingue cuidadosamente las figuras.",scene:"shapes",target:"◆",speak:"Encuentra todos los rombos negros.",easy:["◆","◇","●","■","▲"],medium:["◆","◇","♦","■","●","◈"],hard:["◆","◇","♦","◈","⬥","◊"]}
+ {
+  name:"Mundo submarino",icon:"🌊",
+  title:"Explora el océano",
+  description:"Busca con atención entre los animales marinos.",
+  scene:"ocean",target:"🐠",
+  speak:"Encuentra todos los peces.",
+  easy:["🐠","🐟","🐙","🦀","🐚"],
+  medium:["🐠","🐟","🐡","🦑","🐙","🦀"],
+  hard:["🐠","🐟","🐡","🦈","🐬","🐳"]
+ },
+ {
+  name:"Safari de animales",icon:"🌿",
+  title:"Safari visual",
+  description:"Encuentra el animal indicado.",
+  scene:"jungle",target:"🦁",
+  speak:"Encuentra todos los leones.",
+  easy:["🦁","🐘","🦒","🐒","🦓"],
+  medium:["🦁","🐯","🐆","🐘","🦒","🦓"],
+  hard:["🦁","🐯","🐆","🐅","🐈","🐕"]
+ },
+ {
+  name:"Planeta de las letras",icon:"🚀",
+  title:"Planeta de las letras",
+  description:"Observa cada letra antes de responder.",
+  scene:"letters",target:"M",
+  speak:"Encuentra todas las letras eme.",
+  easy:["M","A","S","L","P"],
+  medium:["M","N","W","H","A","V"],
+  hard:["M","N","W","H","V","Ñ"]
+ },
+ {
+  name:"Detectives de letras",icon:"🔤",
+  title:"Letras parecidas",
+  description:"Busca únicamente la letra indicada.",
+  scene:"letters",target:"b",
+  speak:"Encuentra todas las letras be minúscula.",
+  easy:["b","d","a","p","o"],
+  medium:["b","d","p","q","h","o"],
+  hard:["b","d","p","q","h","g"]
+ },
+ {
+  name:"Laboratorio visual",icon:"🔷",
+  title:"Laboratorio visual",
+  description:"Distingue cuidadosamente las figuras.",
+  scene:"shapes",target:"◆",
+  speak:"Encuentra todos los rombos negros.",
+  easy:["◆","◇","●","■","▲"],
+  medium:["◆","◇","♦","■","●","◈"],
+  hard:["◆","◇","♦","◈","⬥","◊"]
+ }
 ];
 
-const screens={start:document.getElementById("startScreen"),game:document.getElementById("gameScreen"),result:document.getElementById("resultScreen")};
+const startScreen=document.getElementById("startScreen");
+const gameScreen=document.getElementById("gameScreen");
+const resultScreen=document.getElementById("resultScreen");
 
-document.querySelectorAll(".level").forEach(btn=>btn.onclick=()=>{
- document.querySelectorAll(".level").forEach(b=>b.classList.remove("selected"));
- btn.classList.add("selected");level=btn.dataset.level;
+document.querySelectorAll(".level").forEach(btn=>{
+ btn.onclick=()=>{
+  document.querySelectorAll(".level").forEach(x=>x.classList.remove("selected"));
+  btn.classList.add("selected");
+  level=btn.dataset.level;
+ };
 });
 
 document.getElementById("startBtn").onclick=startGame;
+document.getElementById("soundBtn").onclick=speakMission;
 document.getElementById("nextBtn").onclick=nextMission;
 document.getElementById("againBtn").onclick=restart;
-document.getElementById("soundBtn").onclick=speakMission;
 document.getElementById("registerBtn").onclick=openRecord;
-document.getElementById("printBtn").onclick=()=>window.print();
-document.getElementById("closeRecord").onclick=()=>document.getElementById("record").classList.remove("show");
-document.getElementById("refreshSuggestions").onclick=generateSuggestions;
-document.getElementById("support").onchange=generateSuggestions;
-document.getElementById("response").onchange=generateSuggestions;
+document.getElementById("closeX").onclick=closeRecord;
+document.getElementById("closeRecord").onclick=closeRecord;
+document.getElementById("printBtn").onclick=()=>{
+ updateEvidence();
+ window.print();
+};
 
-function showScreen(name){
- Object.values(screens).forEach(s=>s.classList.remove("active"));
- screens[name].classList.add("active");
- window.scrollTo({top:0,behavior:"smooth"});
+document.getElementById("refreshSuggestions").onclick=()=>{
+ suggestionOffset++;
+ generateSuggestions();
+};
+
+document.getElementById("support").onchange=()=>{
+ suggestionOffset=0;
+ generateSuggestions();
+ updateEvidence();
+};
+
+document.getElementById("response").onchange=()=>{
+ suggestionOffset=0;
+ generateSuggestions();
+ updateEvidence();
+};
+
+document.getElementById("initials").oninput=updateEvidence;
+document.getElementById("grade").oninput=updateEvidence;
+document.getElementById("observations").oninput=updateEvidence;
+document.getElementById("nextAction").oninput=updateEvidence;
+
+document.querySelectorAll(".tab").forEach(tab=>{
+ tab.onclick=()=>openTab(tab.dataset.tab);
+});
+
+function showScreen(screen){
+ [startScreen,gameScreen,resultScreen].forEach(x=>x.classList.remove("active"));
+ screen.classList.add("active");
 }
 
 function startGame(){
- missionIndex=0;score=0;hits=0;errors=0;streak=0;seconds=0;missionResults=[];
+ missionIndex=0;
+ score=0;
+ hits=0;
+ errors=0;
+ streak=0;
+ seconds=0;
+ missionResults=[];
+ suggestionOffset=0;
+
  clearInterval(timerInterval);
- timerInterval=setInterval(()=>{seconds++;document.getElementById("timer").textContent=formatTime(seconds)},1000);
- updateStats();showScreen("game");createMission();setTimeout(speakMission,450);
+ timerInterval=setInterval(()=>{
+  seconds++;
+  document.getElementById("timer").textContent=formatTime(seconds);
+ },1000);
+
+ updateStats();
+ showScreen(gameScreen);
+ createMission();
+ setTimeout(speakMission,400);
 }
 
 function createMission(){
  locked=false;
- const m=missions[missionIndex],c=difficulty[level];
- missionResults[missionIndex]={name:m.name,hits:0,errors:0,wrong:{}};
 
- document.getElementById("complete").classList.remove("show");
- document.getElementById("feedback").textContent="";
- document.getElementById("missionNumber").textContent=`MISIÓN ${missionIndex+1} DE 5`;
+ const m=missions[missionIndex];
+ const c=difficulty[level];
+
+ missionResults[missionIndex]={
+  name:m.name,
+  hits:0,
+  errors:0,
+  wrong:{}
+ };
+
+ document.getElementById("missionNumber").textContent=
+  `MISIÓN ${missionIndex+1} DE ${missions.length}`;
+
  document.getElementById("missionName").textContent=m.name;
  document.getElementById("sceneIcon").textContent=m.icon;
  document.getElementById("sceneTitle").textContent=m.title;
  document.getElementById("sceneDescription").textContent=m.description;
- document.getElementById("sceneBanner").className="scene-banner "+m.scene;
  document.getElementById("targetDisplay").textContent=m.target;
- document.getElementById("progressBar").style.width=`${missionIndex*20}%`;
+ document.getElementById("missionPanel").className="mission-panel "+m.scene;
+ document.getElementById("progressBar").style.width=
+  `${missionIndex/missions.length*100}%`;
 
- const board=document.getElementById("board");
- board.innerHTML="";board.style.gridTemplateColumns=`repeat(${c.cols},1fr)`;
+ document.getElementById("feedback").textContent="";
+
  remaining=c.targets;
 
  let items=Array(c.targets).fill(m.target);
  const distractors=m[level].filter(x=>x!==m.target);
- while(items.length<c.total)items.push(distractors[Math.floor(Math.random()*distractors.length)]);
+
+ while(items.length<c.total){
+  items.push(
+   distractors[Math.floor(Math.random()*distractors.length)]
+  );
+ }
+
  shuffle(items);
 
+ const board=document.getElementById("board");
+ board.innerHTML="";
+ board.style.gridTemplateColumns=`repeat(${c.cols},1fr)`;
+ board.style.gridTemplateRows=`repeat(${Math.ceil(c.total/c.cols)},1fr)`;
+
  items.forEach(value=>{
-  const b=document.createElement("button");b.className="item";b.textContent=value;
-  b.onclick=()=>chooseItem(b,value,m.target);
-  board.appendChild(b);
+  const btn=document.createElement("button");
+  btn.className="item";
+  btn.textContent=value;
+  btn.onclick=()=>chooseItem(btn,value,m.target);
+  board.appendChild(btn);
  });
 }
 
 function chooseItem(btn,value,target){
- if(locked||btn.disabled)return;
+ if(locked || btn.disabled)return;
+
  const r=missionResults[missionIndex];
 
  if(value===target){
-  btn.disabled=true;btn.classList.add("correct");
-  hits++;r.hits++;streak++;remaining--;score+=10+Math.min(streak,5)*2;
-  const msg=["¡Lo encontraste! ✨","¡Muy bien! ⭐","¡Excelente observación! 🎯","¡Sigue así! 🌟"];
-  document.getElementById("feedback").textContent=msg[Math.floor(Math.random()*msg.length)];
+  btn.disabled=true;
+  btn.classList.add("correct");
+
+  hits++;
+  r.hits++;
+  streak++;
+  remaining--;
+
+  score+=10+Math.min(streak,5)*2;
+
+  const messages=[
+   "¡Muy bien! ✨",
+   "¡Lo encontraste! 🎯",
+   "¡Excelente! ⭐",
+   "¡Sigue así! 🌟"
+  ];
+
+  document.getElementById("feedback").textContent=
+   messages[Math.floor(Math.random()*messages.length)];
+
   playTone(650,.07);
+
   if(remaining===0)completeMission();
+
  }else{
-  errors++;r.errors++;streak=0;
+  errors++;
+  r.errors++;
+  streak=0;
+
   r.wrong[value]=(r.wrong[value]||0)+1;
-  btn.classList.add("wrong");setTimeout(()=>btn.classList.remove("wrong"),280);
-  const msg=["Mira otra vez 👀","Observa con atención 🔎","Compara con el modelo.","Inténtalo nuevamente 🌱"];
-  document.getElementById("feedback").textContent=msg[Math.floor(Math.random()*msg.length)];
+
+  btn.classList.add("wrong");
+  setTimeout(()=>btn.classList.remove("wrong"),260);
+
+  const messages=[
+   "Mira otra vez 👀",
+   "Compara con el modelo 🔎",
+   "Observa con atención.",
+   "Inténtalo nuevamente 🌱"
+  ];
+
+  document.getElementById("feedback").textContent=
+   messages[Math.floor(Math.random()*messages.length)];
+
   playTone(230,.05);
  }
+
  updateStats();
 }
 
 function completeMission(){
- locked=true;score+=25;updateStats();
- document.getElementById("progressBar").style.width=`${(missionIndex+1)*20}%`;
- document.getElementById("feedback").textContent="";
- const last=missionIndex===4;
- document.getElementById("completeTitle").textContent=last?"¡Superaste el reto final!":"¡Misión superada!";
- document.getElementById("completeText").textContent=last?"Completaste las cinco misiones.":"Encontraste todos los objetivos.";
- document.getElementById("nextBtn").textContent=last?"VER MIS RESULTADOS 🏆":"SIGUIENTE MISIÓN →";
- document.getElementById("complete").classList.add("show");celebrationSound();
+ locked=true;
+ score+=25;
+ updateStats();
+
+ document.getElementById("progressBar").style.width=
+  `${(missionIndex+1)/missions.length*100}%`;
+
+ const last=missionIndex===missions.length-1;
+
+ document.getElementById("completeTitle").textContent=
+  last ? "¡Reto completado!" : "¡Misión superada!";
+
+ document.getElementById("completeText").textContent=
+  last
+   ? "Has completado las cinco misiones."
+   : "Encontraste todos los estímulos objetivo.";
+
+ document.getElementById("nextBtn").textContent=
+  last ? "VER RESULTADOS 🏆" : "SIGUIENTE MISIÓN →";
+
+ document.getElementById("missionComplete").classList.add("show");
+
+ celebrationSound();
 }
 
 function nextMission(){
- if(missionIndex<4){missionIndex++;createMission();setTimeout(speakMission,350)}
- else finishGame();
+ document.getElementById("missionComplete").classList.remove("show");
+
+ if(missionIndex<missions.length-1){
+  missionIndex++;
+  createMission();
+  setTimeout(speakMission,300);
+ }else{
+  finishGame();
+ }
 }
 
 function finishGame(){
  clearInterval(timerInterval);
- const precision=Math.round(hits/(hits+errors)*100);
+
+ const precision=getPrecision();
+
  document.getElementById("finalScore").textContent=score+" ⭐";
  document.getElementById("finalHits").textContent=hits;
  document.getElementById("finalErrors").textContent=errors;
  document.getElementById("finalPrecision").textContent=precision+"%";
  document.getElementById("finalTime").textContent=formatTime(seconds);
- document.getElementById("record").classList.remove("show");
- showScreen("result");
+
+ showScreen(resultScreen);
 }
 
 function openRecord(){
- const precision=Math.round(hits/(hits+errors)*100);
- document.getElementById("recordDate").textContent=new Date().toLocaleDateString("es-DO");
- document.getElementById("recordLevel").textContent=difficulty[level].name;
- document.getElementById("recordResult").textContent=`${hits} aciertos · ${errors} errores · ${precision}% de precisión · ${formatTime(seconds)}`;
-
- document.getElementById("missionSummary").innerHTML=missionResults.map((r,i)=>{
-  const wrong=Object.entries(r.wrong).sort((a,b)=>b[1]-a[1]).map(x=>`${x[0]} (${x[1]})`).join(", ");
-  return `<strong>${i+1}. ${r.name}:</strong> ${r.errors} error${r.errors===1?"":"es"}${wrong?` · Distractores seleccionados: ${wrong}`:""}`
- }).join("<br>");
-
- generateSuggestions();
- document.getElementById("record").classList.add("show");
- setTimeout(()=>document.getElementById("record").scrollIntoView({behavior:"smooth"}),100);
+ fillRecord();
+ openTab("dataPanel");
+ document.getElementById("recordModal").classList.add("show");
 }
 
-function generateSuggestions(){
- const precision=Math.round(hits/(hits+errors)*100);
- const letterErrors=(missionResults[2]?.errors||0)+(missionResults[3]?.errors||0);
- const visualErrors=(missionResults[0]?.errors||0)+(missionResults[1]?.errors||0)+(missionResults[4]?.errors||0);
+function closeRecord(){
+ document.getElementById("recordModal").classList.remove("show");
+}
+
+function openTab(id){
+ document.querySelectorAll(".tab").forEach(x=>{
+  x.classList.toggle("active",x.dataset.tab===id);
+ });
+
+ document.querySelectorAll(".tab-panel").forEach(x=>{
+  x.classList.toggle("active",x.id===id);
+ });
+
+ if(id==="evidencePanel")updateEvidence();
+}
+
+function fillRecord(){
+ const precision=getPrecision();
+
+ document.getElementById("recordDate").textContent=
+  new Date().toLocaleDateString("es-DO");
+
+ document.getElementById("recordLevel").textContent=
+  difficulty[level].name;
+
+ document.getElementById("pHits").textContent=hits;
+ document.getElementById("pErrors").textContent=errors;
+ document.getElementById("pPrecision").textContent=precision+"%";
+ document.getElementById("pTime").textContent=formatTime(seconds);
+
+ const list=document.getElementById("missionList");
+ list.innerHTML="";
+
+ missionResults.forEach((r,i)=>{
+  const wrong=Object.entries(r.wrong)
+   .sort((a,b)=>b[1]-a[1])
+   .map(([stimulus,count])=>`${stimulus} (${count})`)
+   .join(", ");
+
+  const div=document.createElement("div");
+  div.className="mission-row";
+
+  div.innerHTML=
+   `<strong>${i+1}. ${r.name}</strong><br>
+    ${r.hits} aciertos · ${r.errors} error${r.errors===1?"":"es"}
+    ${wrong?`<br>Seleccionó también: ${wrong}`:""}`;
+
+  list.appendChild(div);
+ });
+
+ generateSuggestions();
+ updateEvidence();
+}
+
+function getSuggestionPool(){
+ const precision=getPrecision();
+ const m1=missionResults[0]?.errors||0;
+ const m2=missionResults[1]?.errors||0;
+ const m3=missionResults[2]?.errors||0;
+ const m4=missionResults[3]?.errors||0;
+ const m5=missionResults[4]?.errors||0;
+
  const support=document.getElementById("support").value;
  const response=document.getElementById("response").value;
 
  let pool=[];
 
- if(letterErrors>=3){
+ /* LETRAS */
+ if(m3>=2){
   pool.push(
-   "Incorporar actividades breves de discriminación visual de grafías, progresando desde letras claramente diferentes hacia pares visualmente semejantes.",
-   "Trabajar comparación de letras por rasgos visuales —orientación, dirección y forma— antes de aumentar la cantidad de distractores.",
-   "Proponer búsquedas de una letra objetivo en palabras, tarjetas o pequeños conjuntos, favoreciendo una exploración ordenada.",
-   "Alternar actividades de reconocimiento de letras con tareas de clasificación de grafías iguales y diferentes."
+   "Realizar búsquedas de una letra objetivo en conjuntos pequeños, aumentando gradualmente la semejanza entre los distractores.",
+   "Trabajar comparación visual de grafías atendiendo a sus rasgos de forma y orientación antes de aumentar la cantidad de estímulos.",
+   "Incorporar clasificación de letras iguales y diferentes utilizando primero contrastes claros y luego grafías más semejantes."
   );
  }
 
- if((missionResults[3]?.errors||0)>=2){
+ if(m4>=2){
   pool.push(
-   "Reforzar la diferenciación visual de letras semejantes como b/d y p/q mediante comparación guiada y claves visuales, evitando trabajar demasiados pares simultáneamente.",
-   "Presentar pares de grafías semejantes en conjuntos pequeños y solicitar primero comparar sus rasgos antes de realizar nuevas tareas de búsqueda."
+   "Trabajar de forma gradual la discriminación visual de grafías semejantes como b/d y p/q mediante comparación guiada.",
+   "Presentar inicialmente dos grafías semejantes por vez y solicitar que observe sus diferencias antes de realizar una nueva búsqueda.",
+   "Utilizar actividades breves de emparejamiento y clasificación de letras semejantes, evitando introducir varios pares de confusión simultáneamente."
   );
  }
 
- if(visualErrors>=3){
+ /* FORMAS */
+ if(m5>=2){
   pool.push(
-   "Continuar con actividades de exploración visual utilizando una estrategia organizada de búsqueda, por ejemplo de izquierda a derecha y de arriba hacia abajo.",
-   "Trabajar comparación y clasificación de estímulos semejantes antes de incrementar la densidad visual de las tareas.",
-   "Incorporar actividades de localizar diferencias y emparejar estímulos visuales, aumentando gradualmente su semejanza."
+   "Incorporar tareas de comparación y clasificación de figuras atendiendo a forma, orientación y detalles visuales.",
+   "Practicar con pares de figuras semejantes antes de aumentar la cantidad de distractores visuales.",
+   "Proponer actividades de localizar diferencias entre figuras, aumentando progresivamente su semejanza."
   );
  }
 
+ /* BÚSQUEDA CON IMÁGENES */
+ if(m1+m2>=3){
+  pool.push(
+   "Modelar una estrategia de exploración visual organizada, recorriendo los estímulos de izquierda a derecha y de arriba hacia abajo.",
+   "Reducir inicialmente la cantidad de elementos y aumentar progresivamente la densidad visual conforme disminuyan las selecciones incorrectas.",
+   "Incorporar actividades de búsqueda con imágenes variadas para observar si mantiene una estrategia organizada ante material novedoso."
+  );
+ }
+
+ /* PRECISIÓN ALTA */
  if(precision>=90){
   pool.push(
-   level==="easy"?"Aumentar gradualmente la cantidad o semejanza de los distractores, manteniendo la precisión antes de priorizar la velocidad.":"Variar el criterio de búsqueda incorporando actividades que requieran identificar, mantener y posteriormente cambiar el estímulo objetivo.",
-   "Mantener el nivel de precisión mediante retos nuevos y variados, evitando repetir exactamente la misma configuración de estímulos.",
-   "Introducir progresivamente tareas de búsqueda con dos criterios visuales, comprobando primero que la consigna simple se mantiene de forma independiente."
+   "Aumentar gradualmente una sola variable de dificultad —cantidad, semejanza o cambio de criterio— manteniendo la precisión.",
+   "Presentar una actividad similar con estímulos nuevos para observar si la estrategia de búsqueda se mantiene de manera independiente.",
+   "Introducir progresivamente tareas en las que el estímulo objetivo cambie durante la actividad para favorecer flexibilidad en la búsqueda.",
+   "Combinar búsqueda visual con una breve demanda de memoria, mostrando primero el objetivo y retirándolo antes de iniciar la búsqueda."
   );
  }
 
+ /* PRECISIÓN MEDIA */
+ if(precision>=75 && precision<90){
+  pool.push(
+   "Mantener un nivel de dificultad semejante utilizando estímulos nuevos y priorizando precisión antes de aumentar la velocidad.",
+   "Favorecer una revisión breve antes de cada selección y observar si disminuyen los errores en el siguiente intento.",
+   "Repetir la habilidad con una configuración diferente para comprobar si el desempeño se mantiene sin depender del material conocido."
+  );
+ }
+
+ /* PRECISIÓN BAJA */
  if(precision<75){
   pool.push(
-   "Reducir temporalmente la cantidad de distractores y favorecer la comparación con el modelo antes de cada selección.",
-   "Mantener actividades breves y estructuradas, priorizando respuestas precisas antes de aumentar la velocidad o complejidad.",
-   "Practicar con conjuntos visuales pequeños y aumentar progresivamente el número de elementos conforme disminuyan las selecciones incorrectas."
+   "Reducir temporalmente la cantidad de distractores y favorecer la comparación con el modelo antes de cada respuesta.",
+   "Utilizar conjuntos visuales pequeños y aumentar gradualmente el número de elementos conforme disminuyan las selecciones incorrectas.",
+   "Mantener tareas breves y estructuradas, priorizando precisión y comprensión de la consigna antes de aumentar la complejidad."
   );
  }
 
- if(support==="frequent"||support==="model"){
+ /* APOYO */
+ if(support==="repeat"){
   pool.push(
-   "Mantener consignas breves y una tarea por vez, disminuyendo gradualmente las ayudas a medida que el estudiante comprende la estrategia de búsqueda.",
-   "Modelar inicialmente una estrategia organizada de exploración y retirar progresivamente el apoyo verbal en los siguientes intentos."
+   "Presentar consignas breves y comprobar su comprensión antes de iniciar, observando si en el siguiente intento requiere nuevamente repetición."
   );
  }
 
- if(support==="independent"&&precision>=85){
+ if(support==="occasional"){
   pool.push(
-   "Mantener oportunidades de resolución independiente e incrementar de forma gradual únicamente una variable de dificultad a la vez.",
-   "Proponer una actividad similar con estímulos nuevos para comprobar si la estrategia de búsqueda se mantiene sin apoyo."
+   "Mantener apoyos verbales puntuales y retirarlos gradualmente para favorecer una ejecución cada vez más independiente."
   );
  }
 
- if(response.includes("redirección frecuente")||response.includes("dificultad")){
+ if(support==="frequent" || support==="model"){
   pool.push(
-   "Organizar el próximo ejercicio en periodos breves con una meta visible por tramo, incorporando pausas cortas cuando sea necesario.",
-   "Reducir inicialmente la extensión de la tarea y reforzar el retorno autónomo a la consigna antes de prolongar el tiempo de trabajo."
+   "Modelar inicialmente una estrategia organizada de búsqueda y retirar progresivamente la ayuda durante los siguientes intentos.",
+   "Dividir la actividad en metas breves y ofrecer una consigna por vez, reduciendo gradualmente el apoyo cuando la estrategia se mantenga."
   );
  }
 
- if(pool.length<4){
+ /* RESPUESTA */
+ if(response.includes("redirección frecuente")){
   pool.push(
-   "Utilizar estímulos diferentes en el próximo encuentro para observar si el desempeño se mantiene ante material novedoso.",
-   "Observar en la próxima actividad la estrategia espontánea de exploración y registrar si mantiene un recorrido visual organizado.",
-   "Combinar una tarea conocida con una variante ligeramente más compleja para valorar la respuesta ante el aumento gradual de demanda."
+   "Organizar la próxima actividad en periodos breves con una meta visible por tramo y observar la cantidad de redirecciones necesarias.",
+   "Reducir inicialmente la extensión de la tarea y favorecer el retorno a la consigna antes de aumentar el tiempo de trabajo."
   );
  }
 
- pool=[...new Set(pool)];
+ if(response.includes("dificultad para mantener")){
+  pool.push(
+   "Utilizar actividades breves con inicio y final claramente visibles, ampliando progresivamente el tiempo según la respuesta observada.",
+   "Alternar pequeños periodos de búsqueda con pausas breves y registrar si mejora la permanencia en la tarea."
+  );
+ }
+
+ if(support==="independent" && precision>=85){
+  pool.push(
+   "Mantener oportunidades de resolución independiente e incrementar únicamente una variable de dificultad a la vez.",
+   "Variar los estímulos en el próximo encuentro para comprobar si la estrategia se generaliza sin apoyo."
+  );
+ }
+
+ /* RESPALDO */
+ pool.push(
+  "Observar en una próxima actividad si mantiene un recorrido visual organizado ante estímulos diferentes.",
+  "Combinar una tarea conocida con una variante ligeramente más compleja y registrar cómo responde al cambio.",
+  "Comparar el desempeño en una actividad posterior con estímulos distintos antes de decidir un aumento adicional de dificultad."
+ );
+
+ return [...new Set(pool)];
+}
+
+function generateSuggestions(){
+ let pool=getSuggestionPool();
+
  shuffle(pool);
+
+ if(suggestionOffset>0){
+  for(let i=0;i<suggestionOffset;i++){
+   pool.push(pool.shift());
+  }
+ }
 
  const chosen=pool.slice(0,3);
  const box=document.getElementById("suggestions");
  box.innerHTML="";
 
  chosen.forEach((text,i)=>{
-  const div=document.createElement("div");div.className="suggestion";
-  div.innerHTML=`<input type="checkbox" id="s${i}"><label for="s${i}">${text}</label>`;
-  const check=div.querySelector("input");
-  check.onchange=updateNextAction;
+  const div=document.createElement("div");
+  div.className="suggestion";
+
+  const check=document.createElement("input");
+  check.type="checkbox";
+  check.id="suggestion"+i;
+
+  const label=document.createElement("label");
+  label.htmlFor=check.id;
+  label.textContent=text;
+
+  check.onchange=updateSelectedSuggestions;
+
+  div.appendChild(check);
+  div.appendChild(label);
   box.appendChild(div);
  });
 }
 
-function updateNextAction(){
- const selected=[...document.querySelectorAll(".suggestion input:checked")].map(x=>x.nextElementSibling.textContent);
- document.getElementById("nextAction").value=selected.join("\n\n");
+function updateSelectedSuggestions(){
+ const selected=[
+  ...document.querySelectorAll("#suggestions input:checked")
+ ].map(x=>x.nextElementSibling.textContent);
+
+ document.getElementById("nextAction").value=
+  selected.join("\n\n");
+
+ updateEvidence();
 }
 
-function restart(){clearInterval(timerInterval);showScreen("start")}
-function updateStats(){document.getElementById("score").textContent=score;document.getElementById("streak").textContent=streak;document.getElementById("timer").textContent=formatTime(seconds)}
-function formatTime(s){return `${Math.floor(s/60)}:${String(s%60).padStart(2,"0")}`}
-function shuffle(a){for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}}
+function updateEvidence(){
+ const precision=getPrecision();
+
+ document.getElementById("eInitials").textContent=
+  document.getElementById("initials").value.trim()||"—";
+
+ document.getElementById("eGrade").textContent=
+  document.getElementById("grade").value.trim()||"—";
+
+ document.getElementById("eDate").textContent=
+  new Date().toLocaleDateString("es-DO");
+
+ document.getElementById("eLevel").textContent=
+  difficulty[level].name;
+
+ document.getElementById("eResult").textContent=
+  `${hits} aciertos · ${errors} errores · ${precision}% de precisión · ${formatTime(seconds)}`;
+
+ const supportSelect=document.getElementById("support");
+ document.getElementById("eSupport").textContent=
+  supportSelect.options[supportSelect.selectedIndex].text;
+
+ document.getElementById("eResponse").textContent=
+  document.getElementById("response").value;
+
+ document.getElementById("eObservations").textContent=
+  document.getElementById("observations").value.trim()||"—";
+
+ document.getElementById("eNextAction").textContent=
+  document.getElementById("nextAction").value.trim()||"—";
+}
+
+function restart(){
+ clearInterval(timerInterval);
+ document.getElementById("recordModal").classList.remove("show");
+ document.getElementById("missionComplete").classList.remove("show");
+ showScreen(startScreen);
+}
+
+function getPrecision(){
+ const total=hits+errors;
+ return total ? Math.round(hits/total*100) : 0;
+}
+
+function updateStats(){
+ document.getElementById("score").textContent=score;
+ document.getElementById("streak").textContent=streak;
+ document.getElementById("timer").textContent=formatTime(seconds);
+}
+
+function formatTime(s){
+ return `${Math.floor(s/60)}:${String(s%60).padStart(2,"0")}`;
+}
+
+function shuffle(array){
+ for(let i=array.length-1;i>0;i--){
+  const j=Math.floor(Math.random()*(i+1));
+  [array[i],array[j]]=[array[j],array[i]];
+ }
+}
 
 function speakMission(){
  if(!("speechSynthesis" in window))return;
+
  speechSynthesis.cancel();
- const u=new SpeechSynthesisUtterance(missions[missionIndex].speak);
- u.lang="es-DO";u.rate=.85;speechSynthesis.speak(u);
+
+ const utterance=
+  new SpeechSynthesisUtterance(missions[missionIndex].speak);
+
+ utterance.lang="es-DO";
+ utterance.rate=.85;
+ utterance.pitch=1;
+
+ speechSynthesis.speak(utterance);
 }
 
 function playTone(freq,duration){
  try{
-  const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;
-  const c=new AC(),o=c.createOscillator(),g=c.createGain();
-  o.frequency.value=freq;g.gain.value=.035;o.connect(g);g.connect(c.destination);
-  o.start();g.gain.exponentialRampToValueAtTime(.001,c.currentTime+duration);
-  o.stop(c.currentTime+duration);o.onended=()=>c.close();
+  const AC=window.AudioContext||window.webkitAudioContext;
+  if(!AC)return;
+
+  const ctx=new AC();
+  const osc=ctx.createOscillator();
+  const gain=ctx.createGain();
+
+  osc.frequency.value=freq;
+  gain.gain.value=.035;
+
+  osc.connect(gain);
+  gain.connect(ctx.destination);
+
+  osc.start();
+
+  gain.gain.exponentialRampToValueAtTime(
+   .001,
+   ctx.currentTime+duration
+  );
+
+  osc.stop(ctx.currentTime+duration);
+  osc.onended=()=>ctx.close();
  }catch(e){}
 }
+
 function celebrationSound(){
- playTone(523,.08);setTimeout(()=>playTone(659,.08),100);setTimeout(()=>playTone(784,.12),200);
+ playTone(523,.08);
+ setTimeout(()=>playTone(659,.08),100);
+ setTimeout(()=>playTone(784,.12),200);
 }
 </script>
+
 </body>
 </html>
