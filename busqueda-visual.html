@@ -291,7 +291,58 @@ header{
 .register{border:0;background:var(--salvia);color:#fff}
 .return{border:1px solid var(--borde);background:#fff;color:var(--azul)}
 
-/* REGISTRO MODAL */
+/* ORIENTACIÓN DEL RESULTADO */
+.orientation-card{
+ margin-top:11px;
+ padding:10px 12px;
+ border:1px solid #DCE8DF;
+ background:#F7FAF7;
+ border-radius:10px;
+ display:flex;
+ align-items:center;
+ gap:10px;
+ text-align:left
+}
+
+.orientation-icon{
+ width:35px;
+ height:35px;
+ flex:0 0 35px;
+ display:grid;
+ place-items:center;
+ border-radius:9px;
+ background:#fff;
+ font-size:1rem
+}
+
+.orientation-content{
+ flex:1;
+ min-width:0
+}
+
+.orientation-content small{
+ display:block;
+ color:#587361;
+ font-size:.48rem;
+ font-weight:900;
+ margin-bottom:3px
+}
+
+.orientation-content p{
+ color:var(--gris);
+ font-size:.59rem;
+ line-height:1.35
+}
+
+.recommend-btn{
+ border:0;
+ background:transparent;
+ color:var(--azul);
+ padding:4px 0 0;
+ font-size:.55rem;
+ font-weight:900
+}
+ /* REGISTRO MODAL */
 .modal-overlay{
  position:fixed;inset:0;
  background:rgba(22,34,48,.45);
@@ -616,7 +667,21 @@ header{
    <div class="result-data"><strong id="finalPrecision"></strong><span>PRECISIÓN</span></div>
    <div class="result-data"><strong id="finalTime"></strong><span>TIEMPO</span></div>
   </div>
+<!-- ORIENTACIÓN EDUCATIVA -->
+<div class="orientation-card">
+  <div class="orientation-icon">💡</div>
 
+  <div class="orientation-content">
+    <small>ORIENTACIÓN PARA EL SEGUIMIENTO</small>
+    <p id="resultOrientation">
+      Se generará una orientación a partir del desempeño observado.
+    </p>
+
+    <button id="viewRecommendations" class="recommend-btn">
+      Ver recomendaciones →
+    </button>
+  </div>
+</div>
   <div class="result-actions">
    <button id="againBtn" class="again">🔄 JUGAR OTRA VEZ</button>
    <button id="registerBtn" class="register">📋 REGISTRAR ACTIVIDAD</button>
@@ -889,7 +954,12 @@ document.getElementById("startBtn").onclick=startGame;
 document.getElementById("soundBtn").onclick=speakMission;
 document.getElementById("nextBtn").onclick=nextMission;
 document.getElementById("againBtn").onclick=restart;
-document.getElementById("registerBtn").onclick=openRecord;
+document.getElementById("registerBtn").onclick=openRecord; 
+ document.getElementById("viewRecommendations").onclick=()=>{
+ fillRecord();
+ openTab("followPanel");
+ document.getElementById("recordModal").classList.add("show");
+};
 document.getElementById("closeX").onclick=closeRecord;
 document.getElementById("closeRecord").onclick=closeRecord;
 document.getElementById("printBtn").onclick=()=>{
@@ -1109,6 +1179,20 @@ function finishGame(){
  document.getElementById("finalPrecision").textContent=precision+"%";
  document.getElementById("finalTime").textContent=formatTime(seconds);
 
+ document.getElementById("resultOrientation").textContent=
+  generateOrientation();
+
+ showScreen(resultScreen);
+}
+
+ const precision=getPrecision();
+
+ document.getElementById("finalScore").textContent=score+" ⭐";
+ document.getElementById("finalHits").textContent=hits;
+ document.getElementById("finalErrors").textContent=errors;
+ document.getElementById("finalPrecision").textContent=precision+"%";
+ document.getElementById("finalTime").textContent=formatTime(seconds);
+
  showScreen(resultScreen);
 }
 
@@ -1171,7 +1255,64 @@ function fillRecord(){
  generateSuggestions();
  updateEvidence();
 }
+function generateOrientation(){
 
+ const precision=getPrecision();
+
+ const imageErrors=
+  (missionResults[0]?.errors||0)+
+  (missionResults[1]?.errors||0);
+
+ const letterGeneral=
+  missionResults[2]?.errors||0;
+
+ const similarLetters=
+  missionResults[3]?.errors||0;
+
+ const shapeErrors=
+  missionResults[4]?.errors||0;
+
+ const areas=[
+  {type:"imágenes",errors:imageErrors},
+  {type:"letras",errors:letterGeneral},
+  {type:"grafías semejantes",errors:similarLetters},
+  {type:"figuras",errors:shapeErrors}
+ ];
+
+ areas.sort((a,b)=>b.errors-a.errors);
+
+ const main=areas[0];
+
+ if(errors===0){
+  return "La actividad fue completada sin selecciones incorrectas. Puede considerarse aumentar gradualmente la complejidad y observar si la precisión se mantiene con estímulos nuevos.";
+ }
+
+ if(similarLetters>=3 && similarLetters>=main.errors){
+  return "Durante esta actividad se registraron más selecciones incorrectas al diferenciar grafías visualmente semejantes. Conviene continuar observando esta habilidad mediante actividades específicas de comparación y discriminación visual.";
+ }
+
+ if(letterGeneral>=3 && letterGeneral>=main.errors){
+  return "Se observaron más selecciones incorrectas durante las tareas con letras. Puede ser pertinente continuar trabajando reconocimiento y discriminación visual de grafías con actividades graduadas.";
+ }
+
+ if(shapeErrors>=3 && shapeErrors>=main.errors){
+  return "La mayor cantidad de selecciones incorrectas apareció al comparar figuras semejantes. Puede ser útil continuar con tareas de comparación de formas, orientación y detalles visuales.";
+ }
+
+ if(imageErrors>=4 && imageErrors>=main.errors){
+  return "Se registraron varias selecciones incorrectas durante la búsqueda entre imágenes. Conviene favorecer estrategias organizadas de exploración visual antes de aumentar la cantidad de distractores.";
+ }
+
+ if(precision>=90){
+  return "El desempeño mostró un nivel alto de precisión en esta actividad. Puede aumentarse gradualmente una variable de dificultad y observar si mantiene la estrategia ante nuevos estímulos.";
+ }
+
+ if(precision>=75){
+  return "El desempeño fue mayormente preciso, aunque se registraron algunas selecciones incorrectas. Se recomienda mantener una dificultad semejante y observar el desempeño con estímulos diferentes.";
+ }
+
+ return "Durante esta actividad se registraron varias selecciones incorrectas. Puede ser pertinente reducir temporalmente la cantidad o semejanza de los distractores y favorecer una búsqueda más organizada antes de aumentar la dificultad.";
+}
 function getSuggestionPool(){
  const precision=getPrecision();
  const m1=missionResults[0]?.errors||0;
