@@ -1,36 +1,559 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profe Organizado</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Profe Organizado | Recursos y Juegos Educativos</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: #2f3437;
+    background: #ffffff;
+    line-height: 1.6;
+}
+
+/* MENÚ */
+
+header {
+    background: white;
+    border-bottom: 1px solid #e8ecef;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav {
+    max-width: 1150px;
+    margin: auto;
+    padding: 18px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 800;
+    color: #0F2C59;
+}
+
+.logo span {
+    color: #7C9A83;
+}
+
+nav a {
+    color: #444;
+    text-decoration: none;
+    margin-left: 28px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+nav a:hover {
+    color: #0F2C59;
+}
+
+/* PORTADA */
+
+.hero {
+    background: #f7f5ef;
+    padding: 95px 25px;
+}
+
+.hero-content {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.badge {
+    display: inline-block;
+    background: #e5ece6;
+    color: #496b52;
+    padding: 7px 14px;
+    border-radius: 30px;
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 22px;
+}
+
+.hero h1 {
+    color: #0F2C59;
+    font-size: 54px;
+    line-height: 1.08;
+    max-width: 750px;
+    margin-bottom: 22px;
+}
+
+.hero p {
+    font-size: 19px;
+    max-width: 650px;
+    color: #5f6468;
+    margin-bottom: 35px;
+}
+
+.btn {
+    display: inline-block;
+    background: #0F2C59;
+    color: white;
+    padding: 14px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: .2s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+/* SECCIONES */
+
+.section {
+    padding: 80px 25px;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.section-title small {
+    color: #7C9A83;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.section-title h2 {
+    color: #0F2C59;
+    font-size: 34px;
+    margin-top: 8px;
+}
+
+.section-title p {
+    color: #6c7175;
+    max-width: 600px;
+    margin: 10px auto 0;
+}
+
+/* CATEGORÍAS */
+
+.categories {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+.category {
+    border: 1px solid #e4e8e5;
+    border-radius: 12px;
+    padding: 27px 20px;
+    background: white;
+    transition: .2s;
+}
+
+.category:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0,0,0,.06);
+}
+
+.icon {
+    font-size: 30px;
+    margin-bottom: 12px;
+}
+
+.category h3 {
+    color: #0F2C59;
+    font-size: 17px;
+    margin-bottom: 6px;
+}
+
+.category p {
+    font-size: 14px;
+    color: #707579;
+}
+
+/* JUEGOS */
+
+.games-section {
+    background: #f6f8f7;
+}
+
+.games {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.game {
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid #e7e9e8;
+    transition: .2s;
+}
+
+.game:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 30px rgba(0,0,0,.07);
+}
+
+.game-top {
+    height: 150px;
+    background: #e8eee9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 55px;
+}
+
+.game-content {
+    padding: 23px;
+}
+
+.game-tag {
+    color: #69836f;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.game h3 {
+    color: #0F2C59;
+    margin: 7px 0;
+}
+
+.game p {
+    color: #707579;
+    font-size: 14px;
+    margin-bottom: 18px;
+}
+
+.play {
+    color: #0F2C59;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* PROFESIONALES */
+
+.professional {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+}
+
+.professional > div {
+    flex: 1;
+}
+
+.professional h2 {
+    color: #0F2C59;
+    font-size: 35px;
+    margin-bottom: 15px;
+}
+
+.professional p {
+    color: #62676b;
+    margin-bottom: 20px;
+}
+
+.info-box {
+    background: #f7f5ef;
+    padding: 35px;
+    border-radius: 14px;
+}
+
+.info-box p {
+    margin: 10px 0;
+}
+
+/* FOOTER */
+
+footer {
+    background: #0F2C59;
+    color: white;
+    padding: 45px 25px;
+}
+
+.footer-content {
+    max-width: 1100px;
+    margin: auto;
+    text-align: center;
+}
+
+footer h3 {
+    font-size: 23px;
+    margin-bottom: 8px;
+}
+
+footer p {
+    color: #d7dfe8;
+    font-size: 14px;
+}
+
+/* CELULAR */
+
+@media(max-width: 850px) {
+
+    nav {
+        display: none;
+    }
+
+    .hero {
+        padding: 70px 22px;
+    }
+
+    .hero h1 {
+        font-size: 39px;
+    }
+
+    .categories {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .games {
+        grid-template-columns: 1fr;
+    }
+
+    .professional {
+        flex-direction: column;
+        gap: 30px;
+    }
+}
+
+@media(max-width: 500px) {
+
+    .categories {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <h1>Profe Organizado</h1>
+<header>
+    <div class="nav">
+        <div class="logo">Profe <span>Organizado</span></div>
 
-    <h2>Recursos y juegos educativos interactivos</h2>
+        <nav>
+            <a href="#inicio">Inicio</a>
+            <a href="#areas">Áreas</a>
+            <a href="#juegos">Juegos</a>
+            <a href="#profesionales">Profesionales</a>
+        </nav>
+    </div>
+</header>
 
-    <p>
-        Un espacio creado para apoyar el aprendizaje,
-        la orientación y el acompañamiento educativo.
-    </p>
 
-    <h2>Explora nuestros recursos</h2>
+<section class="hero" id="inicio">
+    <div class="hero-content">
 
-    <p>
-        🧠 Atención y concentración<br><br>
-        🧩 Memoria<br><br>
-        🔤 Lectura y escritura<br><br>
-        👂 Conciencia fonológica<br><br>
-        🔢 Pensamiento matemático<br><br>
-        ❤️ Habilidades socioemocionales
-    </p>
+        <div class="badge">RECURSOS EDUCATIVOS</div>
 
-    <button>Explorar juegos</button>
+        <h1>Recursos que hacen más fácil enseñar, acompañar y aprender.</h1>
+
+        <p>
+            Juegos y herramientas educativas para estimular habilidades,
+            reforzar aprendizajes y acompañar las necesidades de los estudiantes.
+        </p>
+
+        <a href="#juegos" class="btn">Explorar juegos →</a>
+
+    </div>
+</section>
+
+
+<section class="section" id="areas">
+
+    <div class="container">
+
+        <div class="section-title">
+            <small>EXPLORA POR ÁREA</small>
+            <h2>¿Qué quieres trabajar?</h2>
+            <p>
+                Selecciona un área para descubrir actividades y juegos
+                educativos.
+            </p>
+        </div>
+
+        <div class="categories">
+
+            <div class="category">
+                <div class="icon">🎯</div>
+                <h3>Atención</h3>
+                <p>Atención sostenida, selectiva y concentración.</p>
+            </div>
+
+            <div class="category">
+                <div class="icon">🧠</div>
+                <h3>Memoria</h3>
+                <p>Memoria visual, auditiva y secuencial.</p>
+            </div>
+
+            <div class="category">
+                <div class="icon">🔤</div>
+                <h3>Lectura y escritura</h3>
+                <p>Reconocimiento, comprensión y producción escrita.</p>
+            </div>
+
+            <div class="category">
+                <div class="icon">👂</div>
+                <h3>Conciencia fonológica</h3>
+                <p>Sonidos, sílabas, fonemas y rimas.</p>
+            </div>
+
+            <div class="category">
+                <div class="icon">🔢</div>
+                <h3>Pensamiento matemático</h3>
+                <p>Números, cantidades, secuencias y cálculo.</p>
+            </div>
+
+            <div class="category">
+                <div class="icon">👁️</div>
+                <h3>Percepción</h3>
+                <p>Discriminación visual y organización espacial.</p>
+            </div>
+
+            <div class="category">
+                <div class="icon">❤️</div>
+                <h3>Socioemocional</h3>
+                <p>Emociones, autocontrol y habilidades sociales.</p>
+            </div>
+
+            <div class="category">
+                <div class="icon">🧩</div>
+                <h3>Funciones ejecutivas</h3>
+                <p>Planificación, flexibilidad y control inhibitorio.</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<section class="section games-section" id="juegos">
+
+    <div class="container">
+
+        <div class="section-title">
+            <small>APRENDE JUGANDO</small>
+            <h2>Juegos interactivos</h2>
+            <p>
+                Actividades sencillas para trabajar diferentes habilidades
+                educativas.
+            </p>
+        </div>
+
+        <div class="games">
+
+            <div class="game">
+                <div class="game-top">🧠</div>
+                <div class="game-content">
+                    <span class="game-tag">Memoria</span>
+                    <h3>Memoria de parejas</h3>
+                    <p>Encuentra las parejas y ejercita la memoria visual.</p>
+                    <a href="#" class="play">Próximamente →</a>
+                </div>
+            </div>
+
+            <div class="game">
+                <div class="game-top">🔎</div>
+                <div class="game-content">
+                    <span class="game-tag">Atención</span>
+                    <h3>Búsqueda visual</h3>
+                    <p>Localiza los estímulos indicados entre diferentes elementos.</p>
+                    <a href="#" class="play">Próximamente →</a>
+                </div>
+            </div>
+
+            <div class="game">
+                <div class="game-top">🔤</div>
+                <div class="game-content">
+                    <span class="game-tag">Conciencia fonológica</span>
+                    <h3>Sonido inicial</h3>
+                    <p>Identifica con qué sonido comienzan diferentes palabras.</p>
+                    <a href="#" class="play">Próximamente →</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<section class="section" id="profesionales">
+
+    <div class="container professional">
+
+        <div>
+            <h2>Más que juegos.</h2>
+
+            <p>
+                Profe Organizado busca ofrecer recursos prácticos que puedan
+                utilizarse como apoyo en el contexto educativo.
+            </p>
+
+            <p>
+                Las actividades están pensadas para facilitar la estimulación,
+                el reforzamiento de habilidades y el seguimiento educativo.
+            </p>
+        </div>
+
+        <div class="info-box">
+
+            <strong>Diseñado pensando en:</strong>
+
+            <p>✓ Docentes</p>
+            <p>✓ Orientadores escolares</p>
+            <p>✓ Psicólogos escolares</p>
+            <p>✓ Familias</p>
+            <p>✓ Estudiantes</p>
+
+        </div>
+
+    </div>
+</section>
+
+
+<footer>
+
+    <div class="footer-content">
+
+        <h3>Profe Organizado</h3>
+
+        <p>
+            Recursos y juegos educativos para acompañar el aprendizaje.
+        </p>
+
+        <br>
+
+        <p>© 2026 Profe Organizado</p>
+
+    </div>
+
+</footer>
 
 </body>
-
 </html>
